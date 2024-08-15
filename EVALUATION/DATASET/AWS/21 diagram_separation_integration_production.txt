@@ -1,0 +1,11 @@
+This section outlines the specifications of the following important functional architecture components:
+
+    SAS server – This server is the central compute component for analytics processing and includes local direct-attached storage (DAS).
+
+    SAS subversion server – This server acts as the centralized version control system for SAS.
+
+    Amazon FSx for Windows File Server – This is an SMB file server for sharing storage between the SAS server and terminal servers. End users store and archive their pre- and post-processed data files on FSx for Windows File Server.
+
+    Microsoft Remote Desktop Services (RDS), also known as Terminal Services – RDS allows end users to access SAS servers by using a SAS client.
+
+    Infrastructure automation – You can use the AWS Cloud Development Kit (AWS CDK) with AWS CodePipeline and AWS CodeCommit to automate your infrastructure. CodePipeline can help you provision your infrastructure components. CodePipeline is a continuous delivery service for modelling, visualizing, and automating the steps required to release code. Additionally, CodePipeline provides a shared central environment and enables infrastructure management that's independent from local machines. CodeCommit is a secure, highly scalable, fully managed source control service that hosts private Git repositories. You can use CodeCommit to store AWS CDK infrastructure automation code and parameters.

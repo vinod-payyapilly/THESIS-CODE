@@ -1,0 +1,17 @@
+Workflow
+
+    A user selects Sign in in the single-page application.
+    The single-page application invokes Authorization Code flow via a redirect to the Microsoft Entra authorization endpoint.
+    Users authenticate themselves.
+    An Authorization Code flow response with an authorization code is redirected to the API Management callback endpoint.
+    The API Management policy exchanges the authorization code for an access token by calling the Microsoft Entra token endpoint.
+    The Azure API Management policy redirects to the application and places the encrypted access token in an HttpOnly cookie.
+    The user invokes an external API call from the application via an API Management proxied endpoint.
+    The API Management policy receives the API request, decrypts the cookie, and makes a downstream API call, adding the access token as an Authorization header.
+
+Components
+
+    Microsoft Entra ID provides identity services, single sign-on, and multifactor authentication across Azure workloads.
+    API Management is a hybrid multicloud management platform for APIs across all environments. API Management creates consistent, modern API gateways for existing backend services.
+    Azure Static Web Apps is a service that automatically builds and deploys full-stack web apps to Azure from a code repository. Deployments are triggered by changes made to application source code in GitHub or in Azure DevOps repositories.
+

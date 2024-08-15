@@ -1,0 +1,11 @@
+Step 1
+AWS Elemental MediaLive, ingests an input feed and transcodes your content into one adaptive bitrate (ABR) HTTP Live Streaming (HLS) stream as output. 
+
+Step 2
+Amazon Simple Storage Service (Amazon S3) provides a scalable highly available storage bucket to host the encoded segments.
+
+Step 3
+An Amazon CloudFront distribution is configured to use the Amazon S3 custom endpoints as its origin. The CloudFront distribution delivers your live stream to viewers with low latency and high transfer speeds.
+
+Step 4
+An S3 bucket stores the CloudFront logs.

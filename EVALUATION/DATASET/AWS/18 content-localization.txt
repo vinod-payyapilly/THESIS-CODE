@@ -1,0 +1,31 @@
+Step 1
+The AWS CloudFormation template deploys an instance of the Media Insights on AWS.
+
+Step 2
+An Amazon CloudFront distribution to serve the solution’s web application.
+
+Step 3
+An Amazon Simple Storage Service (Amazon S3) web source bucket for hosting the static web application.
+
+Step 4
+An Amazon Cognito user pool to provide a user directory.
+
+Step 5
+Cognito identity pool to provide federation with AWS Identity and Access Management (IAM) for authentication and authorization to the web application.
+
+Step 6
+Amazon API Gateway endpoints for the Media Insights on AWS workflow API, the Media Insights on AWS data plane API and the Amazon OpenSearch Service API endpoint.
+
+Step 7
+An AWS Step Functions workflow created by Media Insights on AWS. The content localization workflow consists of AWS Lambda functions that run jobs in Amazon Transcribe, Amazon Translate, AWS Elemental MediaConvert, and Amazon Polly. 
+
+These Lambda functions also interact with the Media Insights on AWS data plane API to store and retrieve media objects and metadata returned by media analysis jobs. The workflow can also optionally run Amazon Rekognition and Amazon Comprehend to provide additional analysis of the input.
+
+Step 8
+A Lambda function to extract, transform, and load media metadata from the Media Insights on AWS data pipeline into an OpenSearch Service cluster. This Lambda function is invoked by the Media Insights on AWS data plane Amazon DynamoDB stream whenever asset metadata is modified in the Media Insights on AWS data plane.
+
+Step 9
+An OpenSearch Service cluster to index media metadata.
+
+
+

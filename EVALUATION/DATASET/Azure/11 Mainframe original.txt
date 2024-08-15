@@ -1,0 +1,43 @@
+This article describes how to use Precisely Connect to migrate mainframe and midrange systems to Azure.
+
+Workflow
+
+    A Connect agent component captures change logs by using mainframe or midrange native utilities and caches the logs in temporary storage.
+    For mainframe systems, a publisher component on the mainframe manages data migration.
+    For midrange systems, in place of the publisher, a listener component manages data migration. It's located on either a Windows or Linux machine.
+    The publisher or listener moves the data from on-premises to Azure via an enhanced-security connection. The publisher or listener handles the commit and rollback of transactions for each unit of work, maintaining the integrity of data.
+    The Connect Replicator Engine captures the data from the publisher or listener and applies it to the target. It distributes data for parallel processing.
+    The target is a database that receives the changes via ODBC or ingests the changes via Azure Event Hubs.
+    The changed data is consumed by Azure Databricks and applied to Azure data platform services.
+    The Connect Controller Daemon authenticates the request and establishes the socket connection between the publisher or listener and the Replicator Engine.
+
+Components
+Networking and identity
+
+    Azure ExpressRoute extends your on-premises networks to the Azure cloud platform over a private connection from a connectivity provider.
+    Azure VPN Gateway enables you to create virtual network gateways that send encrypted traffic between an Azure virtual network and an on-premises location over the public internet.
+    Microsoft Entra ID is an identity and access management service that synchronizes with on-premises Active Directory.
+
+Storage
+
+    Azure SQL Database is part of the Azure SQL family. It's built for the cloud and provides all the benefits of a fully managed and evergreen platform as a service (PaaS). SQL Database also provides AI-powered automated features that optimize performance and durability. Serverless compute and Hyperscale storage options automatically scale resources on demand.
+    Azure Database for PostgreSQL is a fully managed relational database service that's based on the community edition of the open-source PostgreSQL database engine.
+    Azure Database for MySQL is a fully managed relational database service that's based on the community edition of the open-source MySQL database engine.
+    Azure SQL Managed Instance is an intelligent, scalable cloud database service that offers all the benefits of a fully managed and evergreen PaaS. SQL Managed Instance has nearly 100 percent compatibility with the latest SQL Server Enterprise edition database engine. It also provides a native virtual network implementation that addresses common security concerns.
+    Azure Synapse Analytics is a fast and flexible cloud data warehouse that helps you scale, compute, and store elastically and independently, with a massively parallel processing architecture.
+    Azure Storage is a cloud storage solution that includes object, file, disk, queue, and table storage. Services include hybrid storage solutions and tools for transferring, sharing, and backing up data.
+
+Analysis and reporting
+
+    Power BI is a suite of business analytics tools that can deliver insights throughout your organization. By using Power BI, you can connect to hundreds of data sources, simplify data preparation, and drive ad hoc analysis.
+
+Monitoring
+
+    Azure Monitor provides a comprehensive solution for collecting, analyzing, and acting on telemetry from cloud and on-premises environments. Features include Application Insights, Azure Monitor Logs, and Log Analytics.
+
+Data integrators
+
+    Precisely Connect can integrate data from multiple sources and provide real-time replication to Azure. You can use it to replicate data without making changes to your application. Connect can also improve the performance of extract, transform, load (ETL) jobs.
+    Azure Databricks is based on Apache Spark and integrates with open-source libraries. It provides a unified platform for running analytics workloads. You can use Python, Scala, R, and SQL languages to frame ETL pipelines and orchestrate jobs.
+    Azure Event Hubs is a real-time ingestion service that can process millions of records per second. You can ingest data from multiple sources and use it for real-time analytics. You can easily scale Event Hubs based on the volume of data.
+

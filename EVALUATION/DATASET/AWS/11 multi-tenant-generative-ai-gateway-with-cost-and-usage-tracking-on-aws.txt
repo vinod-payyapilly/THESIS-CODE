@@ -1,0 +1,26 @@
+Step 1
+The Software-as-a-Service (SaaS) AWS Cloud Development Kit (CDK) template deploys all required resources to the AWS account. 
+
+After deployment, a tenant’s application sends a POST request to Amazon API Gateway, invoking a specific model by passing the model_id as a request parameter and the appropriate model payload in the request body. The tenant can be an individual user, a specific project, a team, or even an entire department within a company.
+
+Step 2
+API Gateway routes the request to AWS Lambda. The Lambda function logs usage information for each tenant in Amazon CloudWatch and invokes the foundation model.
+
+Step 3
+Amazon Bedrock provides a virtual private cloud (VPC) endpoint powered by AWS PrivateLink. In the CDK configuration file, you can specify Amazon SageMaker endpoints.
+You can use the SageMaker endpoint name as the model_id to route the request to the appropriate SageMaker endpoint. The Lambda function sends the request to Amazon Bedrock or SageMaker.
+
+Step 4
+After the invocation, AWS CloudTrail generates an event. If the call is successful, the Lambda function logs usage information and returns the generated response to the application.
+
+The type of information logged varies depending on the invoked model and service. It includes details such as team ID, request ID, model ID, input tokens, output tokens, image dimensions, and other relevant information.
+
+Step 5
+(Optional) If the model request includes response streaming, the Lambda function stores the generated response in Amazon DynamoDB.
+
+Step 6
+An Amazon EventBridge rule runs a Lambda function that retrieves the previous day’s usage data from CloudWatch on a regular basis. The function calculates the associated costs and stores the aggregated data by team_id and model_id in a CSV file format to Amazon Simple Storage Service (Amazon S3).
+
+To query and visualize the data stored in Amazon S3, AWS customers have different options, including Amazon S3 Select, Amazon Athena, and Amazon QuickSight.
+
+

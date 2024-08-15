@@ -1,0 +1,32 @@
+{
+    "entities": [
+      ["Apache Spark", "system", "The foundation of the entire Spark framework."],
+      ["Spark Core", "component", "Provides the basic functionality of Apache Spark, including task scheduling, memory management, fault recovery, and interaction with storage systems."],
+      ["RDD (Resilient Distributed Dataset)", "component", "Allows users to perform in-memory data processing."],
+      ["Spark SQL", "component", "Module for structured data processing in Spark. Provides support for querying structured data using SQL syntax as well as DataFrame and Dataset APIs."],
+      ["DataFrame", "component", "API for performing structured data processing."],
+      ["Dataset", "component", "API for performing structured data processing."],
+      ["Spark Streaming", "component", "Real-time processing module in Spark that enables scalable, high-throughput, fault-tolerant stream processing of live data streams."],
+      ["Kafka", "system", "Source for ingesting data in Spark Streaming."],
+      ["Flume", "system", "Source for ingesting data in Spark Streaming."],
+      ["Kinesis", "system", "Source for ingesting data in Spark Streaming."],
+      ["TCP sockets", "system", "Source for ingesting data in Spark Streaming."],
+      ["Spark MLlib", "component", "Scalable machine learning library built on top of Spark Core. Provides a wide range of machine learning algorithms and utilities for tasks such as classification, regression, clustering, collaborative filtering, and dimensionality reduction."],
+      ["Spark GraphX", "component", "Distributed graph processing library built on top of Spark Core. Provides an API for manipulating graph-structured data and running graph algorithms such as PageRank, connected components, and graph traversal."],
+      ["R", "system", "Environment for interacting with Spark's distributed data processing capabilities through the SparkR package."]
+    ],
+    "relationships": [
+      ["Apache Spark", "contains", "Spark Core"],
+      ["Apache Spark", "contains", "RDD (Resilient Distributed Dataset)"],
+      ["Apache Spark", "contains", "Spark SQL"],
+      ["Apache Spark", "contains", "Spark Streaming"],
+      ["Apache Spark", "contains", "Spark MLlib"],
+      ["Apache Spark", "contains", "Spark GraphX"],
+      ["Apache Spark", "calls", "Kafka"],
+      ["Apache Spark", "calls", "Flume"],
+      ["Apache Spark", "calls", "Kinesis"],
+      ["Apache Spark", "calls", "TCP sockets"],
+      ["Spark SQL", "calls", "DataFrame"],
+      ["Spark SQL", "calls", "Dataset"]
+    ]
+  }

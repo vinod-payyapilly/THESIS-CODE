@@ -1,0 +1,126 @@
+The high-level process flow for the solution components deployed with the AWS CloudFormation template is as follows. The numbers below match the number designated in the architecture diagram.
+
+    The AWS CloudFormation
+
+template provisions the following infrastructure and services provided by the solution.
+Note
+
+Other resources in the diagram are example integrations supported by the deployed solution, but are not provisioned or managed by the solution; these external resources are for reference only. In addition to the following resources, all Amazon DynamoDB
+tables and Amazon Simple Storage Service (Amazon S3) buckets have unique AWS KMS
+
+keys for encryption.
+
+Frontend
+
+    Static website: The solution uses Amazon CloudFront
+
+for distribution, and is protected by AWS WAF
+
+. It also uses an Amazon S3 bucket to host and serve the web front end, including the HTML pages, CSS stylesheets, and JavaScript code.
+
+Notifications: An Amazon DynamoDB table is used to manage and provide persistent notifications in the user interface, along with Amazon API Gateway
+REST API resources (resource, method, model), AWS Lambda handler (NodeJS), and an Amazon EventBridge
+
+    rule for mapping events to notifications.
+
+Federated Identity: An Amazon Cognito
+
+user pool manages federating and storing users from external identity providers (IDPs). An AWS Lambda function uses NodeJS to handle custom authorization of federated authentication from identity providers and maps federated users to Automated Data Analytics on AWS’s Identity and Access Management model. The solution provisions a root administrator user in the Amazon Cognito user pool based on email and phone number provided in the CloudFormation template parameters:
+
+    The root administrator is the only user directly managed by the user pool, and
+
+    All other users are federated through the IDP.
+
+Access and API Layer
+
+    Identity and Access Management (IAM):
+
+        An Amazon DynamoDB table to store group policy statements.
+
+        An Amazon Cognito user pool for managing federated user authentication.
+
+    Amazon API Gateway (REST API) for federating requests and access to all underlying services and resources.
+
+        AWS Lambda as custom authorizer to control API access for federated users and machines.
+
+        An Amazon CloudFront distribution network to cache and AWS WAF
+
+        to protect the API.
+
+    Amazon API Gateway (HTTP API) is used for proxying egress requests from external clients (for example, Tableau, or PowerBI) via an Amazon Cognito client credentials and facilitating the request and response to support client formats.
+
+Event Gateway
+
+    A dedicated Amazon EventBridge event bus and gateway is used for event-driven application messaging between microservices, and to propagate and persist notifications to users.
+
+Core solution services
+
+    Data Product service: Stores details about data products and manages the creation of dynamic infrastructure used to ingest, transform, and manage various data sources.
+
+        AWS Lambda functions for handling API requests (NodeJS).
+
+        Amazon DynamoDB data stores.
+
+        AWS Step Functions
+
+for managing the lifecycle of data products.
+
+Amazon S3 buckets for storing processed data, user-defined scripts, and file uploads.
+
+AWS Glue
+
+tables and resources for handling the data extract, transform, and load (ETL) processing.
+
+AWS Lambda function utilizing AWS CDK
+
+        and CloudFormation to deploy dynamic infrastructure for each data product (NodeJS).
+
+    Query service: Responsible for executing governed federated queries, storing/managing saved queries, and maintaining query caching.
+
+        AWS Lambda functions for handling API requests (NodeJS).
+
+        Amazon Athena
+
+        for performing federated queries which stores results in Amazon S3 buckets.
+
+        AWS Step Functions to orchestrate the asynchronous life-cycle of query execution.
+
+        Amazon DynamoDB data stores for saved queries, query history, and query caching.
+
+    Query Parse/Render service: Responsible for SQL query manipulation. This is decoupled from query service to provide flexibility in SQL parsing library.
+
+        AWS Lambda functions for handling API requests (NodeJS & Java).
+
+    Governance service: Allows you to define common terms or classifications of data throughout the entire business and define governance policies based on user groups.
+
+        AWS Lambda functions for handling API requests (NodeJS).
+
+        Amazon DynamoDB data stores for storing governance metadata.
+
+Dynamic Infrastructure: Each data product deploys a dedicated AWS CloudFormation stack with varying resources depending on source type and data, along with Amazon EventBridge rules for integration with core services.
+
+    AWS Lambda functions for handling source import.
+
+    AWS CloudFormation stack to manage resources.
+
+    AWS Step Functions for orchestrating lifecycle management.
+
+    AWS Glue crawlers, data catalogues, and jobs for ETL.
+
+    AWS Secrets Manager
+
+to store external credentials.
+
+Amazon ECS
+
+tasks for processing large data ingestion jobs.
+
+Amazon Athena and Amazon Comprehend
+
+        for detecting PII entities.
+
+    Ingress (Data Connectors): Automated Data Analytics on AWS supports multiple source data connectors out-of-the-box including Amazon S3, Amazon Kinesis Stream, Amazon CloudWatch, Amazon CloudTrail, Amazon Redshift, File Upload, Google Cloud Storage, Google Analytics, Google BigQuery, MySQL5, Oracle, PostgreSQL, Microsoft SQL Server, DynamoDB, or MongoDB. The resources required to support these data sources are only deployed during the creation of a new data product of the given type; there are no idle resources.
+
+    Egress (Third Party Tools): Automated Data Analytics on AWS support both JDBC and ODBC standards for consuming data from common clients.
+
+

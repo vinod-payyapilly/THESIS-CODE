@@ -1,0 +1,39 @@
+Workflow
+
+    User access provided over TLS port 443 for accessing web-based applications. Web-based Applications presentation layer can be kept virtually unchanged to minimize end user retraining. Alternatively, the web application presentation layer can be updated with modern UX frameworks as requirements necessitate.
+
+    In Azure, access to the application compute clusters is through Azure Load Balancer, allowing for scale-out compute resources to process the input work.
+
+    Raincode system emulation software can also support deployment in containers. With Raincode's cutting-edge compiler technology, you can keep current optimized mainframe applications and deploy them on .NET Core.
+
+    Cloud-native applications are a collection of independent and autonomous services packaged as lightweight containers.
+
+    Unlike virtual machines, containers can scale out and scale in rapidly. Since the unit of scaling shifts to containers, infrastructure utilization is optimized.
+
+    Data services use a combination of high-performance storage on Ultra or Premium solid-state disks (SSDs), file storage on Azure NetApp Files or Azure Files, and standard blob, archive, and backup storage that can be locally redundant or geo-redundant.
+
+    Azure SQL Database using either Hyperscale or Business Critical tiers for both high IOPS and high uptime SLA. Further, Private Link for Azure SQL Database is used to provide a private, direct connection isolated to the Azure Networking Backbone from the Azure VM to the Azure SQL Database. Raincode data migration tools can convert DMS/RDMS schemas to SQL.
+
+    Azure Blob Storage is a common landing zone for external data sources.
+
+    An implementation of Active Directory needs to be created or already in place. Raincode provides RACF and Top Secret identity integration using Active Directory extensions.
+
+
+Components
+
+    Azure Kubernetes Service (AKS) is a fully managed Kubernetes service for deploying and managing containerized applications in container-based compute clusters.
+
+    Azure Virtual Network (VNet) is the fundamental building block for your private network in Azure. VNet enables many types of Azure resources, such as Azure Virtual Machines (VM), to securely communicate with each other, the internet, and on-premises networks. VNet is similar to a traditional network that you'd operate in your own datacenter, but it brings more benefits of Azure's infrastructure, such as scale, availability, and isolation.
+
+    Azure Files offers fully managed file shares in the cloud that are accessible via the industry-standard Server Message Block (SMB) protocol. Azure file shares can be mounted concurrently by cloud or on-premises deployments of Windows, Linux, and macOS.
+
+    Azure ExpressRoute lets you extend your on-premises networks into the Microsoft cloud over a private connection facilitated by a connectivity provider. With ExpressRoute you can establish connections to Microsoft cloud services, such as Microsoft Azure and Office 365.
+
+    Azure Load Balancer operates at layer four of the Open Systems Interconnection (OSI) model. It's the single point of contact for clients. Load Balancer distributes inbound flows that arrive at the load balancer's front end to back-end pool instances. These flows are according to configured load balancing rules and health probes. The back-end pool instances can be Azure Virtual Machines or instances in a virtual machine scale set.
+
+    Azure SQL Database is a fully managed platform as a service (PaaS) database engine that always runs the latest stable version of SQL Server and patched OS, with 99.99-percent availability. SQL Database handles upgrading, patching, backups, monitoring, and most other database management functions without user involvement. These PaaS capabilities let you focus on business-critical, domain-specific database administration and optimization.
+
+    Azure Cosmos DB is an Azure PaaS service for NoSQL databases.
+
+    Azure Database for PostgreSQL is an Azure PaaS service for PostgreSQL databases.
+

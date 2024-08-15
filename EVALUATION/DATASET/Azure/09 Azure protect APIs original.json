@@ -1,0 +1,24 @@
+{
+  "entities": [
+    ["API client", "system", "wants to gain access to an application"],
+    ["application", "system", "API client wants to gain access to an application"],
+    ["Azure AD B2C", "system", "The IdP is Azure AD B2C"],
+    ["Azure Front Door", "system", "authentication request goes via Azure Front Door to Azure AD B2C"],
+    ["backend API", "system", "The client triggers an event that accesses a backend API"],
+    ["Azure Front Door", "system", "The request goes through Azure Front Door, whose back end is mapped to the public endpoint of API Management."],
+    ["backend", "component", "Azure Front Door, whose back end"],
+    ["API Management", "system", "API Management intercepts the request and validates the bearer token against Azure AD B2C "],
+    ["public endpoint", "system", "whose back end is mapped to the public endpoint of API Management"],
+    ["User", "person", "Azure AD B2C authenticates the user and returns a JSON Web Token (JWT) bearer token back to the user"]
+  ],
+  "relationships": [
+    ["API client", "calls", "application", ""],
+    ["Azure Front Door", "calls", "Azure AD B2C", "authentication request goes via Azure Front Door to Azure AD B2C"],
+    ["Azure AD B2C", "is-called-from", "User", "Azure AD B2C authenticates the user and returns a JSON Web Token (JWT) bearer token back to the user"],
+    ["API client", "calls", "backend API", "The client triggers an event that accesses a backend API"],
+    ["Azure Front Door", "contains", "backend", "Azure Front Door, whose back end"],
+    ["public endpoint", "part-of", "API Management", "Azure Front Door, whose back end"],
+    ["backend", "calls", "public endpoint", "whose back end is mapped to the public endpoint of API Management"],
+    ["API Management", "calls", "Azure AD B2C", "API Management intercepts the request and validates the bearer token against Azure AD B2C"]
+  ]
+}

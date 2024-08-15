@@ -1,0 +1,1194 @@
+,MODEL_NAME,filename,original text,expected_json,llm_full_response,llm_json_extracted,time_taken_seconds
+0,phi3,../IMAGES NEW/TEST/08 Azure Business Processes.txt,"
+The data flows through the solution as follows:
+
+    The airline system communicates with a custom API hosted in Azure API Management.
+    A custom API coordinator receives notifications and handles incoming messages from the airline system. It sends them to Power Apps, where flights are assigned to Microsoft Teams channels.
+    When a user selects a flight to monitor, or when the system assigns the user to a flight, the system queues a Graph API call in an Azure Storage Account queue for further processing.
+    Azure Functions runs the Graph API calls based on the incoming messages in the storage queue, sending notifications to Teams, and also streams all events to an Azure Event Hubs for further analytics.
+    The airline's notification system is managed by a custom bot messaging service that employs Azure Bot Service.
+    Custom bots send flight updates to users in Teams.
+    An Azure Data Lake storage offers long-term retention and micro-batch processing of events from Event Hubs, ultimately generating insightful reports with Power BI.
+
+","{""entities"": [[""airline system"", ""system"", ""communicates with a custom API hosted in Azure API Management""], [""custom API"", ""component"", ""communicates with a custom API hosted in Azure API Management""], [""Azure API Management"", ""system"", ""communicates with a custom API hosted in Azure API Management""], [""custom API coordinator"", ""system"", ""receives notifications and handles incoming messages from the airline system""], [""Power Apps"", ""system"", ""where flights are assigned to Microsoft Teams channels""], [""Microsoft Teams channels"", ""system"", ""where flights are assigned to Microsoft Teams channels""], [""Storage Account queue"", ""system"", "" the system queues a Graph API call in an Azure Storage Account queue for further processing.""], [""Graph API call"", ""system"", "" the system queues a Graph API call in an Azure Storage Account queue for further processing.""], [""Azure Functions"", ""system"", ""runs the Graph API calls based on the incoming messages in the storage queue""], [""Azure Event Hubs"", ""system"", ""Azure Event Hubs for further analytics""], [""notification system"", ""system"", ""managed by a custom bot messaging service that employs Azure Bot Service""], [""custom bot messaging service"", ""system"", ""managed by a custom bot messaging service that employs Azure Bot Service""], [""Azure Bot Service"", ""system"", ""managed by a custom bot messaging service that employs Azure Bot Service""], [""Users"", ""person"", ""selects a flight to monitor, or when the system assigns the user to a flight""], [""Azure Data Lake storage"", ""system"", ""offers long-term retention and micro-batch processing of events from Event Hubs""], [""Power BI"", ""system"", ""generating insightful reports""]], ""relationships"": [[""Azure API Management"", ""contains"", ""custom API"", ""custom API hosted in Azure API Management""], [""airline system"", ""calls"", ""custom API"", ""communicates with a custom API""], [""custom API coordinator"", ""is-called-from"", ""airline system"", ""receives notifications and handles incoming messages from the airline system""], [""Power Apps"", ""calls"", ""Microsoft Teams channels"", ""Power Apps, where flights are assigned to Microsoft Teams channels""], [""airline system"", ""calls"", ""Graph API call"", "" the system queues a Graph API call in an Azure Storage Account queue for further processing""], [""Azure Functions"", ""calls"", ""Graph API call"", ""runs the Graph API calls based on the incoming messages in the storage queue""], [""Azure Functions"", ""calls"", ""Storage Account queue"", ""based on the incoming messages in the storage queue""], [""Azure Functions"", ""calls"", ""Microsoft Teams channels"", ""sending notifications to Teams""], [""Azure Functions"", ""calls"", ""Azure Event Hubs"", ""also streams all events to an Azure Event Hubs for further analytics""], [""notification system"", ""is-called-from"", ""custom bot messaging service"", ""managed by a custom bot messaging service""], [""custom bot messaging service"", ""calls"", ""Azure Bot Service"", ""custom bot messaging service that employs Azure Bot Service""], [""custom bot messaging service"", ""calls"", ""Microsoft Teams channels"", ""Custom bots send flight updates to users in Teams.""], [""Microsoft Teams channels"", ""calls"", ""Users"", ""Custom bots send flight updates to users in Teams.""], [""Azure Data Lake storage"", ""is-called-from"", ""Azure Event Hubs"", ""Azure Data Lake storage offers long-term retention and micro-batch processing of events from Event Hubs""], [""Azure Data Lake storage"", ""calls"", ""Power BI"", ""Azure Data Lake storage offers long-term retention and micro-batch processing of events from Event Hubs, ultimately generating insightful reports with Power BI""]]}"," Based on the provided context for a data flow solution involving an airline system using various Azure services such as API Management, App Service (Power Apps), Storage Queues, Function Apps, Event Hubs, Bot Service, and Data Lake Analytics with Power BI integration, here is the JSON response structured in key-value pairs representing named entities of type ""component"" or ""system"", along with relationships.
+
+```json
+{
+  ""entities"": [
+    {""entity"": ""airline system"", ""type"": ""system""},
+    {""entity"": ""Azure API Management"", ""type"": ""service""},
+    {""entity"": ""custom API coordinator"", ""type"": ""component""},
+    {""entity"": ""Power Apps"", ""type"": ""application""},
+    {""entity"": ""Microsoft Teams channels"", ""type"": ""system""} as these are groups where the communication takes place. We'll treat them here similarly to components in this context for simplicity, but remember that they technically represent systems since teams can include various other entities like users and bots. 
+    {""entity"": ""Graph API call queue"", ""type"": ""queue""},
+    {""entity"": ""Azure Functions"", ""type"": ""function app""},
+    {""entity"": ""Event Hubs"", ""type"": ""system""} as it's a system rather than an individual entity or component. 
+    {""entity"": ""custom bot messaging service"", ""type"": ""component""},
+    {""entity"": ""Azure Bot Service"", ""type"": ""service""},
+    {""entity"": ""flight updates"", ""type"": ""data""} as this is information being communicated, not a named entity or component in itself. 
+    {""entity"": ""Azure Data Lake storage"", ""type"": ""storage account""},
+    {""entity"": ""Data Lake Analytics with Power BI integration"", ""type"": ""system""} as it involves more than just one service but is treated here as an interconnected system for simplicity, wherein analytics and visualization are performed. 
+  ],
+  ""relationships"": [
+    [""airline system"",""calls"", ""custom API coordinator""],
+    [""custom API coordinator"", ""calls"", ""Power Apps""],
+    [""user in Microsoft Teams channels"",""called-from"", ""airline system or custom bot messaging service""] as when a user selects a flight, the airline/bot will assign them to teams and start communication. 
+    [""Microsoft Teams channel"",""contains"", ""Azure Functions queue for Graph API call""], because functions are triggered by incoming events in these channels through messages stored on queues. However this is treated as team -> function app relationship due to technical constraints of the context, while it actually represents user actions (selecting a flight) leading into system processes via intermediaries like services and apps/components which would then be more accurately described by 'called-from' relationships between entities if we were not limited here. 
+    [""Azure Functions"",""calls"", ""Graph API""], representing the direct service invocation relationship for processing queue messages to perform actions on Event Hubs, while this is a process within Azure services and doesn’t represent named entity interaction directly as in user-service or bot interactions, but it can be considered an internal component of system communication.
+    [""Event Hubs"",""streams"", ""Azure Data Lake storage""], indicating that the incoming events from event hub are being streamed to data lake for processing/retention and further analysis. 
+    [""Microsoft Teams channels"",""contains"", ""custom bot messaging service""] as bots interact with teams by sending updates within these specific team spaces, forming a 'calls' relationship here instead of containing since it’s more about interaction than containment or part-of in the strictest sense for this context.
+    [""Azure Data Lake storage"",""serves"", ""Data Lake Analytics""], signifying that data lake is serving analytics processes and ultimately Power BI visualizations, though typically 'runs' would be a better term here as it involves execution of workloads rather than simple service to component relationships in this context.
+  ]
+}
+```
+Please note the simplifications made for clarity purposes within these structured data representations: actual systems may involve more complex interactions and dependencies, which might not directly fit into our 'calls', 'contains' or 'part-of' framework as strictly defined by your instructions but are necessary to capture the essence of relationships in such architectures."," Based on the provided context for a data flow solution involving an airline system using various Azure services such as API Management, App Service (Power Apps), Storage Queues, Function Apps, Event Hubs, Bot Service, and Data Lake Analytics with Power BI integration, here is the JSON response structured in key-value pairs representing named entities of type ""component"" or ""system"", along with relationships.
+
+```json
+{
+  ""entities"": [
+    {""entity"": ""airline system"", ""type"": ""system""},
+    {""entity"": ""Azure API Management"", ""type"": ""service""},
+    {""entity"": ""custom API coordinator"", ""type"": ""component""},
+    {""entity"": ""Power Apps"", ""type"": ""application""},
+    {""entity"": ""Microsoft Teams channels"", ""type"": ""system""} as these are groups where the communication takes place. We'll treat them here similarly to components in this context for simplicity, but remember that they technically represent systems since teams can include various other entities like users and bots. 
+    {""entity"": ""Graph API call queue"", ""type"": ""queue""},
+    {""entity"": ""Azure Functions"", ""type"": ""function app""},
+    {""entity"": ""Event Hubs"", ""type"": ""system""} as it's a system rather than an individual entity or component. 
+    {""entity"": ""custom bot messaging service"", ""type"": ""component""},
+    {""entity"": ""Azure Bot Service"", ""type"": ""service""},
+    {""entity"": ""flight updates"", ""type"": ""data""} as this is information being communicated, not a named entity or component in itself. 
+    {""entity"": ""Azure Data Lake storage"", ""type"": ""storage account""},
+    {""entity"": ""Data Lake Analytics with Power BI integration"", ""type"": ""system""} as it involves more than just one service but is treated here as an interconnected system for simplicity, wherein analytics and visualization are performed. 
+  ],
+  ""relationships"": [
+    [""airline system"",""calls"", ""custom API coordinator""],
+    [""custom API coordinator"", ""calls"", ""Power Apps""],
+    [""user in Microsoft Teams channels"",""called-from"", ""airline system or custom bot messaging service""] as when a user selects a flight, the airline/bot will assign them to teams and start communication. 
+    [""Microsoft Teams channel"",""contains"", ""Azure Functions queue for Graph API call""], because functions are triggered by incoming events in these channels through messages stored on queues. However this is treated as team -> function app relationship due to technical constraints of the context, while it actually represents user actions (selecting a flight) leading into system processes via intermediaries like services and apps/components which would then be more accurately described by 'called-from' relationships between entities if we were not limited here. 
+    [""Azure Functions"",""calls"", ""Graph API""], representing the direct service invocation relationship for processing queue messages to perform actions on Event Hubs, while this is a process within Azure services and doesn’t represent named entity interaction directly as in user-service or bot interactions, but it can be considered an internal component of system communication.
+    [""Event Hubs"",""streams"", ""Azure Data Lake storage""], indicating that the incoming events from event hub are being streamed to data lake for processing/retention and further analysis. 
+    [""Microsoft Teams channels"",""contains"", ""custom bot messaging service""] as bots interact with teams by sending updates within these specific team spaces, forming a 'calls' relationship here instead of containing since it’s more about interaction than containment or part-of in the strictest sense for this context.
+    [""Azure Data Lake storage"",""serves"", ""Data Lake Analytics""], signifying that data lake is serving analytics processes and ultimately Power BI visualizations, though typically 'runs' would be a better term here as it involves execution of workloads rather than simple service to component relationships in this context.
+  ]
+}
+```
+Please note the simplifications made for clarity purposes within these structured data representations: actual systems may involve more complex interactions and dependencies, which might not directly fit into our 'calls', 'contains' or 'part-of' framework as strictly defined by your instructions but are necessary to capture the essence of relationships in such architectures.",13.3262031369959
+1,phi3,../IMAGES NEW/Azure/13 Azure Secure Research.txt,"
+    Data owners upload datasets into a public blob storage account. The data is encrypted by using Microsoft-managed keys.
+
+    Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location (import path) on another storage account with security controls. The storage account can only be reached through a private endpoint. Also, it's accessed by a service principal with limited permissions. Data Factory deletes the original copy making the dataset immutable.
+
+    Researchers access the secure environment through a streaming application using Azure Virtual Desktop as a privileged jump box.
+
+    The dataset in the secure storage account is presented to the data science VMs provisioned in a secure network environment for research work. Much of the data preparation is done on those VMs.
+
+    The secure environment has Azure Machine Learning compute that can access the dataset through a private endpoint for users for Azure Machine Learning capabilities, such as to train, deploy, automate, and manage machine learning models. At this point, models are created that meet regulatory guidelines. All model data is de-identified by removing personal information.
+
+    Models or de-identified data is saved to a separate location on the secure storage (export path). When new data is added to the export path, a logic app is triggered. In this architecture, the logic app is outside the secure environment because no data is sent to the logic app. Its only function is to send notification and start the manual approval process.
+
+    The app starts an approval process requesting a review of data that is queued to be exported. The manual reviewers ensure that sensitive data isn't exported. After the review process, the data is either approved or denied.
+
+    Note
+
+    If an approval step is not required on exfiltration, the logic app step could be omitted.
+
+    If the de-identified data is approved, it's sent to the Data Factory instance.
+
+    Data Factory moves the data to the public storage account in a separate container to allow external researchers to have access to their exported data and models. Alternately, you can provision another storage account in a lower security environment.
+
+","{""entities"": [[""datasets"", ""component"", ""Data owners upload datasets into a public blob storage account""], [""public blob storage account"", ""system"", ""Data owners upload datasets into a public blob storage account""], [""Azure Data Factory"", ""system"", ""Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location""], [""storage account"", ""system"", ""Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location (import path) on another storage account with security controls""], [""copied dataset"", ""system"", ""Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location (import path) on another storage account with security controls""], [""private endpoint"", ""component"", ""The storage account can only be reached through a private endpoint.""], [""service principal"", ""component"", ""Also, it's accessed by a service principal with limited permissions.""], [""streaming application"", ""component"", ""access the secure environment through a streaming application""], [""Azure Virtual Desktop"", ""component"", ""Azure Virtual Desktop as a privileged jump box""], [""data science VMs"", ""component"", ""data science VMs provisioned in a secure network environment""], [""Azure Machine Learning compute"", ""component"", ""The secure environment has Azure Machine Learning compute that can access the dataset""], [""secure network environment"", ""system"", ""data science VMs provisioned in a secure network environment""], [""machine learning models"", ""component"", ""At this point, models are created that meet regulatory guidelines""], [""de-identified data"", ""component"", ""Models or de-identified data is saved to a separate location on the secure storage (export path)""], [""logic app"", ""component"", ""When new data is added to the export path, a logic app is triggered""], [""separate container"", ""component"", ""Data Factory moves the data to the public storage account in a separate container""], [""moved data"", ""component"", ""Data Factory moves the data to the public storage account in a separate container""], [""Data owners"", ""person"", ""Data owners upload datasets into a public blob storage account""], [""Researchers"", ""person"", ""Researchers access the secure environment through a streaming application using Azure Virtual Desktop as a privileged jump box""], [""manual reviewers"", ""person"", ""The manual reviewers ensure that sensitive data isn't exported.""], [""Users"", ""person"", ""The secure environment has Azure Machine Learning compute that can access the dataset""]], ""relationships"": [[""datasets"", ""part-of"", ""public blob storage account"", ""Data owners upload datasets into a public blob storage account""], [""Data owners"", ""calls"", ""datasets"", ""Data owners upload datasets into a public blob storage account""], [""Azure Data Factory"", ""calls"", ""datasets"", ""Azure Data Factory uses a trigger that starts copying of the uploaded dataset""], [""storage account"", ""contains"", ""copied dataset"", ""opying of the uploaded dataset to a specific location (import path) on another storage account with security controls""], [""Azure Data Factory"", ""calls"", ""copied dataset"", ""Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location""], [""private endpoint"", ""calls"", ""storage account"", ""The storage account can only be reached through a private endpoint""], [""storage account"", ""is-called-from"", ""service principal"", ""Also, it's accessed by a service principal with limited permissions""], [""Researchers"", ""calls"", ""Azure Virtual Desktop"", "" Researchers access the secure environment through a streaming application""], [""Azure Virtual Desktop"", ""calls"", ""streaming application"", ""through a streaming application using Azure Virtual Desktop""], [""streaming application"", ""calls"", ""storage account"", ""Researchers access the secure environment through a streaming application using Azure Virtual Desktop as a privileged jump box""], [""data science VMs"", ""part-of"", ""secure network environment"", ""The dataset in the secure storage account is presented to the data science VMs""], [""data science VMs"", ""calls"", ""copied dataset"", "" The dataset in the secure storage account is presented to the data science VMs""], [""secure network environment"", ""contains"", ""Azure Machine Learning compute"", ""The secure environment has Azure Machine Learning compute that can access the dataset""], [""Azure Machine Learning compute"", ""calls"", ""Azure Machine Learning compute"", ""The secure environment has Azure Machine Learning compute that can access the dataset""], [""machine learning models"", ""part-of"", ""storage account"", ""Models or de-identified data is saved to a separate location on the secure storage (export path)""], [""machine learning models"", ""calls"", ""logic app"", ""When new data is added to the export path, a logic app is triggered""], [""logic app"", ""calls"", ""manual reviewers"", ""The app starts an approval process requesting a review of data that is queued to be exported.""], [""public blob storage account"", ""contains"", ""separate container"", ""Data Factory moves the data to the public storage account in a separate container""], [""Azure Data Factory"", ""calls"", ""de-identified data"", ""Data Factory moves the data to the public storage account in a separate container to allow external researchers to have access to their exported data and models""], [""separate container"", ""contains"", ""moved data"", ""Data Factory moves the data to the public storage account in a separate container""], [""Azure Data Factory"", ""calls"", ""moved data"", ""Data Factory moves the data to the public storage account in a separate container to allow external researchers to have access to their exported data and models""], [""Users"", ""calls"", ""Azure Machine Learning compute"", ""The secure environment has Azure Machine Learning compute that can access the dataset""]]}"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""data owners"",
+      ""type"": ""person"",
+      ""description"": ""Individuals who upload datasets into a public blob storage account.""
+    },
+    {
+      ""entity"": ""Azure Data Factory"",
+      ""type"": ""component"",
+      ""description"": ""A software component that starts copying of the uploaded dataset to another location within Azure services, using various triggers and activities for data movement tasks.""
+    },
+    {
+      ""entity"": ""trigger"",
+      ""type"": ""system"",
+      ""description"": ""The system entity which initiates a start copy operation in Data Factory when it detects the upload of datasets to blob storage account.""
+    },
+    {
+      ""entity"": ""storage accounts"",
+      ""type"": [""component"", ""person""],
+      ""description"": [
+        {
+          ""storageAccount1"": {
+            ""entity"": ""public blob storage account"",
+            ""type"": ""system"" or ""data-platform"",
+            ""description"": ""A public Azure data platform where the uploaded datasets are initially stored.""
+          },
+          ""entity_2"": {
+            ""role"": ""contains relationship with uploader's dataset""
+          }
+        },
+        {
+          ""storageAccount1"": {
+            ""entity"": ""specific location on another storage account"",
+            ""type"": ""system"" or ""data-platform"",
+            ""description"": ""The destination for the data copy operation initiated by Azure Data Factory.""
+          },
+          ""entity_2"": {
+            ""role"": ""contains relationship with uploaded datasets and triggers' target location""
+          }
+        }
+      ]
+    },
+    {
+      ""entity"": ""import path"",
+      ""type"": ""system"",
+      ""description"": ""The specific destination within the secure storage account where data is copied to.""
+    },
+    {
+      ""entity"": ""researchers"",
+      ""type"": ""person"",
+      ""description"": ""Individuals who access and perform research work using Azure services, through a streaming application on virtual desktops or directly from the secure environment.""
+    },
+    {
+      ""entity"": ""Azure Virtual Desktop"",
+      ""type"": ""system"",
+      ""description"": ""A privileged jump box used for accessing the private network in which researchers can run applications to interact with their workloads and data science VMs within a secure environment.""
+    },
+    {
+      ""entity"": ""data science VMs"",
+      ""type"": [""person"", ""component""],
+      ""description"": [
+        {
+          ""vm1"": {
+            ""role"": ""part of the secured networked compute resources for data preparation work."",
+            ""functionality"": ""Data preprocessing and analysis tasks.""
+          }
+        }
+      ]
+    },
+    {
+      ""entity"": ""Azure Machine Learning"",
+      ""type"": [""person"", ""component""],
+      ""description"": [
+        {
+          ""machineLearning1"": {
+            ""role"": ""part of the secure environment for Azure services, providing capabilities to train and deploy machine learning models."",
+            ""functionality"": ""Training ML models with regulatory guidel096b\u2582 in 3-colorings.""}
+        }
+      ]
+    },
+    {
+     ""entity"":""logic app"",
+     ""type"": ""component"",
+     ""description"" : ""A workflow that is triggered externally to notify reviewers and initiate the manual approval process for exported data without sending any actual data.""
+    },
+    {
+      ""entity"": ""approval request email"",
+       ""type"": ""system"", 
+        ""description"":""An automated notification sent out by a logic app, once triggered due to certain conditions being met in the secure storage path."",  
+        ""relationship"" : [""calls"",""logic app""]},
+    {
+      ""entity"": ""data owners' approval request"",
+       ""type"": ""person"", 
+         ""description"":""The data owner initiating a manual review process as per an email sent by the logic app.""  
+        },
+     ]
+}
+```"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""data owners"",
+      ""type"": ""person"",
+      ""description"": ""Individuals who upload datasets into a public blob storage account.""
+    },
+    {
+      ""entity"": ""Azure Data Factory"",
+      ""type"": ""component"",
+      ""description"": ""A software component that starts copying of the uploaded dataset to another location within Azure services, using various triggers and activities for data movement tasks.""
+    },
+    {
+      ""entity"": ""trigger"",
+      ""type"": ""system"",
+      ""description"": ""The system entity which initiates a start copy operation in Data Factory when it detects the upload of datasets to blob storage account.""
+    },
+    {
+      ""entity"": ""storage accounts"",
+      ""type"": [""component"", ""person""],
+      ""description"": [
+        {
+          ""storageAccount1"": {
+            ""entity"": ""public blob storage account"",
+            ""type"": ""system"" or ""data-platform"",
+            ""description"": ""A public Azure data platform where the uploaded datasets are initially stored.""
+          },
+          ""entity_2"": {
+            ""role"": ""contains relationship with uploader's dataset""
+          }
+        },
+        {
+          ""storageAccount1"": {
+            ""entity"": ""specific location on another storage account"",
+            ""type"": ""system"" or ""data-platform"",
+            ""description"": ""The destination for the data copy operation initiated by Azure Data Factory.""
+          },
+          ""entity_2"": {
+            ""role"": ""contains relationship with uploaded datasets and triggers' target location""
+          }
+        }
+      ]
+    },
+    {
+      ""entity"": ""import path"",
+      ""type"": ""system"",
+      ""description"": ""The specific destination within the secure storage account where data is copied to.""
+    },
+    {
+      ""entity"": ""researchers"",
+      ""type"": ""person"",
+      ""description"": ""Individuals who access and perform research work using Azure services, through a streaming application on virtual desktops or directly from the secure environment.""
+    },
+    {
+      ""entity"": ""Azure Virtual Desktop"",
+      ""type"": ""system"",
+      ""description"": ""A privileged jump box used for accessing the private network in which researchers can run applications to interact with their workloads and data science VMs within a secure environment.""
+    },
+    {
+      ""entity"": ""data science VMs"",
+      ""type"": [""person"", ""component""],
+      ""description"": [
+        {
+          ""vm1"": {
+            ""role"": ""part of the secured networked compute resources for data preparation work."",
+            ""functionality"": ""Data preprocessing and analysis tasks.""
+          }
+        }
+      ]
+    },
+    {
+      ""entity"": ""Azure Machine Learning"",
+      ""type"": [""person"", ""component""],
+      ""description"": [
+        {
+          ""machineLearning1"": {
+            ""role"": ""part of the secure environment for Azure services, providing capabilities to train and deploy machine learning models."",
+            ""functionality"": ""Training ML models with regulatory guidel096b\u2582 in 3-colorings.""}
+        }
+      ]
+    },
+    {
+     ""entity"":""logic app"",
+     ""type"": ""component"",
+     ""description"" : ""A workflow that is triggered externally to notify reviewers and initiate the manual approval process for exported data without sending any actual data.""
+    },
+    {
+      ""entity"": ""approval request email"",
+       ""type"": ""system"", 
+        ""description"":""An automated notification sent out by a logic app, once triggered due to certain conditions being met in the secure storage path."",  
+        ""relationship"" : [""calls"",""logic app""]},
+    {
+      ""entity"": ""data owners' approval request"",
+       ""type"": ""person"", 
+         ""description"":""The data owner initiating a manual review process as per an email sent by the logic app.""  
+        },
+     ]
+}
+```",11.565469199005747
+2,phi3,../IMAGES NEW/Azure/16 Azure automate-pdf-forms.txt,"
+    A designated Outlook email account receives PDF files as attachments. The arrival of an email triggers a logic app to process the email. The logic app is built by using the capabilities of Azure Logic Apps.
+    The logic app uploads the PDF files to a container in Azure Data Lake Storage.
+    You can also manually or programmatically upload PDF files to the same PDF container.
+    The arrival of a PDF file in the PDF container triggers another logic app to process the PDF forms that are in the PDF file.
+    The logic app sends the location of the PDF file to a function app for processing. The function app is built by using the capabilities of Azure Functions.
+    The function app receives the location of the file and takes these actions:
+        It splits the file into single pages if the file has multiple pages. Each page contains one independent form. Split files are saved to a second container in Data Lake Storage.
+        It uses HTTPS POST, an Azure REST API, to send the location of the single-page PDF file to AI Document Intelligence for processing. When Azure AI Document Intelligence completes its processing, it sends a response back to the function app, which places the information into a data structure.
+        It creates a JSON data file that contains the response data and stores the file to a third container in Data Lake Storage.
+    The forms processing logic app receives the processed response data.
+    The forms processing logic app sends the processed data to Azure Cosmos DB, which saves the data in a database and in collections.
+    Power BI obtains the data from Azure Cosmos DB and provides insights and dashboards.
+    You can implement further processing as needed on the data that's in Azure Cosmos DB.
+
+","{""entities"": [[""designated Outlook email account"", ""component"", ""A designated Outlook email account receives PDF files as attachments""], [""logic app"", ""component"", ""The arrival of an email triggers a logic app to process the email.""], [""Azure Logic Apps"", ""system"", ""The logic app is built by using the capabilities of Azure Logic Apps.""], [""Container"", ""component"", ""The logic app uploads the PDF files to a container in Azure Data Lake Storage""], [""Azure Data Lake Storage"", ""system"", ""The logic app uploads the PDF files to a container in Azure Data Lake Storage""], [""logic app 2"", ""system"", ""The arrival of a PDF file in the PDF container triggers another logic app to process the PDF forms""], [""function app"", ""component"", ""The logic app sends the location of the PDF file to a function app for processing.""], [""Azure Functions"", ""system"", ""The function app is built by using the capabilities of Azure Functions""], [""Azure REST API"", ""component"", ""It uses HTTPS POST, an Azure REST API, to send the location of the single-page PDF file""], [""Container 2"", ""component"", ""Split files are saved to a second container in Data Lake Storage""], [""AI Document Intelligence"", ""component"", ""It uses HTTPS POST, an Azure REST API, to send the location of the single-page PDF file to AI Document Intelligence for processing""], [""Container 3"", ""component"", ""JSON data file that contains the response data and stores the file to a third container in Data Lake Storage""], [""forms processing logic app"", ""component"", ""The forms processing logic app receives the processed response data""], [""Azure Cosmos DB"", ""component"", ""The forms processing logic app sends the processed data to Azure Cosmos DB""], [""database"", ""component"", ""Azure Cosmos DB, which saves the data in a database""], [""Power BI"", ""component"", ""Power BI obtains the data from Azure Cosmos DB and provides insights and dashboards""]], ""relationships"": [[""designated Outlook email account"", ""calls"", ""logic app"", ""The arrival of an email triggers a logic app to process the email.""], [""Azure Logic Apps"", ""contains"", ""logic app"", ""The logic app is built by using the capabilities of Azure Logic Apps.""], [""logic app"", ""calls"", ""Container"", ""The logic app uploads the PDF files to a container in Azure Data Lake Storage""], [""Container"", ""part-of"", ""Azure Data Lake Storage"", ""container in Azure Data Lake Storage""], [""Container"", ""calls"", ""logic app 2"", ""The arrival of a PDF file in the PDF container triggers another logic app""], [""logic app"", ""calls"", ""function app"", ""The logic app sends the location of the PDF file to a function app for processing.""], [""function app"", ""part-of"", ""Azure Functions"", ""container in Azure Data Lake Storage""], [""function app"", ""calls"", ""Container 2"", ""Split files are saved to a second container in Data Lake Storage""], [""Azure Data Lake Storage"", ""contains"", ""Container 2"", ""Split files are saved to a second container in Data Lake Storage""], [""function app"", ""calls"", ""Azure REST API"", ""It uses HTTPS POST, an Azure REST API""], [""Azure REST API"", ""calls"", ""AI Document Intelligence"", ""HTTPS POST, an Azure REST API, to send the location of the single-page PDF file to AI Document Intelligence""], [""Azure Data Lake Storage"", ""contains"", ""Container 3"", ""third container in Data Lake Storage""], [""function app"", ""calls"", ""Container 3"", ""It creates a JSON data file that contains the response data and stores the file to a third container""], [""forms processing logic app"", ""calls"", ""Container 3"", ""The forms processing logic app receives the processed response data""], [""forms processing logic app"", ""calls"", ""Azure Cosmos DB"", ""The forms processing logic app sends the processed data to Azure Cosmos DB""], [""Azure Cosmos DB"", ""calls"", ""database"", ""Azure Cosmos DB, which saves the data in a database""], [""Power BI"", ""calls"", ""Azure Cosmos DB"", ""Power BI obtains the data from Azure Cosmos DB and provides insights and dashboards""]]}"," {
+  ""entities"": [
+    [""Outlook Email Account"", ""person"", ""email account designated for receiving PDF files""],
+    [""Logic App"", ""system/component"", ""built using Azure Logic Apps, processes emails and uploads received PDF files to the container in Data Lake Storage.""],
+    [""Azure Functions"", ""function app system"", ""processes file location data sent from logic apps. Splits multi-page PDF into single pages for further processing""],
+    [""AI Document Intelligence"", ""component/service"", ""receives processed response data, analyzes the content of each page in a PDF form and provides insights.""],
+    [""Power BI"", ""tool/application"", ""provides insights and dashboards using the processed data from Azure Cosmos DB""],
+    [""Azure Data Lake Storage Container 1"", ""system component container"", """"],
+    [""Azure Data Lake Storage Container 2"", ""component container"", ""stores split files containing single-page PDF forms.""],
+    [""Azure Functions App Output Container"", ""data structure/container"", ""contains JSON data file with processed response information from AI Document Intelligence""],
+    [""Azure Cosmos DB Database"", ""system component database"", """"],
+    [""Azure Data Lake Storage Connector for Logic App (PDF processing)"", ""relationship container connector logic app to Azure Data Lake Store Container 1/2, called-from relationship from PDF container upon receiving a file""],
+    [""Forms Processing Logic App Connection Input of Power BI"", ""relationship data structure input connection to Cosmos DB Database and Collection(s)""]
+  ],
+  ""relationships"": [
+    [""Outlook Email Account"",""calls"",""Logic App (PDF processing)""],
+    [""Logic App (PDF processing)"", ""contains/uploads"", ""Azure Data Lake Storage Container 1""],
+    [""Pdf File in Azure Data Lake Storage Container 1"", ""receives trigger from"",""Forms Processing Logic App Connection Input of Power BI""]
+  ]
+}"," {
+  ""entities"": [
+    [""Outlook Email Account"", ""person"", ""email account designated for receiving PDF files""],
+    [""Logic App"", ""system/component"", ""built using Azure Logic Apps, processes emails and uploads received PDF files to the container in Data Lake Storage.""],
+    [""Azure Functions"", ""function app system"", ""processes file location data sent from logic apps. Splits multi-page PDF into single pages for further processing""],
+    [""AI Document Intelligence"", ""component/service"", ""receives processed response data, analyzes the content of each page in a PDF form and provides insights.""],
+    [""Power BI"", ""tool/application"", ""provides insights and dashboards using the processed data from Azure Cosmos DB""],
+    [""Azure Data Lake Storage Container 1"", ""system component container"", """"],
+    [""Azure Data Lake Storage Container 2"", ""component container"", ""stores split files containing single-page PDF forms.""],
+    [""Azure Functions App Output Container"", ""data structure/container"", ""contains JSON data file with processed response information from AI Document Intelligence""],
+    [""Azure Cosmos DB Database"", ""system component database"", """"],
+    [""Azure Data Lake Storage Connector for Logic App (PDF processing)"", ""relationship container connector logic app to Azure Data Lake Store Container 1/2, called-from relationship from PDF container upon receiving a file""],
+    [""Forms Processing Logic App Connection Input of Power BI"", ""relationship data structure input connection to Cosmos DB Database and Collection(s)""]
+  ],
+  ""relationships"": [
+    [""Outlook Email Account"",""calls"",""Logic App (PDF processing)""],
+    [""Logic App (PDF processing)"", ""contains/uploads"", ""Azure Data Lake Storage Container 1""],
+    [""Pdf File in Azure Data Lake Storage Container 1"", ""receives trigger from"",""Forms Processing Logic App Connection Input of Power BI""]
+  ]
+}",5.720641658990644
+3,phi3,../IMAGES NEW/Azure/06 Azure logic-apps-data-integration.txt,"
+    API Management accepts API calls in the form of HTTP requests.
+
+    API Management securely routes the HTTP requests to Logic Apps.
+
+    Each HTTP request triggers a run in Logic Apps:
+        Logic Apps uses secured template parameters to retrieve database credentials from Azure Key Vault.
+        Logic Apps uses Transport Layer Security (TLS) to send the database credentials and a database statement to the on-premises data gateway.
+
+    The on-premises data gateway connects to a SQL Server database to run the statement.
+
+    SQL Server stores the data and makes it available to apps that users access.
+
+    Azure Monitor collects information on Logic Apps events and performance.
+
+","{""entities"": [[""API Management"", ""system"", ""accepts API calls in the form of HTTP requests""], [""Logic Apps"", ""system"", ""uses secured template parameters to retrieve database credentials from Azure Key Vault""], [""on-premises data gateway"", ""system"", """"], [""SQL Server"", ""system"", ""stores the data and makes it available to apps that users access""], [""Azure Monitor"", ""system"", ""collects information on Logic Apps events and performance""], [""Azure Key Vault"", ""system"", ""database credentials""]], ""relationships"": [[""API Management"", ""calls"", ""Logic Apps"", ""routes the HTTP requests to Logic Apps""], [""Logic Apps"", ""calls"", ""Azure Key Vault"", ""Logic Apps uses secured template parameters to retrieve database credentials from Azure Key Vault""], [""Logic Apps"", ""calls"", ""on-premises data gateway"", ""send the database credentials and a database statement to the on-premises data gateway""], [""on-premises data gateway"", ""calls"", ""SQL Server"", ""connects to a SQL Server database""], [""Azure Monitor"", ""calls"", ""Logic Apps"", ""collects information on Logic Apps events and performance""]]}"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""API Management"",
+      ""type"": ""system"",
+      ""description"": ""An API management platform that accepts HTTP requests.""
+    },
+    {
+      ""entity"": ""Logic Apps"",
+      ""type"": ""component"",
+      ""description"": ""A cloud-based automation service used by the Logic Apps to retrieve database credentials from Azure Key Vault and send data securely through TLS connection protocol, using a template parameter.""
+    },
+    {
+      ""entity"": ""HTTP requests"",
+      ""type"": ""component"",
+      ""description"": ""The starting point of this system. It initiates the sequence by contacting API Management to trigger Logic Apps run.""
+    },
+    {
+      ""entity"": ""Azure Key Vault"",
+      ""type"": ""system"",
+      ""description"": ""A service used for securely managing keys, secrets and other sensitive information in Azure cloud environment. It provides secured template parameters to retrieve database credentials by Logic Apps.""
+    },
+    {
+      ""entity"": ""Transport Layer Security (TLS)"",
+      ""type"": ""component"",
+      ""description"": ""A security protocol used between the on-premises data gateway and Azure Key Vault, ensuring secure transmission of database credentials from Logic Apps.""
+    },
+    {
+      ""entity"": ""on-premises data gateway"",
+      ""type"": ""component"",
+      ""description"": ""A service that connects to a SQL Server Database on the premises and receives encrypted HTTP requests with database statement, after retrieving credentials securely from Azure Key Vault.""
+    },
+    {
+      ""entity"": ""SQL Server Database"",
+      ""type"": ""component"",
+      ""description"": ""The system where data is stored. It holds users' accessible information for apps and manages the execution of SQL database statements received through encrypted HTTP requests with TLS connection protocol from Logic Apps.""
+    },
+    {
+      ""entity"": ""Azure Monitor"",
+      ""type"": ""system"",
+      ""description"": ""A service that collects events, performance data related to Logic Apps and other services in Azure cloud environment for monitoring purposes.""
+    }
+  ],
+  ""relationships"": [
+    [""HTTP requests"",""calls"",""API Management""],
+    [""API Management"",""contains"",""Logic Apps""],
+    [""Logic Apps"",""part-of"",""component process of retrieving database credentials from Azure Key Vault and sending the statement to SQL Server Database through TLS connection protocol""],
+    [""Logic Apps"",""called-from"", ""HTTP requests""]
+  ]
+}
+```"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""API Management"",
+      ""type"": ""system"",
+      ""description"": ""An API management platform that accepts HTTP requests.""
+    },
+    {
+      ""entity"": ""Logic Apps"",
+      ""type"": ""component"",
+      ""description"": ""A cloud-based automation service used by the Logic Apps to retrieve database credentials from Azure Key Vault and send data securely through TLS connection protocol, using a template parameter.""
+    },
+    {
+      ""entity"": ""HTTP requests"",
+      ""type"": ""component"",
+      ""description"": ""The starting point of this system. It initiates the sequence by contacting API Management to trigger Logic Apps run.""
+    },
+    {
+      ""entity"": ""Azure Key Vault"",
+      ""type"": ""system"",
+      ""description"": ""A service used for securely managing keys, secrets and other sensitive information in Azure cloud environment. It provides secured template parameters to retrieve database credentials by Logic Apps.""
+    },
+    {
+      ""entity"": ""Transport Layer Security (TLS)"",
+      ""type"": ""component"",
+      ""description"": ""A security protocol used between the on-premises data gateway and Azure Key Vault, ensuring secure transmission of database credentials from Logic Apps.""
+    },
+    {
+      ""entity"": ""on-premises data gateway"",
+      ""type"": ""component"",
+      ""description"": ""A service that connects to a SQL Server Database on the premises and receives encrypted HTTP requests with database statement, after retrieving credentials securely from Azure Key Vault.""
+    },
+    {
+      ""entity"": ""SQL Server Database"",
+      ""type"": ""component"",
+      ""description"": ""The system where data is stored. It holds users' accessible information for apps and manages the execution of SQL database statements received through encrypted HTTP requests with TLS connection protocol from Logic Apps.""
+    },
+    {
+      ""entity"": ""Azure Monitor"",
+      ""type"": ""system"",
+      ""description"": ""A service that collects events, performance data related to Logic Apps and other services in Azure cloud environment for monitoring purposes.""
+    }
+  ],
+  ""relationships"": [
+    [""HTTP requests"",""calls"",""API Management""],
+    [""API Management"",""contains"",""Logic Apps""],
+    [""Logic Apps"",""part-of"",""component process of retrieving database credentials from Azure Key Vault and sending the statement to SQL Server Database through TLS connection protocol""],
+    [""Logic Apps"",""called-from"", ""HTTP requests""]
+  ]
+}
+```",6.987742958008312
+4,phi3,../IMAGES NEW/Azure/09 Azure protect APIs original.txt,"
+    To gain access to an application, an API client authenticates by providing credentials such as username and password. The IdP is Azure AD B2C in this solution, but you can use a different one.
+
+    The authentication request goes via Azure Front Door to Azure AD B2C, which is configured with a custom domain for sign-in. Azure AD B2C authenticates the user and returns a JSON Web Token (JWT) bearer token back to the user.
+
+    The client triggers an event that accesses a backend API. This event could be a click of a button on a web application or on a mobile device, or a direct call to the endpoint of the backend API.
+
+    The request goes through Azure Front Door, whose back end is mapped to the public endpoint of API Management. API Management intercepts the request and validates the bearer token against Azure AD B2C by using its validate-jwt policy. If the token isn't valid, API Management rejects the request by responding with a 401 code.
+
+    If the token is valid, API Management forwards the request to the appropriate backend API.
+
+    The diagram shows backend APIs running in three environments:
+        App Service Environment
+        Function Apps
+        Azure Kubernetes Services (AKS)
+
+    APIs running in on-premises and hybrid cloud environments can also be integrated with API Management if network connectivity is established between the APIs and API Management.
+
+","{""entities"": [[""API client"", ""system"", ""wants to gain access to an application""], [""application"", ""system"", ""API client wants to gain access to an application""], [""Azure AD B2C"", ""system"", ""The IdP is Azure AD B2C""], [""Azure Front Door"", ""system"", ""authentication request goes via Azure Front Door to Azure AD B2C""], [""backend API"", ""system"", ""The client triggers an event that accesses a backend API""], [""Azure Front Door"", ""system"", ""The request goes through Azure Front Door, whose back end is mapped to the public endpoint of API Management.""], [""backend"", ""component"", ""Azure Front Door, whose back end""], [""API Management"", ""system"", ""API Management intercepts the request and validates the bearer token against Azure AD B2C ""], [""public endpoint"", ""system"", ""whose back end is mapped to the public endpoint of API Management""], [""User"", ""person"", ""Azure AD B2C authenticates the user and returns a JSON Web Token (JWT) bearer token back to the user""]], ""relationships"": [[""API client"", ""calls"", ""application"", """"], [""Azure Front Door"", ""calls"", ""Azure AD B2C"", ""authentication request goes via Azure Front Door to Azure AD B2C""], [""Azure AD B2C"", ""is-called-from"", ""User"", ""Azure AD B2C authenticates the user and returns a JSON Web Token (JWT) bearer token back to the user""], [""API client"", ""calls"", ""backend API"", ""The client triggers an event that accesses a backend API""], [""Azure Front Door"", ""contains"", ""backend"", ""Azure Front Door, whose back end""], [""public endpoint"", ""part-of"", ""API Management"", ""Azure Front Door, whose back end""], [""backend"", ""calls"", ""public endpoint"", ""whose back end is mapped to the public endpoint of API Management""], [""API Management"", ""calls"", ""Azure AD B2C"", ""API Management intercepts the request and validates the bearer token against Azure AD B2C""]]}"," ```json
+{
+  ""entities"": [
+    {""entity"": ""API client"", ""type"": ""person"", ""description"": """"},
+    {""entity"": ""Azure AD B2C Identity Provider (IdP)"", ""type"": ""system"", ""description"": ""The IdP used for authentication in this solution is Azure AD B2C.""},
+    {""entity"": ""Azure Front Door"", ""type"": ""component"", ""description"": ""A service that routes requests from clients through a proxy to the back end of an application.""},
+    {""entity"": ""API Management"", ""type"": ""system"", ""description"": ""An API Gateway managing request interception, token validation and forwarding requests to appropriate backend APIs.""},
+    {""entity"": ""Azure App Service Environment (ASE)"", ""type"": ""component"", ""description"": ""A fully managed platform for building scalable web applications with high availability. It runs on Microsoft Azure.""},
+    {""entity"": ""Function Apps"", ""type"": ""component"", ""description"": ""Serverless technology where a function is executed in response to events such as HTTP requests, database changes or queue messages.""},
+    {""entity"": ""Azure Kubernetes Services (AKS)"", ""type"": ""system"", ""description"": ""Managed service on Azure for running applications built with container technology. It simplifies the deployment and management of containers across clusters.""}
+  ],
+  ""relationships"": [
+    [""API client"",""calls"",""Azure Front Door""],
+    [""Azure AD B2C IdP"", ""part-of"", ""Azure AD B2C Identity Provider (IdP)""],
+    [""Azure Front Door"", ""contains"", ""Azure AD B2C IdP""],
+    [""API Management"", ""calls"", ""Azure Front Door""],
+    [""App Service Environment"", ""contain"", ""Function Apps""], 
+    [""Function Apps"", ""part-of"",""App Service Environment""],
+    [""AKS"", ""contains"", ""Function Apps""]
+  ]
+}
+```"," ```json
+{
+  ""entities"": [
+    {""entity"": ""API client"", ""type"": ""person"", ""description"": """"},
+    {""entity"": ""Azure AD B2C Identity Provider (IdP)"", ""type"": ""system"", ""description"": ""The IdP used for authentication in this solution is Azure AD B2C.""},
+    {""entity"": ""Azure Front Door"", ""type"": ""component"", ""description"": ""A service that routes requests from clients through a proxy to the back end of an application.""},
+    {""entity"": ""API Management"", ""type"": ""system"", ""description"": ""An API Gateway managing request interception, token validation and forwarding requests to appropriate backend APIs.""},
+    {""entity"": ""Azure App Service Environment (ASE)"", ""type"": ""component"", ""description"": ""A fully managed platform for building scalable web applications with high availability. It runs on Microsoft Azure.""},
+    {""entity"": ""Function Apps"", ""type"": ""component"", ""description"": ""Serverless technology where a function is executed in response to events such as HTTP requests, database changes or queue messages.""},
+    {""entity"": ""Azure Kubernetes Services (AKS)"", ""type"": ""system"", ""description"": ""Managed service on Azure for running applications built with container technology. It simplifies the deployment and management of containers across clusters.""}
+  ],
+  ""relationships"": [
+    [""API client"",""calls"",""Azure Front Door""],
+    [""Azure AD B2C IdP"", ""part-of"", ""Azure AD B2C Identity Provider (IdP)""],
+    [""Azure Front Door"", ""contains"", ""Azure AD B2C IdP""],
+    [""API Management"", ""calls"", ""Azure Front Door""],
+    [""App Service Environment"", ""contain"", ""Function Apps""], 
+    [""Function Apps"", ""part-of"",""App Service Environment""],
+    [""AKS"", ""contains"", ""Function Apps""]
+  ]
+}
+```",5.447308481001528
+5,phi3,../IMAGES NEW/Azure/14 Azure Call Center Analytics.txt,"
+    A phone call between an agent and a customer is recorded and stored in Azure Blob Storage. Audio files are uploaded to an Azure Storage account via a supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API.
+
+    Azure AI Speech is used to transcribe audio files in Batch mode asynchronously with speaker diarization enabled. The transcription results are persisted in Blob Storage.
+
+    Azure AI Language is used to detect and redact personal data in the transcript.
+
+    For batch mode transcription and personal data detection and redaction, use the AI services Ingestion Client tool. The Ingestion Client tool uses a no-code approach for call center transcription.
+
+    Azure OpenAI is used to process the transcript and extract entities, summarize the conversation, and analyze sentiments. The processed output is stored in Blob Storage and then analyzed and visualized by using other services. You can also store the output in a datastore for keeping track of metadata and for reporting. Use Azure OpenAI to process the stored transcription information.
+
+    Power BI or a custom web application that's hosted by App Service is used to visualize the output. Both options provide near real-time insights. You can store this output in a customer relationship management (CRM), so agents have contextual information about why the customer called and can quickly solve potential problems. This process is fully automated, which saves the agents time and effort.
+
+","{""entities"": [[""phone call"", ""component"", ""A phone call between an agent and a customer is recorded""], [""agent"", ""person"", ""A phone call between an agent and a customer is recorded""], [""customer"", ""person"", ""A phone call between an agent and a customer is recorded""], [""Azure Blob Storage"", ""system"", ""is recorded and stored in Azure Blob Storage""], [""Audio files"", ""system"", ""Audio files are uploaded to an Azure Storage account via a supported method""], [""supported method"", ""component"", ""Audio files are uploaded to an Azure Storage account via a supported method""], [""UI-based tool"", ""component"", ""supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API""], [""Azure Storage Explorer"", ""component"", ""supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API""], [""Storage SDK"", ""component"", ""supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API""], [""API"", ""component"", ""supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API""], [""Azure AI Speech"", ""component"", ""transcribe audio files in Batch mode asynchronously""], [""transcription results"", ""component"", ""The transcription results are persisted in Blob Storage.""], [""Azure AI Language"", ""component"", ""Azure AI Language is used to detect and redact personal data in the transcript.""], [""AI services Ingestion Client tool"", ""component"", ""For batch mode transcription and personal data detection and redaction, use the AI services Ingestion Client tool""], [""Azure OpenAI"", ""component"", ""Azure OpenAI is used to process the transcript and extract entities, summarize the conversation, and analyze sentiments.""], [""Azure OpenAI output"", ""component"", ""The processed output is stored in Blob Storage and then analyzed and visualized by using other services.""], [""other services"", ""component"", ""The processed output is stored in Blob Storage and then analyzed and visualized by using other services.""], [""App Service"", ""system"", ""Power BI or a custom web application that's hosted by App Service is used to visualize the output.""], [""Power BI"", ""system"", ""Power BI or a custom web application that's hosted by App Service is used to visualize the output.""], [""custom web application"", ""system"", ""Power BI or a custom web application that's hosted by App Service is used to visualize the output.""], [""Azure OpenAI output 2"", ""component"", ""You can also store the output in a datastore for keeping track of metadata and for reporting""], [""datastore"", ""component"", ""You can also store the output in a datastore for keeping track of metadata and for reporting""], [""customer relationship management (CRM)"", ""system"", ""You can store this output in a customer relationship management (CRM)""], [""Azure OpenAI output 3"", ""component"", ""You can store this output in a customer relationship management (CRM)""]], ""relationships"": [[""agent"", ""calls"", ""phone call"", ""A phone call between an agent and a customer is recorded""], [""customer"", ""calls"", ""phone call"", ""A phone call between an agent and a customer is recorded""], [""phone call"", ""part-of"", ""Azure Blob Storage"", ""is recorded and stored in Azure Blob Storage""], [""Audio files"", ""part-of"", ""Azure Blob Storage"", ""Audio files are uploaded to an Azure Storage account via a supported method""], [""supported method"", ""calls"", ""Audio files"", ""Audio files are uploaded to an Azure Storage account via a supported method""], [""supported method"", ""contains"", ""UI-based tool"", ""upported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API""], [""supported method"", ""contains"", ""Azure Storage Explorer"", ""upported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API""], [""supported method"", ""contains"", ""Storage SDK"", ""upported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API""], [""supported method"", ""contains"", ""API"", ""supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API""], [""Azure AI Speech"", ""calls"", ""Audio files"", ""transcribe audio files in Batch mode asynchronously""], [""Azure Blob Storage"", ""contains"", ""transcription results"", ""The transcription results are persisted in Blob Storage.""], [""Azure AI Speech"", ""calls"", ""transcription results"", ""The transcription results are persisted in Blob Storage.""], [""Azure AI Language"", ""calls"", ""transcription results"", ""Azure AI Language is used to detect and redact personal data in the transcript.""], [""AI services Ingestion Client tool"", ""calls"", ""transcription results"", ""For batch mode transcription and personal data detection and redaction, use the AI services Ingestion Client tool""], [""Azure OpenAI"", ""calls"", ""transcription results"", ""Azure OpenAI is used to process the transcript and extract entities, summarize the conversation, and analyze sentiments.""], [""Azure OpenAI"", ""calls"", ""Azure OpenAI output"", ""The processed output is stored in Blob Storage and then analyzed and visualized by using other services.""], [""Azure Blob Storage"", ""contains"", ""Azure OpenAI output"", ""The processed output is stored in Blob Storage and then analyzed and visualized by using other services.""], [""other services"", ""calls"", ""Azure OpenAI output"", ""The processed output is stored in Blob Storage and then analyzed and visualized by using other services.""], [""Power BI"", ""part-of"", ""App Service"", ""Power BI or a custom web application that's hosted by App Service is used to visualize the output.""], [""custom web application"", ""part-of"", ""App Service"", ""Power BI or a custom web application that's hosted by App Service is used to visualize the output.""], [""custom web application"", ""calls"", ""Azure OpenAI output"", ""Power BI or a custom web application that's hosted by App Service is used to visualize the output.""], [""Power BI"", ""calls"", ""Azure OpenAI output"", ""Power BI or a custom web application that's hosted by App Service is used to visualize the output.""], [""agent"", ""calls"", ""customer relationship management (CRM)"", ""You can store this output in a customer relationship management (CRM), so agents have contextual information about why the customer called and can quickly solve potential problems""], [""Azure OpenAI output 2"", ""part-of"", ""datastore"", ""You can also store the output in a datastore for keeping track of metadata and for reporting""], [""Azure OpenAI output 3"", ""part-of"", ""customer relationship management (CRM)"", ""You can also store the output in a datastore for keeping track of metadata and for reporting""], [""Azure OpenAI output"", ""calls"", ""Azure OpenAI output 2"", ""You can also store the output in a datastore for keeping track of metadata and for reporting""], [""Azure OpenAI output"", ""calls"", ""Azure OpenAI output 3"", ""You can store this output in a customer relationship management (CRM), so agents have contextual information about why the customer called and can quickly solve potential problems""]]}"," {
+    ""entities"": [
+        [""Agent"", ""person"", ""a user in a call center""],
+        [""Customer"", ""person"", ""the caller of the phone number""],
+        [""Azure Blob Storage"", ""system"", ""where audio files and transcription results are stored""],
+        [""Audio file"", ""component"", ""an uploaded recording from a phone call""],
+        [""Transcription result"", ""data type entity"", ""a text representation of spoken words in an audio file""],
+        [""Personal data detection/redaction service"", ""system component"", ""a tool for detecting and redacting personal information in transcriptions using Azure AI Language""]
+    ],
+    ""relationships"": [
+        [""Agent"",""calls"",,""Customer""],
+        [""Customer"",""called-from"",,[""Agent""]],
+        [""Audio file"",""contains"",,""Transcription result""],
+        [""Azure Blob Storage"",""containst"",""Audio files and transcription results""],
+        [""Azure AI Speech service"",""part of"",,""Batch mode asynchronous speech recognition with speaker diarization using Azure AI Language for personal data detection and redaction""]
+    ]
+}"," {
+    ""entities"": [
+        [""Agent"", ""person"", ""a user in a call center""],
+        [""Customer"", ""person"", ""the caller of the phone number""],
+        [""Azure Blob Storage"", ""system"", ""where audio files and transcription results are stored""],
+        [""Audio file"", ""component"", ""an uploaded recording from a phone call""],
+        [""Transcription result"", ""data type entity"", ""a text representation of spoken words in an audio file""],
+        [""Personal data detection/redaction service"", ""system component"", ""a tool for detecting and redacting personal information in transcriptions using Azure AI Language""]
+    ],
+    ""relationships"": [
+        [""Agent"",""calls"",,""Customer""],
+        [""Customer"",""called-from"",,[""Agent""]],
+        [""Audio file"",""contains"",,""Transcription result""],
+        [""Azure Blob Storage"",""containst"",""Audio files and transcription results""],
+        [""Azure AI Speech service"",""part of"",,""Batch mode asynchronous speech recognition with speaker diarization using Azure AI Language for personal data detection and redaction""]
+    ]
+}",3.256956799974432
+6,phi3,../IMAGES NEW/Azure/10 Azure LoB original.txt,"
+The data flows through the solution as follows:
+
+    Supplier data stored in CDS is moved to SQL via Data Factory.
+    Purchase order (PO) data stored in ERP system is sent to Azure SQL database.
+    Azure Functions uses API to surface PO data monthly and creates a task for users to review.
+    Power Apps retrieves data from Azure SQL Database through API.
+    User reviews and updates POs in Power Apps and sends this data to suppliers through CSV export.
+    Power BI reports trends in supplier status.
+
+","{""entities"": [[""Supplier data"", ""component"", ""Supplier data stored in CDS""], [""CDS"", ""system"", "" Supplier data stored in CDS""], [""Azure SQL database"", ""system"", ""moved to SQL via Data Factory""], [""Data Factory"", ""system"", ""moved to SQL via Data Factory""], [""Purchase order (PO)"", ""system"", ""moved to SQL via Data Factory""], [""ERP system"", ""system"", ""Purchase order (PO) data stored in ERP system""], [""Azure Functions"", ""system"", ""uses API to surface PO data monthly and creates a task for users to review""], [""Power Apps"", ""system"", ""retrieves data from Azure SQL Database through API""], [""CSV export"", ""system"", ""ends this data to suppliers through CSV export""], [""User"", ""person"", "" reviews and updates POs in Power Apps""], [""suppliers"", ""person"", "" reviews and updates POs in Power Apps""]], ""relationships"": [[""Supplier data"", ""part-of"", ""CDS"", ""Supplier data stored in CDS""], [""Supplier data"", ""is-called-from"", ""Data Factory"", ""moved to SQL via Data Factory""], [""Data Factory"", ""calls"", ""Azure SQL database"", ""moved to SQL via Data Factory""], [""Purchase order (PO)"", ""part-of"", ""ERP system"", ""Purchase order (PO) data stored in ERP system""], [""Purchase order (PO)"", ""calls"", ""Azure SQL database"", ""Purchase order (PO) data stored in ERP system is sent to Azure SQL database""], [""Azure Functions"", ""calls"", ""Purchase order (PO)"", ""uses API to surface PO data monthly""], [""Azure Functions"", ""calls"", ""User"", ""creates a task for users to review""], [""Power Apps"", ""calls"", ""Azure SQL database"", ""retrieves data from Azure SQL Database through API""], [""User"", ""calls"", ""Power Apps"", ""Reviews and updates POs in Power Apps""], [""User"", ""calls"", ""CSV export"", ""sends this data to suppliers through CSV export""], [""CSV export"", ""calls"", ""suppliers"", ""sends this data to suppliers through CSV export""]]}"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""Supplier data"",
+      ""type"": ""component"",
+      ""description"": ""Data related to suppliers stored in CDS.""
+    },
+    {
+      ""entity"": ""SQL database"",
+      ""type"": ""system"",
+      ""description"": ""A SQL database that stores Purchase Order (PO) data sent from ERP system via Azure Data Factory.""
+    },
+    {
+      ""entity"": ""Purchase order (PO) data"",
+      ""type"": ""component"",
+      ""description"": ""Data related to purchase orders stored in the ERP system and transferred to SQL database for processing by Power Apps.""
+    },
+    {
+      ""entity"": ""Azure Functions API"",
+      ""type"": ""system"",
+      ""description"": ""An API used by Azure Functions that surfaces PO data monthly, creates a task for user reviews, and interfaces with other components like CSV exports or Power Apps.""
+    },
+    {
+      ""entity"": ""Power Apps"",
+      ""type"": ""component"",
+      ""description"": ""A toolset used by users to review purchase orders (PO) data sent from Azure SQL Database through API, make updates, and export the updated PO data as CSV files for suppliers.""
+    },
+    {
+      ""entity"": ""Supplier status trends"",
+      ""type"": ""system"",
+      ""description"": ""Reports generated by Power BI that display and analyze changes in Supplier status based on user reviews made through Power Apps.""
+    }
+  ],
+  ""relationships"": [
+    [""Supplier data"", ""calls"", ""SQL database""],
+    [""Purchase order (PO) data"", ""called-from"", ""ERP system""],
+    [""Azure Functions API"", ""calls"", ""Power Apps""],
+    [""Power Apps"", ""contains"", ""Purchase Order (PO) data""]
+  ]
+}
+```"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""Supplier data"",
+      ""type"": ""component"",
+      ""description"": ""Data related to suppliers stored in CDS.""
+    },
+    {
+      ""entity"": ""SQL database"",
+      ""type"": ""system"",
+      ""description"": ""A SQL database that stores Purchase Order (PO) data sent from ERP system via Azure Data Factory.""
+    },
+    {
+      ""entity"": ""Purchase order (PO) data"",
+      ""type"": ""component"",
+      ""description"": ""Data related to purchase orders stored in the ERP system and transferred to SQL database for processing by Power Apps.""
+    },
+    {
+      ""entity"": ""Azure Functions API"",
+      ""type"": ""system"",
+      ""description"": ""An API used by Azure Functions that surfaces PO data monthly, creates a task for user reviews, and interfaces with other components like CSV exports or Power Apps.""
+    },
+    {
+      ""entity"": ""Power Apps"",
+      ""type"": ""component"",
+      ""description"": ""A toolset used by users to review purchase orders (PO) data sent from Azure SQL Database through API, make updates, and export the updated PO data as CSV files for suppliers.""
+    },
+    {
+      ""entity"": ""Supplier status trends"",
+      ""type"": ""system"",
+      ""description"": ""Reports generated by Power BI that display and analyze changes in Supplier status based on user reviews made through Power Apps.""
+    }
+  ],
+  ""relationships"": [
+    [""Supplier data"", ""calls"", ""SQL database""],
+    [""Purchase order (PO) data"", ""called-from"", ""ERP system""],
+    [""Azure Functions API"", ""calls"", ""Power Apps""],
+    [""Power Apps"", ""contains"", ""Purchase Order (PO) data""]
+  ]
+}
+```",5.114345057983883
+7,phi3,../IMAGES NEW/Azure/15 Azure automate-document-classification.txt,"
+    The user provides a document file that the web app uploads. The file contains multiple documents of various types. It can, for instance, be a PDF or multipage TIFF file.
+        The document file is stored in Azure Blob Storage.
+        The web app adds a command message to a storage queue to initiate pipeline processing.
+
+    Durable Functions orchestration is triggered by the command message. The message contains metadata that identifies the location in Blob Storage of the document file to be processed. Each Durable Functions instance processes only one document file.
+
+    The Scan activity function calls the Computer Vision Read API, passing in the location in storage of the document to be processed. Optical character recognition (OCR) results are returned to the orchestration to be used by subsequent activities.
+
+    The Classify activity function calls the document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster. This service uses regular expression pattern matching to identify the starting page of each known document and to calculate how many document types are contained in the document file. The types and page ranges of the documents are calculated and returned to the orchestration.
+
+
+
+Note
+
+Azure doesn't offer a service that can classify multiple document types in a single file. This solution uses a non-Azure service that's hosted in AKS.
+
+The Metadata Store activity function saves the document type and page range information in an Azure Cosmos DB store.
+
+The Indexing activity function creates a new search document in the Cognitive Search service for each identified document type and uses the Azure AI Search libraries for .NET to include in the search document the full OCR results and document information. A correlation ID is also added to the search document so that the search results can be matched with the corresponding document metadata from Azure Cosmos DB.
+
+End users can search for documents by contents and metadata. Correlation IDs in the search result set can be used to look up document records that are in Azure Cosmos DB. The records include links to the original document file in Blob Storage.
+
+
+","{""entities"": [[""web app"", ""system"", ""The user provides a document file that the web app uploads""], [""Azure Blob Storage"", ""system"", ""The document file is stored in Azure Blob Storage""], [""storage queue"", ""system"", ""the web app adds a command message to a storage queue to initiate pipeline processing""], [""Durable Functions orchestration"", ""system"", ""Durable Functions orchestration is triggered by the command message.""], [""Scan activity function"", ""component"", ""The Scan activity function calls the Computer Vision Read API.""], [""Computer Vision Read API"", ""component"", ""The Scan activity function calls the Computer Vision Read API.""], [""Classify activity function"", ""component"", ""The Classify activity function calls the document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster""], [""document classifier service"", ""component"", ""The Classify activity function calls the document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster""], [""Azure Kubernetes Service (AKS) cluster"", ""system"", ""The Classify activity function calls the document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster""], [""User"", ""person"", ""provides a document file that the web app uploads""]], ""relationships"": [[""User"", ""calls"", ""web app"", ""The user provides a document file that the web app uploads""], [""web app"", ""calls"", ""Azure Blob Storage"", ""The user provides a document file that the web app uploads.The document file is stored in Azure Blob Storage""], [""web app"", ""calls"", ""storage queue"", ""the web app adds a command message to a storage queue to initiate pipeline processing""], [""storage queue"", ""calls"", ""Durable Functions orchestration"", ""Durable Functions orchestration is triggered by the command message.""], [""Durable Functions orchestration"", ""calls"", ""Azure Blob Storage"", ""Each Durable Functions instance processes only one document file""], [""Scan activity function"", ""calls"", ""Computer Vision Read API"", ""the Scan activity function calls the Computer Vision Read API""], [""document classifier service"", ""part-of"", ""Azure Kubernetes Service (AKS) cluster"", ""document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster""], [""Classify activity function"", ""calls"", ""Scan activity function"", ""The Classify activity function calls the document classifier service""], [""Classify activity function"", ""calls"", ""Durable Functions orchestration"", ""The types and page ranges of the documents are calculated and returned to the orchestration""]]}"," ```json
+{
+  ""entities"": [
+    {""entity"": ""document_file"", ""type"": ""component"", ""description"": ""The uploaded file containing multiple documents of various types.""},
+    {""entity"": ""Azure Blob Storage"", ""type"": ""system"", ""description"": ""Storage location for the document files.""},
+    {""entity"": ""storage queue"", ""type"": ""system"", ""description"": ""Queue used by the web app to hold command messages initiating pipeline processing.""},
+    {""entity"": ""Durable Functions orchestration"", ""type"": ""component"", ""description"": ""Triggers and processes document files one at a time using Durable Functions instances.""},
+    {""entity"": ""command message"", ""type"": ""person"", ""description"": ""Message containing metadata initiating pipeline processing for the uploaded documents.""},
+    {""entity"": ""document file to be processed"", ""type"": ""component"", ""description"": ""The document from the stored files that is being scanned and classified by Durable Functions instances.""},
+    {""entity"": ""Computer Vision Read API"", ""type"": ""system"", ""description"": ""API used in Scan activity function to perform OCR on a selected file part of interest within Azure Blob Storage.""},
+    {""entity"": ""Scanning Activity Function"", ""type"": ""component"", ""description"": ""Function that initiates the Computer Vision Read API for document scanning and retrieves OCR results.""},
+    {""entity"": ""Classify activity function"", ""type"": ""component"", ""description"": ""Non-Azure service hosted in Azure Kubernetes Service (AKS) used to identify starting page of each known document type within a file, as well as count the number of types contained therein using regular expression pattern matching.""},
+    {""entity"": ""document classifier service"", ""type"": ""component"", ""description"": ""Service running on an Azure Kubernetes Service (AKS) cluster to identify and categorize starting pages for different document types in a file, based on regex patterns provided by the user.""},
+    {""entity"": "".NET libraries"", ""type"": ""person"", ""description"": ""Libraries used within Classify activity function using regular expression pattern matching for classification of documents' content.""},
+    {""entity"": ""Azure Cosmos DB store"", ""type"": ""system"", ""description"": ""Store where the document type and page range information is saved by Metadata Store Activity Function.""},
+    {""entity"": ""Metadata Store Activity Function"", ""type0. [ENTITY, COMPONENT] 
+[document_file, 'component', 'The uploaded file containing multiple documents of various types.']
+
+1. [ENDPOINT, SYSTEM] Endpoint for Azure Blob Storage where the document files are stored and retrieved from: https://<account-name>.blob.core.windows.net/documents/?restype=directory&comp=list
+2. [QUEUE_NAME, QUEUE] Name of the storage queue used by web app to hold command messages initiating pipeline processing for documents: document_processing_queue
+3. [DURABLE_FUNCTIONS_ORCHESTRATION, COMPONENT] Triggers and processes uploaded document files one at a time using Durable Functions instances when the corresponding message is received from storage queue endpoint above. 
+4. [COMMAND_MESSAGE, PERSON] Command Message containing metadata that identifies where to find specific document file in Azure Blob Storage for processing: https://<account-name>.queue.<region>?t=documents/123&queuename=document_processing_queue
+5. [DOCUMENT FILE TO BE PROCESSED, COMPONENT] The selected part of the uploaded document file to be scanned and classified: https://<account-name>.blob.core.windows.net/documents/?restype=directory&comp=list#1234567890
+```
+
+Based on this information, I can now generate relationships as per the instructions given above. However, since there is no specific order of entities or directions for these relations mentioned in your provided text snippet and without additional context from which to infer a chronological sequence (as it usually happens with workflows), my interpretation will follow based solely on logical flow within this scenario:
+
+```json
+{
+  ""relationships"": [
+    [""document_file"", ""contains"", ""command message""], // The document file contains the command messages for processing.
+    [""storage queue endpoint"", ""receives from"", ""web app upload of a document file using Azure Blob Storage""], // Web App sends files to storage via an uploaded action that initiates pipeline process upon receiving this end point triggering request on its own initiation/action in workflow. 
+    [""Durable Functions orchestration"", ""processes"", ""document_file based command messages received from web app using Azure Blob Storage""], // Web App's upload triggers Durable functions which processes the documents one at a time as per their commands for further action.
+    [""command message"", ""receives metadata about uploaded document file in storage queue endpoint above""] // The command message receives information on where to find specific files within Document_processing_queue, thus initiating processing chain by invoking durable functions orchestration when triggered from web app upload of a document file using Azure Blob Storage.
+  ]
+}
+```"," ```json
+{
+  ""entities"": [
+    {""entity"": ""document_file"", ""type"": ""component"", ""description"": ""The uploaded file containing multiple documents of various types.""},
+    {""entity"": ""Azure Blob Storage"", ""type"": ""system"", ""description"": ""Storage location for the document files.""},
+    {""entity"": ""storage queue"", ""type"": ""system"", ""description"": ""Queue used by the web app to hold command messages initiating pipeline processing.""},
+    {""entity"": ""Durable Functions orchestration"", ""type"": ""component"", ""description"": ""Triggers and processes document files one at a time using Durable Functions instances.""},
+    {""entity"": ""command message"", ""type"": ""person"", ""description"": ""Message containing metadata initiating pipeline processing for the uploaded documents.""},
+    {""entity"": ""document file to be processed"", ""type"": ""component"", ""description"": ""The document from the stored files that is being scanned and classified by Durable Functions instances.""},
+    {""entity"": ""Computer Vision Read API"", ""type"": ""system"", ""description"": ""API used in Scan activity function to perform OCR on a selected file part of interest within Azure Blob Storage.""},
+    {""entity"": ""Scanning Activity Function"", ""type"": ""component"", ""description"": ""Function that initiates the Computer Vision Read API for document scanning and retrieves OCR results.""},
+    {""entity"": ""Classify activity function"", ""type"": ""component"", ""description"": ""Non-Azure service hosted in Azure Kubernetes Service (AKS) used to identify starting page of each known document type within a file, as well as count the number of types contained therein using regular expression pattern matching.""},
+    {""entity"": ""document classifier service"", ""type"": ""component"", ""description"": ""Service running on an Azure Kubernetes Service (AKS) cluster to identify and categorize starting pages for different document types in a file, based on regex patterns provided by the user.""},
+    {""entity"": "".NET libraries"", ""type"": ""person"", ""description"": ""Libraries used within Classify activity function using regular expression pattern matching for classification of documents' content.""},
+    {""entity"": ""Azure Cosmos DB store"", ""type"": ""system"", ""description"": ""Store where the document type and page range information is saved by Metadata Store Activity Function.""},
+    {""entity"": ""Metadata Store Activity Function"", ""type0. [ENTITY, COMPONENT] 
+[document_file, 'component', 'The uploaded file containing multiple documents of various types.']
+
+1. [ENDPOINT, SYSTEM] Endpoint for Azure Blob Storage where the document files are stored and retrieved from: https://<account-name>.blob.core.windows.net/documents/?restype=directory&comp=list
+2. [QUEUE_NAME, QUEUE] Name of the storage queue used by web app to hold command messages initiating pipeline processing for documents: document_processing_queue
+3. [DURABLE_FUNCTIONS_ORCHESTRATION, COMPONENT] Triggers and processes uploaded document files one at a time using Durable Functions instances when the corresponding message is received from storage queue endpoint above. 
+4. [COMMAND_MESSAGE, PERSON] Command Message containing metadata that identifies where to find specific document file in Azure Blob Storage for processing: https://<account-name>.queue.<region>?t=documents/123&queuename=document_processing_queue
+5. [DOCUMENT FILE TO BE PROCESSED, COMPONENT] The selected part of the uploaded document file to be scanned and classified: https://<account-name>.blob.core.windows.net/documents/?restype=directory&comp=list#1234567890
+```
+
+Based on this information, I can now generate relationships as per the instructions given above. However, since there is no specific order of entities or directions for these relations mentioned in your provided text snippet and without additional context from which to infer a chronological sequence (as it usually happens with workflows), my interpretation will follow based solely on logical flow within this scenario:
+
+```json
+{
+  ""relationships"": [
+    [""document_file"", ""contains"", ""command message""], // The document file contains the command messages for processing.
+    [""storage queue endpoint"", ""receives from"", ""web app upload of a document file using Azure Blob Storage""], // Web App sends files to storage via an uploaded action that initiates pipeline process upon receiving this end point triggering request on its own initiation/action in workflow. 
+    [""Durable Functions orchestration"", ""processes"", ""document_file based command messages received from web app using Azure Blob Storage""], // Web App's upload triggers Durable functions which processes the documents one at a time as per their commands for further action.
+    [""command message"", ""receives metadata about uploaded document file in storage queue endpoint above""] // The command message receives information on where to find specific files within Document_processing_queue, thus initiating processing chain by invoking durable functions orchestration when triggered from web app upload of a document file using Azure Blob Storage.
+  ]
+}
+```",14.466251081001246
+8,phi3,../IMAGES NEW/Azure/12 Azure Network Microservices original.txt,"
+    Outside services and clients make a POST request to APIM, with a data body that includes patient information.
+    APIM calls the CreatePatient function in the Patient API with the given patient information.
+    The CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app to create an audit record.
+    The Audit API CreateAuditRecord function creates the audit record in Azure Cosmos DB, and returns a success response to the Patient API CreatePatient function.
+    The CreatePatient function creates the patient document in Azure Cosmos DB, and returns a success response to APIM.
+    The outside services and clients receive the success response from APIM.
+
+","{""entities"": [[""Outside services"", ""system"", ""Outside services and clients make a POST request to APIM""], [""clients"", ""system"", ""Outside services and clients make a POST request to APIM""], [""APIM"", ""system"", ""Outside services and clients make a POST request to APIM""], [""Patient API"", ""system"", "" The CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app""], [""CreatePatient function"", ""component"", "" The CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app""], [""Audit API function app"", ""system"", ""The CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app""], [""CreateAuditRecord function"", ""component"", ""CreatePatient function in Patient API calls the CreateAuditRecord function""], [""Azure Cosmos DB"", ""system"", ""The Audit API CreateAuditRecord function creates the audit record in Azure Cosmos DB, and returns a success response to the Patient API CreatePatient function""]], ""relationships"": [[""CreatePatient function"", ""part-of"", ""Patient API"", ""Reason""], [""Outside services"", ""calls"", ""APIM"", ""utside services and clients make a POST request to APIM""], [""clients"", ""calls"", ""APIM"", ""outside services and clients make a POST request to APIM""], [""APIM"", ""calls"", ""CreatePatient function"", ""APIM calls the CreatePatient function in the Patient API""], [""CreateAuditRecord function"", ""part-of"", ""Audit API function app"", ""Reason""], [""CreatePatient function"", ""calls"", ""CreateAuditRecord function"", ""CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app""], [""CreateAuditRecord function"", ""calls"", ""Azure Cosmos DB"", ""Audit API CreateAuditRecord function creates the audit record in Azure Cosmos DB""], [""CreateAuditRecord function"", ""calls"", ""CreatePatient function"", ""returns a success response to the Patient API CreatePatient function.""], [""CreatePatient function"", ""calls"", ""Azure Cosmos DB"", ""The CreatePatient function creates the patient document in Azure Cosmos DB""], [""CreatePatient function"", ""is-called-from"", ""APIM"", ""The CreatePatient function returns a success response to APIM""]]}"," Here is the extracted information about named entities (entities), their types, descriptions, as well as identified relationships in a knowledge graph format:
+
+Entities:
+1. [APIM, system] - A software application that handles requests from outside services and clients to create patients through an API call. It sends patient data via POST request containing the necessary information for creating new entries into Azure Cosmos DB. 
+2. [Patient API, component] - An independent entity responsible for handling Patient-related tasks within a system such as CreatePatient function that creates or updates patient records in database after calling AuditAPI's CreateAuditRecord method to create an audit record simultaneously. It communicates with the external systems via POST requests and returns responses back from APIM, which is another component of this larger software architecture called System for handling Healthcare Services (HSC).
+3. [CreatePatient function, action] - A specific functionality within Patient API that triggers when a request comes in through an outside service or client to create new patient information using the data provided as input and communicates with AuditAPI's CreateAuditRecord method for creating auditing records concurrently.
+4. [Patient Information, attribute] - The essential details like name, age, medical history etc., shared by clients when they make a POST request to create or update patient information in APIM system through the Patient API as input data body of this RESTful call. 
+5. [Audit Record, action]- An independent functionality within AuditAPI that is called upon whenever there's an auditing need for any created/updated patients record and it creates or updates records into Azure Cosmos DB accordingly while providing a successful response to Patient API CreatePatient function after the completion of its task.
+6. [Azure Cosmos DB, system] - A cloud-based database management service used as backend storage where patient information gets stored & audit logs are recorded in this case within System for handling Healthcare Services (HSC). It serves both Patient API and AuditAPI's functions to create/update patients records or any related data.
+7. [Calls, relationship] - A connection between CreatePatient function of the Patient API which initiates a call towards Azure Cosmos DB using auditing mechanism after creating patient record in it through another independent action called 'CreateAuditRecord'. 
+8. [APIM, system] & [Azure Cosmos DB, storage_system], [Calls, relationship] - A connection between System for handling Healthcare Services (HSC) and Azure Cosmos DB wherein HSC uses the cosmos as a backend to store patient information after creation or update operation performed via APIM.
+9. [APIM, system] & [Azure Cosmos DB, storage_system], [receives, relationship] - A connection between System for handling Healthcare Services (HSC) and Azure Cosmos wherein HSC receives the success response from Patient's auditing mechanism back through APIM after calling CreateAuditRecord function of AuditAPI.
+10. [Patient Information, attribute], [containment_relation] - A containment relation between patient information (data) and attributes it holds like name, age etc., which is input data to be stored into Azure Cosmos DB through APIM system by outside services or clients for creating new patients' records in HSC.
+11. [Audit Record, attribute], [containment_relation] - A containment relation between auditing record and its attributes like patient id & timestamp which gets created after the CreatePatient function of Patient API sends a request to create or update that particular entry into Azure Cosmos DB in HSC system.
+
+Relationships: 
+1. [CreatePatient, calls], [Audit Record] - The relationship represents how and when an outside service/client triggers the auditing mechanism with patient information through CreatePatient function of Patient API before storing their data into Azure Cosmos DB in System for handling Healthcare Services (HSC).
+2. [CreatePatient, calls], [Azure Cosmos DB] - It denotes that whenever a call comes to create or update patients' records via an outside service/client through CreatePatient function of Patient API systematically calling the Azure Cosmos as its backend database where data is stored and retrieved back on demand using GET requests.
+3. [Audit Record, calls], [Azure Cosmos DB] - It denotes how & when auditing records for patients' information are created or updated in Azure Cosmos by AuditAPI after being called from the CreatePatient function of Patient API within HSC system based on certain conditions like before/after patient data update request.
+4. [Audit Record, receives], [HSC] - It denotes how & when auditing records are received back to outside services or clients by System for handling Healthcare Services (APIM), after the completion of record creation in Azure Cosmos DB with successful response from AuditRecord's CreateAction function within HCS.
+5. [Patient Information, containment_relation], [Azure Cosmos] - It indicates that patient information which contains name, age and other details is stored into Azure Cosmos through APIM system by outside services or clients when they call the PatientAPI create-patient request with a POST method to HCS (HSC).
+
+JSON Response: 
+{
+    ""Entities"": [[""APIM"", ""system""], [""Patient API Component"", ""component""], [""CreatePatient Function"", ""action""], [""Patient Information"", ""attribute""], [""Audit Record"", ""action""]],
+    
+    ""Relationships"": [[""CreatePatient Function calls"",""calls"",""Azure Cosmos DB""], 
+                    [""APIM System Calls"",""calls"",""Azure Cosmos DB""], 
+                    [""Calls Receive Response From HCS"",""receives"", ""HSC system""]]
+}"," Here is the extracted information about named entities (entities), their types, descriptions, as well as identified relationships in a knowledge graph format:
+
+Entities:
+1. [APIM, system] - A software application that handles requests from outside services and clients to create patients through an API call. It sends patient data via POST request containing the necessary information for creating new entries into Azure Cosmos DB. 
+2. [Patient API, component] - An independent entity responsible for handling Patient-related tasks within a system such as CreatePatient function that creates or updates patient records in database after calling AuditAPI's CreateAuditRecord method to create an audit record simultaneously. It communicates with the external systems via POST requests and returns responses back from APIM, which is another component of this larger software architecture called System for handling Healthcare Services (HSC).
+3. [CreatePatient function, action] - A specific functionality within Patient API that triggers when a request comes in through an outside service or client to create new patient information using the data provided as input and communicates with AuditAPI's CreateAuditRecord method for creating auditing records concurrently.
+4. [Patient Information, attribute] - The essential details like name, age, medical history etc., shared by clients when they make a POST request to create or update patient information in APIM system through the Patient API as input data body of this RESTful call. 
+5. [Audit Record, action]- An independent functionality within AuditAPI that is called upon whenever there's an auditing need for any created/updated patients record and it creates or updates records into Azure Cosmos DB accordingly while providing a successful response to Patient API CreatePatient function after the completion of its task.
+6. [Azure Cosmos DB, system] - A cloud-based database management service used as backend storage where patient information gets stored & audit logs are recorded in this case within System for handling Healthcare Services (HSC). It serves both Patient API and AuditAPI's functions to create/update patients records or any related data.
+7. [Calls, relationship] - A connection between CreatePatient function of the Patient API which initiates a call towards Azure Cosmos DB using auditing mechanism after creating patient record in it through another independent action called 'CreateAuditRecord'. 
+8. [APIM, system] & [Azure Cosmos DB, storage_system], [Calls, relationship] - A connection between System for handling Healthcare Services (HSC) and Azure Cosmos DB wherein HSC uses the cosmos as a backend to store patient information after creation or update operation performed via APIM.
+9. [APIM, system] & [Azure Cosmos DB, storage_system], [receives, relationship] - A connection between System for handling Healthcare Services (HSC) and Azure Cosmos wherein HSC receives the success response from Patient's auditing mechanism back through APIM after calling CreateAuditRecord function of AuditAPI.
+10. [Patient Information, attribute], [containment_relation] - A containment relation between patient information (data) and attributes it holds like name, age etc., which is input data to be stored into Azure Cosmos DB through APIM system by outside services or clients for creating new patients' records in HSC.
+11. [Audit Record, attribute], [containment_relation] - A containment relation between auditing record and its attributes like patient id & timestamp which gets created after the CreatePatient function of Patient API sends a request to create or update that particular entry into Azure Cosmos DB in HSC system.
+
+Relationships: 
+1. [CreatePatient, calls], [Audit Record] - The relationship represents how and when an outside service/client triggers the auditing mechanism with patient information through CreatePatient function of Patient API before storing their data into Azure Cosmos DB in System for handling Healthcare Services (HSC).
+2. [CreatePatient, calls], [Azure Cosmos DB] - It denotes that whenever a call comes to create or update patients' records via an outside service/client through CreatePatient function of Patient API systematically calling the Azure Cosmos as its backend database where data is stored and retrieved back on demand using GET requests.
+3. [Audit Record, calls], [Azure Cosmos DB] - It denotes how & when auditing records for patients' information are created or updated in Azure Cosmos by AuditAPI after being called from the CreatePatient function of Patient API within HSC system based on certain conditions like before/after patient data update request.
+4. [Audit Record, receives], [HSC] - It denotes how & when auditing records are received back to outside services or clients by System for handling Healthcare Services (APIM), after the completion of record creation in Azure Cosmos DB with successful response from AuditRecord's CreateAction function within HCS.
+5. [Patient Information, containment_relation], [Azure Cosmos] - It indicates that patient information which contains name, age and other details is stored into Azure Cosmos through APIM system by outside services or clients when they call the PatientAPI create-patient request with a POST method to HCS (HSC).
+
+JSON Response: 
+{
+    ""Entities"": [[""APIM"", ""system""], [""Patient API Component"", ""component""], [""CreatePatient Function"", ""action""], [""Patient Information"", ""attribute""], [""Audit Record"", ""action""]],
+    
+    ""Relationships"": [[""CreatePatient Function calls"",""calls"",""Azure Cosmos DB""], 
+                    [""APIM System Calls"",""calls"",""Azure Cosmos DB""], 
+                    [""Calls Receive Response From HCS"",""receives"", ""HSC system""]]
+}",15.16186096900492
+9,phi3,../IMAGES NEW/Azure/08 Azure Business Processes.txt,"
+The data flows through the solution as follows:
+
+    The airline system communicates with a custom API hosted in Azure API Management.
+    A custom API coordinator receives notifications and handles incoming messages from the airline system. It sends them to Power Apps, where flights are assigned to Microsoft Teams channels.
+    When a user selects a flight to monitor, or when the system assigns the user to a flight, the system queues a Graph API call in an Azure Storage Account queue for further processing.
+    Azure Functions runs the Graph API calls based on the incoming messages in the storage queue, sending notifications to Teams, and also streams all events to an Azure Event Hubs for further analytics.
+    The airline's notification system is managed by a custom bot messaging service that employs Azure Bot Service.
+    Custom bots send flight updates to users in Teams.
+    An Azure Data Lake storage offers long-term retention and micro-batch processing of events from Event Hubs, ultimately generating insightful reports with Power BI.
+
+","{""entities"": [[""airline system"", ""system"", ""communicates with a custom API hosted in Azure API Management""], [""custom API"", ""component"", ""communicates with a custom API hosted in Azure API Management""], [""Azure API Management"", ""system"", ""communicates with a custom API hosted in Azure API Management""], [""custom API coordinator"", ""system"", ""receives notifications and handles incoming messages from the airline system""], [""Power Apps"", ""system"", ""where flights are assigned to Microsoft Teams channels""], [""Microsoft Teams channels"", ""system"", ""where flights are assigned to Microsoft Teams channels""], [""Storage Account queue"", ""system"", "" the system queues a Graph API call in an Azure Storage Account queue for further processing.""], [""Graph API call"", ""system"", "" the system queues a Graph API call in an Azure Storage Account queue for further processing.""], [""Azure Functions"", ""system"", ""runs the Graph API calls based on the incoming messages in the storage queue""], [""Azure Event Hubs"", ""system"", ""Azure Event Hubs for further analytics""], [""notification system"", ""system"", ""managed by a custom bot messaging service that employs Azure Bot Service""], [""custom bot messaging service"", ""system"", ""managed by a custom bot messaging service that employs Azure Bot Service""], [""Azure Bot Service"", ""system"", ""managed by a custom bot messaging service that employs Azure Bot Service""], [""Users"", ""person"", ""selects a flight to monitor, or when the system assigns the user to a flight""], [""Azure Data Lake storage"", ""system"", ""offers long-term retention and micro-batch processing of events from Event Hubs""], [""Power BI"", ""system"", ""generating insightful reports""]], ""relationships"": [[""Azure API Management"", ""contains"", ""custom API"", ""custom API hosted in Azure API Management""], [""airline system"", ""calls"", ""custom API"", ""communicates with a custom API""], [""custom API coordinator"", ""is-called-from"", ""airline system"", ""receives notifications and handles incoming messages from the airline system""], [""Power Apps"", ""calls"", ""Microsoft Teams channels"", ""Power Apps, where flights are assigned to Microsoft Teams channels""], [""airline system"", ""calls"", ""Graph API call"", "" the system queues a Graph API call in an Azure Storage Account queue for further processing""], [""Azure Functions"", ""calls"", ""Graph API call"", ""runs the Graph API calls based on the incoming messages in the storage queue""], [""Azure Functions"", ""calls"", ""Storage Account queue"", ""based on the incoming messages in the storage queue""], [""Azure Functions"", ""calls"", ""Microsoft Teams channels"", ""sending notifications to Teams""], [""Azure Functions"", ""calls"", ""Azure Event Hubs"", ""also streams all events to an Azure Event Hubs for further analytics""], [""notification system"", ""is-called-from"", ""custom bot messaging service"", ""managed by a custom bot messaging service""], [""custom bot messaging service"", ""calls"", ""Azure Bot Service"", ""custom bot messaging service that employs Azure Bot Service""], [""custom bot messaging service"", ""calls"", ""Microsoft Teams channels"", ""Custom bots send flight updates to users in Teams.""], [""Microsoft Teams channels"", ""calls"", ""Users"", ""Custom bots send flight updates to users in Teams.""], [""Azure Data Lake storage"", ""is-called-from"", ""Azure Event Hubs"", ""Azure Data Lake storage offers long-term retention and micro-batch processing of events from Event Hubs""], [""Azure Data Lake storage"", ""calls"", ""Power BI"", ""Azure Data Lake storage offers long-term retention and micro-batch processing of events from Event Hubs, ultimately generating insightful reports with Power BI""]]}"," {
+  ""entities"": [
+    {""entity"": ""airline system"", ""type"": ""system"", ""description"": ""Communicates with a custom API hosted in Azure API Management.""},
+    {""entity"": ""custom API coordinator"", ""type"": ""component"", ""description"": ""Receives notifications and handles incoming messages from the airline system, sends them to Power Apps.""},
+    {""entity"": ""Microsoft Teams"", ""type"": ""system"", ""description"": ""Hosting platform where flights are assigned""},
+    {""entity"": ""Graph API call"", ""type"": ""component"", ""description"": ""Used for further processing of messages from the storage queue.""},
+    {""entity"": ""Azure Functions"", ""type"": ""service"", ""description"": ""Runs Graph API calls based on incoming messages in the storage queue, sends notifications to Teams and streams events to Azure Event Hubs.""},
+    {""entity"": ""custom bot messaging service"", ""type"": ""component"", ""description"": ""Manages the airline's notification system using Azure Bot Service""},
+    {""entity"": ""Azure Batch account"", ""type"": ""system"", ""description"": ""Used for orchestration and execution of Graph API calls.""},
+    {""entity"": ""Azure Event Hubs"", ""type"": ""service"", ""description"": ""Streams events from the data flow to Azure Data Lake storage""},
+    {""entity"": ""Power BI"", ""type"": ""system"", ""description"": ""Generates insightful reports using long-term retention of event streams in Azure Data Lake Storage.""}
+  ],
+  ""relationships"": [
+    [""airline system"", ""calls"", ""custom API coordinator""],
+    [""custom API coordinator"", ""sends to"", ""Microsoft Teams""],
+    [""Graph API call"", ""queued by"", ""Azure Functions""],
+    [""Azure Functions"", ""runs on"", ""Azure Batch account""],
+    [""Azure Event Hubs"", ""streams events from"", ""Data Flow""],
+    [""custom bot messaging service"", ""employs Azure Service Bus queue for message dispatching to custom bots.""],
+    [""Microsoft Teams"", ""receives notifications and assignments through the Graph API call""]
+  ]
+}"," {
+  ""entities"": [
+    {""entity"": ""airline system"", ""type"": ""system"", ""description"": ""Communicates with a custom API hosted in Azure API Management.""},
+    {""entity"": ""custom API coordinator"", ""type"": ""component"", ""description"": ""Receives notifications and handles incoming messages from the airline system, sends them to Power Apps.""},
+    {""entity"": ""Microsoft Teams"", ""type"": ""system"", ""description"": ""Hosting platform where flights are assigned""},
+    {""entity"": ""Graph API call"", ""type"": ""component"", ""description"": ""Used for further processing of messages from the storage queue.""},
+    {""entity"": ""Azure Functions"", ""type"": ""service"", ""description"": ""Runs Graph API calls based on incoming messages in the storage queue, sends notifications to Teams and streams events to Azure Event Hubs.""},
+    {""entity"": ""custom bot messaging service"", ""type"": ""component"", ""description"": ""Manages the airline's notification system using Azure Bot Service""},
+    {""entity"": ""Azure Batch account"", ""type"": ""system"", ""description"": ""Used for orchestration and execution of Graph API calls.""},
+    {""entity"": ""Azure Event Hubs"", ""type"": ""service"", ""description"": ""Streams events from the data flow to Azure Data Lake storage""},
+    {""entity"": ""Power BI"", ""type"": ""system"", ""description"": ""Generates insightful reports using long-term retention of event streams in Azure Data Lake Storage.""}
+  ],
+  ""relationships"": [
+    [""airline system"", ""calls"", ""custom API coordinator""],
+    [""custom API coordinator"", ""sends to"", ""Microsoft Teams""],
+    [""Graph API call"", ""queued by"", ""Azure Functions""],
+    [""Azure Functions"", ""runs on"", ""Azure Batch account""],
+    [""Azure Event Hubs"", ""streams events from"", ""Data Flow""],
+    [""custom bot messaging service"", ""employs Azure Service Bus queue for message dispatching to custom bots.""],
+    [""Microsoft Teams"", ""receives notifications and assignments through the Graph API call""]
+  ]
+}",6.597215797024546
+10,phi3,../IMAGES NEW/Azure/11 Mainframe original.txt,"
+    A Connect agent component captures change logs by using mainframe or midrange native utilities and caches the logs in temporary storage.
+    For mainframe systems, a publisher component on the mainframe manages data migration.
+    For midrange systems, in place of the publisher, a listener component manages data migration. It's located on either a Windows or Linux machine.
+    The publisher or listener moves the data from on-premises to Azure via an enhanced-security connection. The publisher or listener handles the commit and rollback of transactions for each unit of work, maintaining the integrity of data.
+    The Connect Replicator Engine captures the data from the publisher or listener and applies it to the target. It distributes data for parallel processing.
+    The target is a database that receives the changes via ODBC or ingests the changes via Azure Event Hubs.
+    The changed data is consumed by Azure Databricks and applied to Azure data platform services.
+    The Connect Controller Daemon authenticates the request and establishes the socket connection between the publisher or listener and the Replicator Engine.
+
+","{""entities"": [[""Connect agent"", ""component"", ""captures change logs""], [""temporary storage"", ""component"", ""caches the logs in temporary storage""], [""mainframe native utilities"", ""system"", ""captures change logs by using mainframe or midrange native utilities""], [""midrange native utilities"", ""system"", ""captures change logs by using mainframe or midrange native utilities""], [""mainframe systems"", ""system"", ""For mainframe systems, a publisher component on the mainframe manages data migration.""], [""midrange systems"", ""system"", ""For midrange systems, in place of the publisher, a listener component manages data migration.""], [""publisher"", ""component"", ""For mainframe systems, a publisher component on the mainframe manages data migration.""], [""listener"", ""component"", ""For midrange systems, in place of the publisher, a listener component manages data migration.""], [""Connect Replicator Engine"", ""system"", ""captures the data from the publisher or listener and applies it to the target.""], [""on-premises"", ""system"", ""The publisher or listener moves the data from on-premises to Azure""], [""Azure"", ""system"", ""The publisher or listener moves the data from on-premises to Azure""], [""Connect Replicator Engine"", ""system"", ""The Connect Replicator Engine captures the data from the publisher or listener""], [""target"", ""system"", ""applies it to the target""], [""database"", ""system"", ""target is a database""], [""ODBC"", ""component"", ""The target is a database that receives the changes via ODBC or ingests the changes via Azure Event Hubs""], [""Azure Event Hubs"", ""component"", ""The target is a database that receives the changes via ODBC or ingests the changes via Azure Event Hubs""], [""Azure Databricks"", ""component"", ""the changed data is consumed by Azure Databricks and applied to Azure data platform services.""], [""Azure data platform services"", ""component"", ""the changed data is consumed by Azure Databricks and applied to Azure data platform services.""], [""Connect Controller Daemon"", ""component"", ""authenticates the request and establishes the socket connection between the publisher or listener and the Replicator Engine.""]], ""relationships"": [[""Connect agent"", ""calls"", ""mainframe native utilities"", ""captures change logs by using mainframe or midrange native utilities""], [""Connect agent"", ""calls"", ""midrange native utilities"", ""captures change logs by using mainframe or midrange native utilities""], [""Connect agent"", ""calls"", ""temporary storage"", ""captures change logs by using mainframe or midrange native utilities""], [""mainframe systems"", ""contains"", ""mainframe native utilities"", ""F""], [""midrange systems"", ""contains"", ""midrange native utilities"", """"], [""mainframe systems"", ""contains"", ""publisher"", ""For mainframe systems, a publisher component on the mainframe manages data migration.""], [""midrange systems"", ""contains"", ""listener"", ""For midrange systems, in place of the publisher, a listener component manages data migration.""], [""publisher"", ""calls"", ""on-premises"", ""The publisher or listener moves the data from on-premises to Azure""], [""publisher"", ""calls"", ""Azure"", ""The publisher or listener moves the data from on-premises to Azure""], [""listener"", ""calls"", ""on-premises"", ""The publisher or listener moves the data from on-premises to Azure""], [""listener"", ""calls"", ""Azure"", ""The publisher or listener moves the data from on-premises to Azure""], [""Connect Replicator Engine"", ""calls"", ""publisher"", ""captures the data from the publisher or listener and applies it to the target.""], [""Connect Replicator Engine"", ""calls"", ""listener"", ""captures the data from the publisher or listener and applies it to the target.""], [""Connect Replicator Engine"", ""calls"", ""target"", ""captures the data from the publisher or listener and applies it to the target.""], [""target"", ""contains"", ""database"", ""target is a database""], [""database"", ""is-called-from"", ""ODBC"", ""database that receives the changes via ODBC""], [""database"", ""is-called-from"", ""Azure Event Hubs"", ""ingests the changes via Azure Event Hubs""], [""database"", ""is-called-from"", ""Azure Databricks"", ""the changed data is consumed by Azure Databricks""], [""Azure Databricks"", ""calls"", ""Azure data platform services"", ""consumed by Azure Databricks and applied to Azure data platform services.""], [""Connect Controller Daemon"", ""is-called-from"", ""publisher"", ""establishes the socket connection between the publisher or listener and the Replicator Engine..""], [""Connect Controller Daemon"", ""is-called-from"", ""listener"", ""establishes the socket connection between the publisher or listener and the Replicator Engine..""], [""Connect Controller Daemon"", ""calls"", ""Connect Replicator Engine"", ""establishes the socket connection between the publisher or listener and the Replicator Engine..""]]}"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""Connect agent"",
+      ""type"": ""component"",
+      ""description"": ""A component that captures change logs.""
+    },
+    {
+      ""entity"": ""mainframe system publisher"",
+      ""type"": ""publisher"",
+      ""description"": ""Manages data migration for mainframe systems.""
+    },
+    {
+      ""entity"": ""midrange listener"",
+      ""type"": ""listener"",
+      ""description"": ""Manages data migration for midrange systems. Located on either Windows or Linux machine.""
+    },
+    {
+      ""entity"": ""Connect Replicator Engine"",
+      ""type"": ""component"",
+      ""description"": ""Captures and distributes the migrated data to Azure Event Hubs or ODBC target, for parallel processing.""
+    },
+    {
+      ""entity"": ""Azure database"",
+      ""type"": ""system"",
+      ""description"": ""The receiving entity that gets changed data via either connection methods""
+    },
+    {
+      ""entity"": ""Connect Controller Daemon"",
+      ""type"": ""component"",
+      ""description"": ""Authenticates request and establishes socket connections between publisher/listener, or Replicator Engine.""
+    }
+  ],
+  ""relationships"": [
+    [""mainframe system publisher"", ""calls"", ""Connect agent""],
+    [""midrange listener"", ""calls"", ""Connect agent""],
+    [""Connect Agent and mainframe system publisher/listener"", ""part-of"", ""Connect Replicator Engine""],
+    [""Connect Replicator Engine"",""contains"",""mainframe system publisher/listener""], 
+    [""Connect Publisher or Listener"",""called-from"", ""Connect Controller Daemon""],
+    [""Connect Agent and mainframe system publisher/listener"", ""part-of"", ""Connect Controller Daemon""]
+  ]
+}
+```"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""Connect agent"",
+      ""type"": ""component"",
+      ""description"": ""A component that captures change logs.""
+    },
+    {
+      ""entity"": ""mainframe system publisher"",
+      ""type"": ""publisher"",
+      ""description"": ""Manages data migration for mainframe systems.""
+    },
+    {
+      ""entity"": ""midrange listener"",
+      ""type"": ""listener"",
+      ""description"": ""Manages data migration for midrange systems. Located on either Windows or Linux machine.""
+    },
+    {
+      ""entity"": ""Connect Replicator Engine"",
+      ""type"": ""component"",
+      ""description"": ""Captures and distributes the migrated data to Azure Event Hubs or ODBC target, for parallel processing.""
+    },
+    {
+      ""entity"": ""Azure database"",
+      ""type"": ""system"",
+      ""description"": ""The receiving entity that gets changed data via either connection methods""
+    },
+    {
+      ""entity"": ""Connect Controller Daemon"",
+      ""type"": ""component"",
+      ""description"": ""Authenticates request and establishes socket connections between publisher/listener, or Replicator Engine.""
+    }
+  ],
+  ""relationships"": [
+    [""mainframe system publisher"", ""calls"", ""Connect agent""],
+    [""midrange listener"", ""calls"", ""Connect agent""],
+    [""Connect Agent and mainframe system publisher/listener"", ""part-of"", ""Connect Replicator Engine""],
+    [""Connect Replicator Engine"",""contains"",""mainframe system publisher/listener""], 
+    [""Connect Publisher or Listener"",""called-from"", ""Connect Controller Daemon""],
+    [""Connect Agent and mainframe system publisher/listener"", ""part-of"", ""Connect Controller Daemon""]
+  ]
+}
+```",5.085486579977442
+11,phi3,../IMAGES NEW/Azure/05. azure Original.txt,"
+    Backend systems. The right-hand side of the diagram shows the various backend systems that the enterprise has deployed or relies on. These systems might include SaaS systems, other Azure services, or web services that expose REST or SOAP endpoints.
+
+    Azure Logic Apps. In this architecture, logic apps are triggered by HTTP requests. You can also nest workflows for more complex orchestration. Logic Apps uses connectors to integrate with commonly used services. Logic Apps offers hundreds of connectors, and you can create custom connectors.
+
+    Azure API Management. API Management consists of two related components:
+
+        API gateway. The API gateway accepts HTTP calls and routes them to the backend.
+
+        Developer portal. Each instance of Azure API Management provides access to a developer portal. This portal gives your developers access to documentation and code samples for calling the APIs. You can also test APIs in the developer portal.
+
+    Azure DNS. Azure DNS provides name resolution by using the Azure infrastructure. By hosting your domains in Azure, you can manage your DNS records by using the same credentials, APIs, tools, and billing that you use for your other Azure services. To use a custom domain name, such as contoso.com, create DNS records that map the custom domain name to the IP address. For more information, see Configure a custom domain name in API Management.
+
+    Microsoft Entra ID. Use Microsoft Entra ID to authenticate clients that call the API gateway. Microsoft Entra ID supports the OpenID Connect (OIDC) protocol. Clients obtain an access token from Microsoft Entra ID, and API Gateway validates the token to authorize the request. If you use the Standard or Premium tier of API Management, Microsoft Entra ID can also help secure access to the developer portal.
+
+","{""entities"": [[""Backend systems"", ""system"", ""various backend systems that the enterprise has deployed or relies on""], [""SaaS systems"", ""component"", ""SaaS systems""], [""other Azure services"", ""component"", ""other Azure services""], [""web services"", ""component"", ""expose REST or SOAP endpoints""], [""Azure Logic Apps"", ""system"", ""Logic Apps uses connectors to integrate with commonly used services""], [""Azure API Management"", ""system"", ""Logic Apps uses connectors to integrate with commonly used services""], [""API gateway"", ""component"", ""The API gateway accepts HTTP calls and routes them to the backend""], [""Developer portal"", ""component"", ""This portal gives your developers access to documentation and code samples for calling the APIs""], [""Azure DNS"", ""system"", ""Azure DNS provides name resolution by using the Azure infrastructure""], [""Microsoft Entra ID"", ""system"", ""Use Microsoft Entra ID to authenticate clients that call the API gateway""], [""clients"", ""system"", ""clients that call the API gateway""], [""developers"", ""person"", ""accesses documentation and code samples""]], ""relationships"": [[""Backend systems"", ""contains"", ""SaaS systems"", ""These systems might include ""], [""Backend systems"", ""contains"", ""web services"", ""These systems might include ""], [""Backend systems"", ""contains"", ""other Azure services"", ""These systems might include ""], [""web services"", ""contains"", ""SaaS systems"", ""These systems might include ""], [""Azure API Management"", ""contains"", ""API gateway"", ""API Management consists of two related components""], [""Azure API Management"", ""contains"", ""Developer portal"", ""API Management consists of two related components""], [""clients"", ""calls"", ""API gateway"", ""clients that call the API gateway""], [""clients"", ""calls"", ""Microsoft Entra ID"", ""Clients obtain an access token from Microsoft Entra ID""], [""developers"", ""calls"", ""Developer portal"", ""This portal gives your developers access to documentation and code samples for calling the APIs. You can also test APIs in the developer portal""]]}"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""Azure Logic Apps"",
+      ""type"": ""component"",
+      ""description"": ""In this architecture, logic apps are triggered by HTTP requests and can be nested for complex orchestration. It uses connectors to integrate with commonly used services.""
+    },
+    {
+      ""entity"": ""API gateway"",
+      ""type"": ""system"",
+      ""description"": ""Part of Azure API Management that accepts HTTP calls and routes them to the backend systems or other specified endpoints.""
+    },
+    {
+      ""entity"": ""Developer portal"",
+      ""type"": ""component"",
+      ""description"": ""Provided by each instance of Azure API Management, it gives developers access to documentation, code samples for calling APIs and allows testing in the developer portal.""
+    },
+    {
+      ""entity"": ""Azure DNS"",
+      ""type"": ""system"",
+      ""description"": ""Part of Microsoft infrastructure that provides name resolution by using Azure. It enables management of domain names through credentials, tools, and billing used for other services in the same environment.""
+    },
+    {
+      ""entity"": ""Microsoft Entra ID"",
+      ""type"": ""component"",
+      ""description"": ""Used to authenticate clients that call the API gateway. It supports OpenID Connect (OIDC) protocol and can validate access tokens for authorizing requests in Standard or Premium tiers of API Management.""
+    }
+  ],
+  ""relationships"": [
+    [""Azure Logic Apps"", ""part-of"", ""API gateway""],
+    [""Developer portal"", ""calls_from"", ""Microsoft Entra ID""]
+  ]
+}
+```"," ```json
+{
+  ""entities"": [
+    {
+      ""entity"": ""Azure Logic Apps"",
+      ""type"": ""component"",
+      ""description"": ""In this architecture, logic apps are triggered by HTTP requests and can be nested for complex orchestration. It uses connectors to integrate with commonly used services.""
+    },
+    {
+      ""entity"": ""API gateway"",
+      ""type"": ""system"",
+      ""description"": ""Part of Azure API Management that accepts HTTP calls and routes them to the backend systems or other specified endpoints.""
+    },
+    {
+      ""entity"": ""Developer portal"",
+      ""type"": ""component"",
+      ""description"": ""Provided by each instance of Azure API Management, it gives developers access to documentation, code samples for calling APIs and allows testing in the developer portal.""
+    },
+    {
+      ""entity"": ""Azure DNS"",
+      ""type"": ""system"",
+      ""description"": ""Part of Microsoft infrastructure that provides name resolution by using Azure. It enables management of domain names through credentials, tools, and billing used for other services in the same environment.""
+    },
+    {
+      ""entity"": ""Microsoft Entra ID"",
+      ""type"": ""component"",
+      ""description"": ""Used to authenticate clients that call the API gateway. It supports OpenID Connect (OIDC) protocol and can validate access tokens for authorizing requests in Standard or Premium tiers of API Management.""
+    }
+  ],
+  ""relationships"": [
+    [""Azure Logic Apps"", ""part-of"", ""API gateway""],
+    [""Developer portal"", ""calls_from"", ""Microsoft Entra ID""]
+  ]
+}
+```",4.863608554005623
+12,phi3,../IMAGES NEW/Azure/07 Azure internal APIs original.txt,"
+The data flows as follows:
+
+    Developers check in code to a GitHub repository that's connected to a CI/CD pipeline agent that's installed on an Azure VM.
+    The agent pushes the build to the API application that's hosted on ILB ASE.
+    Azure API Management consumes the preceding APIs via HOST headers that are specified in API Management policy.
+    API Management uses the App Service Environment's DNS name for all the APIs.
+    Application Gateway exposes API Management's developer and API portal.
+    Azure Private DNS is used to route the traffic internally between ASE, API Management, and Application Gateway.
+    External users utilize the exposed developer portal to consume the APIs via Application Gateway's public IP.
+
+","{""entities"": [[""GitHub repository"", ""system"", """"], [""Developers"", ""person"", """"], [""External users"", ""person"", """"], [""CI/CD pipeline agent"", ""system"", """"], [""Azure VM"", ""system"", """"], [""ILB ASE"", ""system"", """"], [""API application"", ""component"", """"], [""Azure API Management"", ""system"", ""consumes the preceding APIs via HOST headers""], [""App Service Environment"", ""component"", """"], [""Application Gateway"", ""component"", ""exposes API Management's developer and API portal""], [""Developer portal"", ""component"", ""API Management's developer and API portal""], [""API portal"", ""component"", ""API Management's developer and API portal""], [""Application Gateway"", ""component"", ""exposes API Management's developer and API portal""], [""Azure Private DNS"", ""component"", ""used to route the traffic internally between ASE, API Management, and Application Gateway""]], ""relationships"": [[""Azure VM"", ""contains"", ""CI/CD pipeline agent"", ""installed on an Azure VM""], [""API application"", ""part-of"", ""ILB ASE"", ""API application that's hosted on ILB ASE""], [""GitHub repository"", ""calls"", ""CI/CD pipeline agent"", ""GitHub repository that's connected to a CI/CD pipeline agent""], [""CI/CD pipeline agent"", ""calls"", ""API application"", ""agent pushes the build to the API application""], [""Azure API Management"", ""calls"", ""App Service Environment"", ""uses the App Service Environment's DNS name for all the APIs""], [""External users"", ""calls"", ""Application Gateway"", """"], [""Application Gateway"", ""calls"", ""API application"", ""to consume the APIs via Application Gateway's public IP""], [""Azure API Management"", ""contains"", ""Developer portal"", ""API Management's developer and API portal""], [""Azure API Management"", ""contains"", ""API portal"", ""API Management's developer and API portal""], [""Application Gateway"", ""calls"", ""API portal"", ""exposes API Management's developer and API portal.""], [""Application Gateway"", ""calls"", ""Developer portal"", ""exposes API Management's developer and API portal.""], [""Azure Private DNS"", ""calls"", ""Azure API Management"", ""route the traffic internally between ASE, API Management, and Application Gateway""], [""Azure Private DNS"", ""calls"", ""Application Gateway"", ""route the traffic internally between ASE, API Management, and Application Gateway""]]}"," Based on your task description, here is a possible interpretation of entities and relationships in this context as per software architecture components within Azure environment with their roles described using ""part-of"" relationship where applicable or needed for understanding. Note that while some information can be derived directly from given details like 'GitHub repository', specifics about certain entity types such as the CI/CD pipeline agent, API application and Application Gateway are not mentioned in detail within this context but their dependencies on other entities have been inferred based on general software architecture principles:
+
+```json
+{
+  ""entities"": [
+    {
+      ""name"": ""GitHub repository"",
+      ""type"": ""component"",
+      ""description"": ""A code storage service for developers""
+    },
+    {
+      ""name"": ""CI/CD pipeline agent"",
+      ""type"": ""system"",
+      ""description"": ""Installs on Azure VM to manage build processes.""
+    },
+    {
+      ""name"": ""Azure VM"",
+      ""type"": ""system"",
+      ""description"": ""Hosts the CI/CD pipeline and API application""
+    },
+    {
+      ""name"": ""API Management system"",
+      ""type"": ""component"",
+      ""description"": ""Exposes APIs via HOST headers."" 
+    },
+    {
+      ""name"": ""Application Gateway"",
+      ""type"": ""system"",
+      ""description"": ""Serves as a gateway for API exposure and portal access""
+    },
+    {
+      ""name"": ""Azure Private DNS"",
+      ""type"": ""component"",
+      ""description"": ""Used to route traffic internally within Azure services."" 
+    },
+    {
+      ""name"": ""API Management policy"",
+      ""type"": ""system"",
+      ""description"": ""Specifies HOST headers for API consumption""
+    },
+    {
+      ""name"": ""Developer portal"",
+      ""type"": ""component"",
+      ""description"": ""End-user interface to consume APIs."" 
+    },
+    {
+      ""name"": ""Application Gateway public IP"",
+      ""type"": ""system"",
+      ""description"": ""External endpoint for API consumption by users""
+    }
+  ],
+  ""relationships"": [
+    [""GitHub repository"",""calls"",""CI/CD pipeline agent""],
+    [""CI/CD pipeline agent"",""pushes_to"",""API Management system""]
+  ]
+}
+```
+This JSON representation is based on the information provided in your context. It might need further refinement depending upon any additional details that could be discovered from other sources or domain specific knowledge about how these systems interrelate beyond what's mentioned directly within this text snippet, but it should serve as a starting point for understanding key entities and their relationships based on the given information in your context."," Based on your task description, here is a possible interpretation of entities and relationships in this context as per software architecture components within Azure environment with their roles described using ""part-of"" relationship where applicable or needed for understanding. Note that while some information can be derived directly from given details like 'GitHub repository', specifics about certain entity types such as the CI/CD pipeline agent, API application and Application Gateway are not mentioned in detail within this context but their dependencies on other entities have been inferred based on general software architecture principles:
+
+```json
+{
+  ""entities"": [
+    {
+      ""name"": ""GitHub repository"",
+      ""type"": ""component"",
+      ""description"": ""A code storage service for developers""
+    },
+    {
+      ""name"": ""CI/CD pipeline agent"",
+      ""type"": ""system"",
+      ""description"": ""Installs on Azure VM to manage build processes.""
+    },
+    {
+      ""name"": ""Azure VM"",
+      ""type"": ""system"",
+      ""description"": ""Hosts the CI/CD pipeline and API application""
+    },
+    {
+      ""name"": ""API Management system"",
+      ""type"": ""component"",
+      ""description"": ""Exposes APIs via HOST headers."" 
+    },
+    {
+      ""name"": ""Application Gateway"",
+      ""type"": ""system"",
+      ""description"": ""Serves as a gateway for API exposure and portal access""
+    },
+    {
+      ""name"": ""Azure Private DNS"",
+      ""type"": ""component"",
+      ""description"": ""Used to route traffic internally within Azure services."" 
+    },
+    {
+      ""name"": ""API Management policy"",
+      ""type"": ""system"",
+      ""description"": ""Specifies HOST headers for API consumption""
+    },
+    {
+      ""name"": ""Developer portal"",
+      ""type"": ""component"",
+      ""description"": ""End-user interface to consume APIs."" 
+    },
+    {
+      ""name"": ""Application Gateway public IP"",
+      ""type"": ""system"",
+      ""description"": ""External endpoint for API consumption by users""
+    }
+  ],
+  ""relationships"": [
+    [""GitHub repository"",""calls"",""CI/CD pipeline agent""],
+    [""CI/CD pipeline agent"",""pushes_to"",""API Management system""]
+  ]
+}
+```
+This JSON representation is based on the information provided in your context. It might need further refinement depending upon any additional details that could be discovered from other sources or domain specific knowledge about how these systems interrelate beyond what's mentioned directly within this text snippet, but it should serve as a starting point for understanding key entities and their relationships based on the given information in your context.",7.163575419021072

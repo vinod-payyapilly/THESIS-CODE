@@ -1,0 +1,9 @@
+[user]
+	email = vinod.v.p@gmail.com
+	name = Vinod
+[safe]
+	directory = nginx-flask-nodejs-redis/
+	directory = /media/vinod/STUDY/LEARNING/MTU-MSC/WORK/Cloud-Automation/A02/kubernetes/nginx-flask-nodejs-redis/python-web
+	directory = /media/vinod/STUDY/LEARNING/MTU-MSC/WORK/AI-Thesis/CODE/ardia-chat
+[credential]
+	helper = "!f() { /root/.vscode-server/bin/863d2581ecda6849923a2118d93a088b0745d9d6/node /tmp/vscode-remote-containers-37b6ab93-7bb1-43a4-b6d0-0c077582b055.js git-credential-helper $*; }; f"

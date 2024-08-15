@@ -1,0 +1,27 @@
+{
+  "entities": [
+    ["Backend systems", "system", "various backend systems that the enterprise has deployed or relies on"],
+    ["SaaS systems", "component", "SaaS systems"],
+    ["other Azure services", "component", "other Azure services"],
+    ["web services", "component", "expose REST or SOAP endpoints"],
+    ["Azure Logic Apps", "system", "Logic Apps uses connectors to integrate with commonly used services"],
+    ["Azure API Management", "system", "Logic Apps uses connectors to integrate with commonly used services"],
+    ["API gateway", "component", "The API gateway accepts HTTP calls and routes them to the backend"],
+    ["Developer portal", "component", "This portal gives your developers access to documentation and code samples for calling the APIs"],
+    ["Azure DNS", "system", "Azure DNS provides name resolution by using the Azure infrastructure"],
+    ["Microsoft Entra ID", "system", "Use Microsoft Entra ID to authenticate clients that call the API gateway"],
+    ["clients", "system", "clients that call the API gateway"],
+    ["developers", "person", "accesses documentation and code samples"]
+  ],
+  "relationships": [
+    ["Backend systems", "contains", "SaaS systems", "These systems might include "],
+    ["Backend systems", "contains", "web services", "These systems might include "],
+    ["Backend systems", "contains", "other Azure services", "These systems might include "],
+    ["web services", "contains", "SaaS systems", "These systems might include "],
+    ["Azure API Management", "contains", "API gateway", "API Management consists of two related components"],
+    ["Azure API Management", "contains", "Developer portal", "API Management consists of two related components"],
+    ["clients", "calls", "API gateway", "clients that call the API gateway"],
+    ["clients", "calls", "Microsoft Entra ID", "Clients obtain an access token from Microsoft Entra ID"],
+    ["developers", "calls", "Developer portal", "This portal gives your developers access to documentation and code samples for calling the APIs. You can also test APIs in the developer portal"]
+  ]
+}

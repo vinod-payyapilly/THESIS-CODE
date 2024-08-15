@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+langchain_community
+httpx
+pandas
+#requests
+#configparser

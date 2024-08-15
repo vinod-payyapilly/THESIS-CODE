@@ -1,0 +1,38 @@
+Dataflow
+
+    Sensors in the warehouse facility are connected and send data to a LoRa (Long Range) gateway.
+
+    LoRa gateway pushes data to the cloud using cellular connectivity.
+
+    myDevices is a software as a service (SaaS)-based plug and play solution. It uses devices and gateways that are automatically provisioned and associated with the corresponding customer.
+
+    Device data is sent to Azure IoT Central. Customers use the solution for controlling and monitoring the devices.
+
+    Modeling of the supply chain and warehouse facilities using Azure Digital Twins. This is a live executing environment where applications can ingest data to gain visibility on the status of the supply chain. Digital Twins integrates natively with Azure Event Hub, which other applications interact with to retrieve data from the twin.
+
+    Temporal and spatial data required by ML models is obtained from the external data sources.
+
+    Key data is stored in Azure data solutions. Blob storage is used for ML training data. Azure Cosmos DB is used for scored data and key performance indexes.
+
+    Telemetry data is ingested from IoT Central via Event Hub to ensure decoupling of the data ingestion and consumption. Azure Functions is used to combine external data sources and telemetry data, and then analyze this data set for any anomalies. The data is surfaced through Digital Twins.
+
+    Azure Databricks performs data transformations required for training the ML models.
+
+    Wildfire prediction models are trained using Azure Machine Learning by utilizing historical data, real-time data, and micro-weather data.
+
+    Routing updates are provided by the Bing Maps Truck Routing API.
+
+    Applications can query Digital Twins directly to obtain relevant data from the model.
+
+Components
+
+    Azure IoT Central is used as the IoT managed platform. It provides security, scalability, and availability as part of the service so that customers can focus efforts on business requirements. Users can integrate with business components such as Power Apps and Power BI, and create notifications through the data export feature in IoT Central.
+
+    Azure storage is used for storing device information in the cloud in a secure and scalable way that is also cost-effective. The data stored is used for training the ML models.
+
+    Azure Cosmos DB is used to store application key performance indicators (KPIs) and model outputs. Azure Cosmos DB is a fully managed NoSQL database service for modern application development. It provides high-speed transactions and can easily enable the service for global distribution.
+
+    Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. It's used for transforming, manipulating, and normalizing data so that it can be properly consumed by the machine learning pipeline.
+
+    Azure Machine Learning is used to create wildfire prediction models. The models provide the intelligence required to assess the risk of a wildfire. Input from multiple data sources is required to train the model for accuracy. These sources can include satellite imagery, historical data, local soil conditions, and weather data. Based on the predicated wildfire area from the model, the Supply Chain and Logistics Solution can reroute trucks.
+

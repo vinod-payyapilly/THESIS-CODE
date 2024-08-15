@@ -1,0 +1,72 @@
+{
+  "entities": [
+    ["phone call", "component", "A phone call between an agent and a customer is recorded"],
+    ["agent", "person", "A phone call between an agent and a customer is recorded"],
+    ["customer", "person", "A phone call between an agent and a customer is recorded"],
+
+    ["Azure Blob Storage", "system", "is recorded and stored in Azure Blob Storage"],
+    ["Audio files", "system", "Audio files are uploaded to an Azure Storage account via a supported method"],
+    ["supported method", "component", "Audio files are uploaded to an Azure Storage account via a supported method"],
+
+    ["UI-based tool", "component", "supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API"],
+    ["Azure Storage Explorer", "component", "supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API"],
+    ["Storage SDK", "component", "supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API"],
+    ["API", "component", "supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API"],
+
+    ["Azure AI Speech", "component", "transcribe audio files in Batch mode asynchronously"],
+    ["transcription results", "component", "The transcription results are persisted in Blob Storage."],
+    ["Azure AI Language", "component", "Azure AI Language is used to detect and redact personal data in the transcript."],
+    ["AI services Ingestion Client tool", "component", "For batch mode transcription and personal data detection and redaction, use the AI services Ingestion Client tool"],
+    ["Azure OpenAI", "component", "Azure OpenAI is used to process the transcript and extract entities, summarize the conversation, and analyze sentiments."],
+
+    ["Azure OpenAI output", "component", "The processed output is stored in Blob Storage and then analyzed and visualized by using other services."],
+    ["other services", "component", "The processed output is stored in Blob Storage and then analyzed and visualized by using other services."],
+    ["App Service", "system", "Power BI or a custom web application that's hosted by App Service is used to visualize the output."],
+    ["Power BI", "system", "Power BI or a custom web application that's hosted by App Service is used to visualize the output."],
+    ["custom web application", "system", "Power BI or a custom web application that's hosted by App Service is used to visualize the output."],
+    
+    ["Azure OpenAI output 2", "component", "You can also store the output in a datastore for keeping track of metadata and for reporting"],
+    ["datastore", "component", "You can also store the output in a datastore for keeping track of metadata and for reporting"],
+
+    ["customer relationship management (CRM)", "system", "You can store this output in a customer relationship management (CRM)"],
+    ["Azure OpenAI output 3", "component", "You can store this output in a customer relationship management (CRM)"]
+  ],
+  "relationships": [
+    ["agent", "calls", "phone call", "A phone call between an agent and a customer is recorded"],
+    ["customer", "calls", "phone call", "A phone call between an agent and a customer is recorded"],
+
+    ["phone call", "part-of", "Azure Blob Storage", "is recorded and stored in Azure Blob Storage"],
+
+    ["Audio files", "part-of", "Azure Blob Storage", "Audio files are uploaded to an Azure Storage account via a supported method"],
+    
+    ["supported method", "calls", "Audio files", "Audio files are uploaded to an Azure Storage account via a supported method"],
+
+    ["supported method", "contains", "UI-based tool", "upported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API"],
+    ["supported method", "contains", "Azure Storage Explorer", "upported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API"],
+    ["supported method", "contains", "Storage SDK", "upported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API"],
+    ["supported method", "contains", "API", "supported method, such as the UI-based tool, Azure Storage Explorer, or a Storage SDK or API"],
+    
+    ["Azure AI Speech", "calls", "Audio files", "transcribe audio files in Batch mode asynchronously"],
+    ["Azure Blob Storage", "contains", "transcription results", "The transcription results are persisted in Blob Storage."],
+    ["Azure AI Speech", "calls", "transcription results", "The transcription results are persisted in Blob Storage."],
+    ["Azure AI Language", "calls", "transcription results", "Azure AI Language is used to detect and redact personal data in the transcript."],
+    ["AI services Ingestion Client tool", "calls", "transcription results","For batch mode transcription and personal data detection and redaction, use the AI services Ingestion Client tool"],
+    ["Azure OpenAI", "calls", "transcription results","Azure OpenAI is used to process the transcript and extract entities, summarize the conversation, and analyze sentiments."],
+    ["Azure OpenAI", "calls", "Azure OpenAI output","The processed output is stored in Blob Storage and then analyzed and visualized by using other services."],
+    ["Azure Blob Storage", "contains", "Azure OpenAI output", "The processed output is stored in Blob Storage and then analyzed and visualized by using other services."],
+    
+    ["other services", "calls", "Azure OpenAI output","The processed output is stored in Blob Storage and then analyzed and visualized by using other services."],
+
+    ["Power BI", "part-of", "App Service", "Power BI or a custom web application that's hosted by App Service is used to visualize the output."],
+    ["custom web application", "part-of", "App Service", "Power BI or a custom web application that's hosted by App Service is used to visualize the output."],
+    ["custom web application", "calls", "Azure OpenAI output", "Power BI or a custom web application that's hosted by App Service is used to visualize the output."],
+    ["Power BI", "calls", "Azure OpenAI output", "Power BI or a custom web application that's hosted by App Service is used to visualize the output."],
+    ["agent", "calls", "customer relationship management (CRM)", "You can store this output in a customer relationship management (CRM), so agents have contextual information about why the customer called and can quickly solve potential problems"],
+    
+    ["Azure OpenAI output 2", "part-of", "datastore", "You can also store the output in a datastore for keeping track of metadata and for reporting"],    
+    ["Azure OpenAI output 3", "part-of", "customer relationship management (CRM)", "You can also store the output in a datastore for keeping track of metadata and for reporting"],
+
+    ["Azure OpenAI output", "calls", "Azure OpenAI output 2", "You can also store the output in a datastore for keeping track of metadata and for reporting"],
+    ["Azure OpenAI output", "calls", "Azure OpenAI output 3", "You can store this output in a customer relationship management (CRM), so agents have contextual information about why the customer called and can quickly solve potential problems"]
+  ]
+}

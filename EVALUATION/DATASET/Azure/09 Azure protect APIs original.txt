@@ -1,0 +1,33 @@
+we'll look at an architecture that protects backend APIs in Azure and other environments by using API Management and Azure Active Directory (Azure AD) B2C to validate bearer tokens.
+
+Dataflow
+
+    To gain access to an application, an API client authenticates by providing credentials such as username and password. The IdP is Azure AD B2C in this solution, but you can use a different one.
+
+    The authentication request goes via Azure Front Door to Azure AD B2C, which is configured with a custom domain for sign-in. Azure AD B2C authenticates the user and returns a JSON Web Token (JWT) bearer token back to the user.
+
+    The client triggers an event that accesses a backend API. This event could be a click of a button on a web application or on a mobile device, or a direct call to the endpoint of the backend API.
+
+    The request goes through Azure Front Door, whose back end is mapped to the public endpoint of API Management. API Management intercepts the request and validates the bearer token against Azure AD B2C by using its validate-jwt policy. If the token isn't valid, API Management rejects the request by responding with a 401 code.
+
+    If the token is valid, API Management forwards the request to the appropriate backend API.
+
+    The diagram shows backend APIs running in three environments:
+        App Service Environment
+        Function Apps
+        Azure Kubernetes Services (AKS)
+
+    APIs running in on-premises and hybrid cloud environments can also be integrated with API Management if network connectivity is established between the APIs and API Management.
+
+Components
+
+    Azure Virtual Network provides secure communications among Azure resources such as virtual machines (VMs). It also provides access to the internet, and to on-premises networks.
+    Azure Front Door is a modern cloud content delivery network (CDN) service that delivers high performance, scalability, and secure user experiences for web content and applications. It offers Layer 7 capabilities such as SSL offload, path-based routing, fast failover, and caching to improve the performance and availability of your applications.
+    Azure Application Gateway is a Layer 7 load balancer that manages traffic to web applications.
+    API Management is a turnkey solution for publishing APIs to external and internal clients. It provides features that are useful for managing a public-facing API, including rate limiting, IP restrictions, and authentication that uses Microsoft Entra ID or another IdP. API Management doesn't perform any load balancing, so you should use it with a load balancer such as Application Gateway or a reverse proxy. For information about using API Management with Application Gateway, see Integrate API Management in an internal virtual network with Application Gateway.
+    Azure AD B2C is a highly available global identity management service, built on Microsoft Entra ID, for consumer-facing applications. It scales to hundreds of millions of identities. It's the IdP that this solution uses. It returns the bearer token (JWT) on successful authentication.
+    Azure App Service is a fully managed service for building, deploying, and scaling web apps. You can build apps by using .NET, .NET Core, Node.js, Java, Python, or PHP. The apps can run in containers or on Windows or Linux. In a mainframe migration, the front-end screens or web interface can be coded as HTTP-based REST APIs. They can be segregated as in the mainframe application, and can be stateless to orchestrate a microservices-based system.
+    Azure App Service Environment is a single-tenant deployment of App Service. It enables hosting of applications in a fully isolated and dedicated environment for securely running App Service apps at high scale.
+    Azure Kubernetes Service (AKS) is a Microsoft managed Kubernetes environment for running containerized applications.
+    Azure Functions is an event-driven serverless compute platform. Azure Functions runs on demand and at scale in the cloud.
+

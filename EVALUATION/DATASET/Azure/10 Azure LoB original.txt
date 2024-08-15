@@ -1,0 +1,24 @@
+This example shows how you can modernize your legacy systems that can't support new processes, therefore providing a better user experience.
+
+Dataflow
+
+The data flows through the solution as follows:
+
+    Supplier data stored in CDS is moved to SQL via Data Factory.
+    Purchase order (PO) data stored in ERP system is sent to Azure SQL database.
+    Azure Functions uses API to surface PO data monthly and creates a task for users to review.
+    Power Apps retrieves data from Azure SQL Database through API.
+    User reviews and updates POs in Power Apps and sends this data to suppliers through CSV export.
+    Power BI reports trends in supplier status.
+
+Components
+
+Data is loaded from these different data sources using several Azure components:
+
+    Power Apps: Increase agility across your organization by rapidly building low-code apps that modernize processes and solve tough challenges.
+    Azure Functions: Accelerate and simplify application development with serverless compute
+    Azure API management: Hybrid, multicloud management platform for APIs across all environments
+    Azure SQL Database: Build apps that scale with the pace of your business with managed and intelligent SQL in the cloud
+    Azure Data Factory: Hybrid data integration service that simplifies ETL at scale
+    Power BI: a suite of business analytics tools to analyze data and share insights. Power BI can query a semantic model stored in Analysis Services, or it can query Azure Synapse directly.
+

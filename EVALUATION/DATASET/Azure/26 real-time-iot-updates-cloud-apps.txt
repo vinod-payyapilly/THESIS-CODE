@@ -1,0 +1,18 @@
+Workflow
+
+    Web pages, mobile apps, and other clients request an Azure SignalR Service endpoint and token from Azure Functions, a serverless compute platform. Besides integrating data from various sources, Functions also manages Azure SignalR Service endpoints and information on client groups.
+
+    Clients use the endpoint and token to connect to Azure SignalR Service.
+
+    IoT devices send telemetry to Azure IoT Edge and Azure IoT Hub. IoT Edge sends processed IoT device telemetry to IoT Hub.
+
+    The telemetry triggers a function in Azure Functions. The function completes these tasks:
+        Runs any calculations that you program on the telemetry.
+        Transforms the data any way that you program.
+        Uses the managed service Azure SignalR Service to broadcast the data.
+
+    Azure SignalR Service supports several techniques that real-time applications use, such as WebSocket, a preferred transport protocol. But Azure SignalR Service uses techniques like server-sent events (SSE) and long polling when WebSocket isn't available. Azure SignalR Service automatically detects and initializes the appropriate transport protocol based on the features that the server and client support.
+
+    The Azure SignalR Service message goes out to a specific client or group of clients. The clients use the data to update apps.
+
+

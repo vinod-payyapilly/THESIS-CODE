@@ -1,0 +1,22 @@
+Dataflow
+
+The architecture diagram shows a sample MLOps solution.
+
+    The virtual network named AML VNET helps protect the Azure Machine Learning workspace and its associated resources.
+
+    The jump host, Azure Bastion, and self-hosted agents belong to another virtual network named BASTION VNET. This arrangement simulates having another solution that requires access to the resources within Azure Machine Learning virtual network.
+
+    With the support of virtual network peering and private DNS zones, Azure Pipelines can execute on self-host agents and trigger the Azure Machine Learning pipelines that are published in the Azure Machine Learning workspace to train, evaluate, and register the machine learning models.
+
+    Finally, the model is deployed to online endpoints or batch endpoints that are supported by Azure Machine Learning compute or Azure Kubernetes Service clusters.
+
+Components
+
+The sample MLOps solution consists of these components:
+
+    Data storage: Azure Blob Storage for data storage.
+    Model training, validation, and registration: Azure Machine Learning workspace
+    Model deployment: Azure Machine Learning endpoints and Azure Kubernetes Service
+    Model monitor: Azure Monitor for Application Insights
+    MLOps pipelines: Azure DevOps and Azure Pipelines
+

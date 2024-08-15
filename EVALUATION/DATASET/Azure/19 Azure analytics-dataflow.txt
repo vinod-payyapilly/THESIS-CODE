@@ -1,0 +1,30 @@
+The following dataflow corresponds to the preceding diagram:
+
+    The data capture device is connected to the vehicle networks and collects high-resolution vehicle signal data and video. (1a) The device publishes real-time telemetry messages or (1b) requests the upload of recorded data files to the Azure Event Grid MQTT broker functionality by using an MQTT client. This functionality uses a Claim-Check pattern.
+
+    (2a) Event Grid routes live vehicle signal data to an Azure Functions app. This app decodes the vehicle signals to the JavaScript Object Notation (JSON) format and posts them to an eventstream.
+
+    (2b) Event Grid coordinates the file upload from the device client to the lakehouse. A completed file upload triggers a pipeline that decodes the data and writes the decoded file to OneLine in a format that's suitable for ingestion, such as parquet or CSV.
+
+    (3a) The eventstream routes the decoded JSON vehicle signals for ingestion in the eventhouse.
+
+    (3b) A data pipeline triggers the ingestion of decoded files from the lakehouse.
+
+    The eventhouse uses update policies to enrich the data and to expand the JSON data into a suitable row format, for example location data might be clustered to align with geospatial analytics. Every time a new row is ingested, the real-time analytics engine invokes an associated Update() function.
+
+    Data engineers and data scientists use Kusto Query Language (KQL) to build analytics use cases. Users store frequently used cases as shareable user-defined functions. The engineers use built-in KQL functions such as aggregation, time-series analysis, geospatial clustering, windowing, and machine learning plugins with Copilot support.
+
+    R&D engineers and data scientists use notebooks to analyze data and build test and validation use cases.
+
+        R&D engineers use KQL querysets and Copilot for Real-Time Intelligence to perform interactive data analysis.
+
+        Data engineers and data scientists use notebooks to store and share their analysis processes. With notebooks, engineers can use Azure Spark to run analytics and use Git to manage the notebook code. Users can take advantage of Copilot for Data Science and Data Engineering to support their workflow with contextual code suggestions.
+
+    R&D engineers and data scientists can use Power BI with dynamic queries or real-time analytics dashboards to create visualizations to share with business users. These visualizations invoke user-defined functions for ease of maintenance.
+
+    Engineers can also connect more tools to Microsoft Fabric. For instance, they can connect Azure Managed Grafana to the eventhouse or create a web application that queries the eventhouse directly.
+
+    Data engineers and R&D engineers use Data Activator to create reflex items to monitor conditions and trigger actions, such as triggering Power Automate flows for business integration. For example, Data Activator can notify a Teams channel if the health of a device degrades.
+
+    The data collector configuration enables engineers to change the data collection policies of the data capture device. Azure API Management abstracts and secures the partner configuration API and provides observability.
+

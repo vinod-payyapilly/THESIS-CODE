@@ -1,0 +1,36 @@
+Step 1
+SAP data hosted on SAP RISE, SAP HANA Cloud, AWS, or on-premises systems can be extracted in real-time or batch and full or incremental mode from SAP NetWeaver systems, such as SAP ERP Central ECC, SAP S/4HANA, or SAP BW.
+It can also be extracted with SAP HANA Database using options such as:
+
+A. AWS Managed Services
+
+B. SAP and other AWS Partner Solutions with dedicated instances
+
+C. AWS Partner Solutions embedded in SAP NetWeaver
+
+
+Data Integration Options
+
+Step A
+AWS Glue, a serverless data integration service, and Amazon AppFlow SAP OData connector offer application-level data extraction.
+
+Step B2
+Using SAP native integration, SAP Datasphere or SAP Data Services sends data to Amazon Simple Storage Service (Amazon S3) or Amazon Redshift.
+
+ 
+
+Step B3
+SAP SLT replication engine supports replicating data to Amazon Relational Database Service (Amazon RDS) using a database connection. AWS Partner Solutions such as Syntax CxLink support streaming data to Amazon S3 and Amazon Kinesis using ABAP add-on for SAP SLT.
+
+ 
+
+Step C
+AWS Partner Solutions embedded in SAP NetWeaver, such as SNP Glue, offer point-to-point data replication from SAP NetWeaver-based source system to the AWS Cloud.
+
+ 
+
+Step 2
+Data extracted from SAP can be landed in AWS services, such as Amazon S3, Amazon Redshift, Amazon Kinesis, or Amazon RDS, combined with non-SAP data, further processed, and analyzed using AWS analytics and generative AI services.
+
+ 
+

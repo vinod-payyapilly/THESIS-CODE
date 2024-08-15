@@ -1,0 +1,30 @@
+Step 1
+An Amazon CloudFront distribution to serve the Media Services Application Mapper on AWS web application.
+
+Step 2
+An Amazon Simple Storage Service (Amazon S3) bucket as an origin to serve the solution’s web application.
+
+Step 3
+Amazon API Gateway for inventory and monitoring queries to the solution’s backend.
+
+Step 4
+AWS Lambda functions to handle client REST API requests from API Gateway, periodically scan for media services resources, and receive notifications of changes in a resource’s status.
+
+Two Lambda functions are custom resources for the browser application stack and one for the Amazon DynamoDB tables stack that are used during installation, update, and deletion.
+
+Step 5
+Amazon CloudWatch scheduled rules or event patterns to invoke the primary Lambda functions.
+
+Step 6
+DynamoDB tables to store the solution’s backend and front-end configuration and state.
+
+Step 7
+The AWS Cloud services and devices that this solution scans. The solution uses the AWS Elemental MediaLive API to discover AWS Elemental Link devices and the AWS Systems Manager API to discover AWS Elemental Live encoders.
+
+Step 8
+CloudWatch events to invoke the regional Lambda functions when there are operational changes in the sources of inventory or changes in state to subscribed CloudWatch alarms.
+
+Step 9
+Lambda functions to monitor source services for CloudWatch events in additional AWS Regions.
+
+

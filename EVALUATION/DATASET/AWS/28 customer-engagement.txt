@@ -1,0 +1,17 @@
+ The steps in this architecture are as follows:
+
+    Initialize Pinpoint and create a marketing project — You first need to configure your project to add your users and their contact info, such as email addresses. At this time, you also need to configure your metrics collection to ensure that you can capture your customer interactions to Amazon S3.
+
+    Near real-time data ingestion — Grab data from Amazon Pinpoint in near real-time through Amazon Data Firehose
+
+. Optionally, you can change this to an Amazon Kinesis Data Stream
+
+for near real-time use cases. This data is collected into S3, and used to both train the ML model and to analyze activity in your Amazon QuickSight dashboard.
+
+SageMaker model implementation — Using a combination of Amazon Pinpoint
+
+    engagement data with other customer demographic data, you can train a model that predicts the likelihood of customer churn (or segmentation, or other customer modeling insight). This is done in an iterative manner until you validate that your model is effective. Once that’s done, you can set up a SageMaker endpoint to host this model and run inference against. This is done in a batch manner. It exports the results to Amazon Pinpoint and S3 for consumption.
+
+    Data consumption with Athena and QuickSight — View and analyze all of the data being collected from the Amazon Pinpoint engagement, and combine it with other data facts from your data lake with Amazon Athena. You can explore this data and run ad-hoc SQL queries to gain direct insight directly from S3 storage. Combine this with Amazon QuickSight to visualize these insights and share them with others in the organization.
+
+

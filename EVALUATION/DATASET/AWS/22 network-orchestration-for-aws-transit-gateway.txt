@@ -1,0 +1,28 @@
+Step 1
+This template deploys an Amazon EventBridge rule that monitors specific virtual private cloud (VPC) and subnet tag changes.
+
+Step 2
+An EventBridge rule in the spoke account sends the tags to the EventBridge bus in the hub account.
+
+Step 3
+The rules associated with the EventBridge bus invoke an AWS Lambda function to start the solution workflow. 
+
+Step 4
+AWS Step Functions (solution state machine) processes network requests from the spoke accounts.
+
+Step 5
+The state machine workflow attaches a VPC to the transit gateway.
+
+Step 6
+The state machine workflow updates the VPC route table associated with the tagged subnet.
+
+Step 7
+The state machine workflow updates the transit gateway route table with association and propagation changes.
+
+Step 8
+(Optional) The state machine workflow updates the attachment name with the VPC name and the OU name for the spoke account (retrieved from the Org Management account).
+
+Step 9
+The solution updates Amazon DynamoDB with the information extracted from the event and resources created, updated, or deleted in the workflow.
+
+

@@ -1,0 +1,74 @@
+{
+  "entities": [
+    ["datasets", "component", "Data owners upload datasets into a public blob storage account"],
+    ["public blob storage account", "system", "Data owners upload datasets into a public blob storage account"],
+    ["Azure Data Factory", "system", "Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location"],
+    
+    ["storage account", "system", "Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location (import path) on another storage account with security controls"],
+    ["copied dataset", "system", "Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location (import path) on another storage account with security controls"],
+
+    ["private endpoint", "component", "The storage account can only be reached through a private endpoint."],
+    ["service principal", "component", "Also, it's accessed by a service principal with limited permissions."],
+    
+    ["streaming application", "component", "access the secure environment through a streaming application"],
+    ["Azure Virtual Desktop", "component", "Azure Virtual Desktop as a privileged jump box"],
+
+    ["data science VMs", "component", "data science VMs provisioned in a secure network environment"],
+    ["Azure Machine Learning compute", "component", "The secure environment has Azure Machine Learning compute that can access the dataset"],
+    ["secure network environment", "system", "data science VMs provisioned in a secure network environment"],
+
+    ["machine learning models", "component", "At this point, models are created that meet regulatory guidelines"],
+    ["de-identified data", "component", "Models or de-identified data is saved to a separate location on the secure storage (export path)"],
+
+    ["logic app", "component", "When new data is added to the export path, a logic app is triggered"],
+
+    ["separate container", "component", "Data Factory moves the data to the public storage account in a separate container"],
+
+    ["moved data", "component", "Data Factory moves the data to the public storage account in a separate container"],
+
+
+    ["Data owners", "person", "Data owners upload datasets into a public blob storage account"],
+    ["Researchers", "person", "Researchers access the secure environment through a streaming application using Azure Virtual Desktop as a privileged jump box"],
+
+    ["manual reviewers", "person", "The manual reviewers ensure that sensitive data isn't exported."],
+    ["Users", "person", "The secure environment has Azure Machine Learning compute that can access the dataset"]
+
+  ],
+  "relationships": [
+      ["datasets", "part-of", "public blob storage account", "Data owners upload datasets into a public blob storage account"],
+      ["Data owners", "calls", "datasets", "Data owners upload datasets into a public blob storage account"],
+      ["Azure Data Factory", "calls", "datasets", "Azure Data Factory uses a trigger that starts copying of the uploaded dataset"],
+
+      ["storage account", "contains", "copied dataset", "opying of the uploaded dataset to a specific location (import path) on another storage account with security controls"],
+      ["Azure Data Factory", "calls", "copied dataset", "Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location"],
+
+      ["private endpoint", "calls", "storage account", "The storage account can only be reached through a private endpoint"],
+      ["storage account", "is-called-from", "service principal", "Also, it's accessed by a service principal with limited permissions"],
+      
+      ["Researchers", "calls", "Azure Virtual Desktop", " Researchers access the secure environment through a streaming application"],
+      ["Azure Virtual Desktop", "calls", "streaming application", "through a streaming application using Azure Virtual Desktop"],
+      ["streaming application", "calls", "storage account", "Researchers access the secure environment through a streaming application using Azure Virtual Desktop as a privileged jump box"],
+      
+      ["data science VMs", "part-of", "secure network environment", "The dataset in the secure storage account is presented to the data science VMs"],
+      ["data science VMs", "calls", "copied dataset", " The dataset in the secure storage account is presented to the data science VMs"],
+
+      ["secure network environment", "contains", "Azure Machine Learning compute", "The secure environment has Azure Machine Learning compute that can access the dataset"],
+      
+      ["Azure Machine Learning compute", "calls", "Azure Machine Learning compute", "The secure environment has Azure Machine Learning compute that can access the dataset"],
+
+      ["machine learning models", "part-of", "storage account", "Models or de-identified data is saved to a separate location on the secure storage (export path)"],
+      ["machine learning models", "calls", "logic app", "When new data is added to the export path, a logic app is triggered"],
+
+      ["logic app", "calls", "manual reviewers", "The app starts an approval process requesting a review of data that is queued to be exported."],
+
+      ["public blob storage account", "contains", "separate container", "Data Factory moves the data to the public storage account in a separate container"],      
+
+      ["Azure Data Factory", "calls", "de-identified data", "Data Factory moves the data to the public storage account in a separate container to allow external researchers to have access to their exported data and models"],
+
+      ["separate container", "contains", "moved data", "Data Factory moves the data to the public storage account in a separate container"],     
+
+      ["Azure Data Factory", "calls", "moved data", "Data Factory moves the data to the public storage account in a separate container to allow external researchers to have access to their exported data and models"],
+
+      ["Users", "calls", "Azure Machine Learning compute", "The secure environment has Azure Machine Learning compute that can access the dataset"]
+  ]
+}

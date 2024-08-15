@@ -1,0 +1,42 @@
+Step 1
+AWS WAF to protect the Druid web console and Druid API endpoints against common web exploits and bots that may affect availability, compromise security, or consume excessive resources. AWS WAF is only provisioned and deployed for internet facing clusters.
+
+Step 2
+A security hardened Linux server (Bastion host) to manage access to the Druid servers running in a private network separate from an external network. It can also be used to access the Druid web console through SSH tunneling where a private Application Load Balancer (ALB) is deployed.
+ 
+Step 3
+An ALB serves as the single point of contact for clients. The load balancer distributes incoming application traffic across multiple query servers in multiple Availability Zones.
+
+Step 4
+The private subnet consists of the following:
+
+Druid master Auto scaling group: An auto scaling group contains a collection of Druid master servers. A master server manages data ingestion and availability and is responsible for starting new ingestion jobs and coordinating availability of data on the "Data servers". Within a master server, functionality is split between two processes; the Coordinator and Overlord.
+
+Druid data Auto scaling group: An auto scaling group contains a collection of Druid data servers. A data server runs ingestion jobs and stores queryable data. Within a data server, functionality is split between two processes; the Historical and MiddleManager.
+
+Druid query Auto scaling group: An auto scaling group contains a collection of Druid query servers. A query server provides the endpoints that users and client applications interact with, routing queries to data servers or other query servers. Within a query server, functionality is split between two processes; the Broker and Router.
+
+ZooKeeper Auto scaling group: An auto scaling group contains a collection of ZooKeeper servers. Apache Druid uses Apache ZooKeeper (ZK) for management of current cluster state.
+
+Step 5
+An Amazon Simple Storage Service (S3) bucket provides deep storage for the Apache Druid cluster. Deep storage is the location where the segments are stored.
+
+Step 6
+AWS Secrets Manager stores the secrets used by Apache Druid including the Amazon Relational Database Service (RDS) secret, and the administrator user secret. It also stores the credentials for the system account the Druid components use to authenticate with each other.
+
+Step 7
+Amazon CloudWatch supports logs, metrics, and dashboards.
+
+Step 8
+An Amazon Aurora PostgreSQL database provides the metadata storage for the Apache Druid cluster. Druid uses the metadata store to house only metadata about the system and does not store the actual data.
+
+Step 9
+The notification system, powered by Amazon Simple Notification Service (Amazon SNS), delivers alerts or alarms promptly when system events occur. This ensures immediate awareness and action when needed.
+
+
+
+
+
+
+ 
+

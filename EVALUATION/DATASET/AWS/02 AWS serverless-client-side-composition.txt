@@ -1,0 +1,10 @@
+Client-side composition happens in the browser environment through a shell application. The diagram shows the following details:
+
+    After the shell application is loaded, it makes an initial request to Amazon CloudFront to discover the micro-frontends to be loaded through a manifest endpoint.
+
+    Manifests contain information about each micro-frontend (for example, name, URL, version, and fallback behavior). The manifests are served by the micro-frontends discovery service. In the diagram, this discovery service is represented by Amazon API Gateway, an AWS Lambda function, and Amazon DynamoDB. The shell application uses the manifest information to request individual micro-frontends to compose the page within a given layout.
+
+    Each micro-frontend bundle is composed of static files (such as JavaScript, CSS, and HTML). The files are hosted in an Amazon Simple Storage Service (Amazon S3) bucket and served through CloudFront.
+
+    Teams can deploy new versions of their micro-frontends and update the manifest information by using deployment pipelines that they own.
+

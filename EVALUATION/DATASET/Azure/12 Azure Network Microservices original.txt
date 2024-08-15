@@ -1,0 +1,32 @@
+In this Azure solution, Azure API Management (APIM) controls access to the API through a single managed endpoint. The application backend consists of two interdependent Azure Functions microservice apps that create and manage patient records and audit records. APIM and the two function apps access each other through a locked-down virtual network.
+
+Workflow
+
+    Outside services and clients make a POST request to APIM, with a data body that includes patient information.
+    APIM calls the CreatePatient function in the Patient API with the given patient information.
+    The CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app to create an audit record.
+    The Audit API CreateAuditRecord function creates the audit record in Azure Cosmos DB, and returns a success response to the Patient API CreatePatient function.
+    The CreatePatient function creates the patient document in Azure Cosmos DB, and returns a success response to APIM.
+    The outside services and clients receive the success response from APIM.
+
+Components
+
+The solution uses the following components:
+
+    Azure API Management (APIM) is a hybrid, multicloud platform for managing APIs across all environments. In this solution, APIM controls internal and third-party access to the Patient API that allows reading and/or writing data. APIM allows for easy integration with different authentication mechanisms.
+
+    Azure Functions is a serverless compute platform that handles small, event-driven pieces of code. The cloud infrastructure provides the necessary updated servers to run the functions at scale. The current solution uses a set of two Azure Functions API microservices that create and manage operations for patient test results and auditing records.
+
+    Azure Virtual Network provides an isolated and highly secure application environment by restricting network access to specific IP addresses or subnets. Both APIM and Azure Functions support access restriction and deployment in virtual networks. This solution uses regional virtual network integration to deploy both function apps in the same virtual network in the same region.
+
+    Azure Key Vault centrally stores, encrypts, and manages access to keys, certificates, and connection strings. This solution maintains the Azure Functions host keys and Azure Cosmos DB connection strings in a Key Vault that only specified identities can access.
+
+    Azure Cosmos DB is a fully managed serverless database with instant, automatic scaling. In the current solution, both microservices store data in Azure Cosmos DB, using the MongoDB Node.js driver. The services don't share data, and you can deploy each service to its own independent database.
+
+    Application Insights, a feature of Azure Monitor, reports on application performance, usage, availability, and behavior to detect and help diagnose anomalies.
+
+    Failures in microservices-based architecture are often distributed over a variety of components, and can't be diagnosed by looking at the services in isolation. The ability to correlate telemetry across components is vital to diagnosing these issues. Application Insights telemetry centralizes logging along the whole request pipeline to detect performance anomalies. The telemetry shares a common operation ID, allowing correlation across components.
+
+    APIM and the Azure Functions runtime have built-in support for Application Insights to generate and correlate a wide variety of telemetry, including standard application output. The function apps use the Application Insights Node.js SDK to manually track dependencies and other custom telemetry.
+
+

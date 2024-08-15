@@ -1,0 +1,26 @@
+This reference architecture uses Azure Integration Services to orchestrate calls to enterprise backend systems. The backend systems can include software as a service (SaaS) systems, Azure services, and existing web services in your enterprise.
+
+Workflow
+
+    Backend systems. The right-hand side of the diagram shows the various backend systems that the enterprise has deployed or relies on. These systems might include SaaS systems, other Azure services, or web services that expose REST or SOAP endpoints.
+
+    Azure Logic Apps. In this architecture, logic apps are triggered by HTTP requests. You can also nest workflows for more complex orchestration. Logic Apps uses connectors to integrate with commonly used services. Logic Apps offers hundreds of connectors, and you can create custom connectors.
+
+    Azure API Management. API Management consists of two related components:
+
+        API gateway. The API gateway accepts HTTP calls and routes them to the backend.
+
+        Developer portal. Each instance of Azure API Management provides access to a developer portal. This portal gives your developers access to documentation and code samples for calling the APIs. You can also test APIs in the developer portal.
+
+    Azure DNS. Azure DNS provides name resolution by using the Azure infrastructure. By hosting your domains in Azure, you can manage your DNS records by using the same credentials, APIs, tools, and billing that you use for your other Azure services. To use a custom domain name, such as contoso.com, create DNS records that map the custom domain name to the IP address. For more information, see Configure a custom domain name in API Management.
+
+    Microsoft Entra ID. Use Microsoft Entra ID to authenticate clients that call the API gateway. Microsoft Entra ID supports the OpenID Connect (OIDC) protocol. Clients obtain an access token from Microsoft Entra ID, and API Gateway validates the token to authorize the request. If you use the Standard or Premium tier of API Management, Microsoft Entra ID can also help secure access to the developer portal.
+
+Components
+
+    Integration Services is a collection of services that you can use to integrate applications, data, and processes.
+    Logic Apps is a serverless platform for building enterprise workflows that integrate applications, data, and services.
+    API Management is a managed service for publishing catalogs of HTTP APIs. You can use it to promote the reuse and discoverability of your APIs and to deploy an API gateway to proxy API requests.
+    Azure DNS is a hosting service for DNS domains.
+    Microsoft Entra ID is a cloud-based identity and access management service. Enterprise employees can use Microsoft Entra ID to access external and internal resources.
+

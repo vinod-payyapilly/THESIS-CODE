@@ -1,0 +1,20 @@
+{
+  "entities": [
+    ["Spring MVC", "system", "a Java-based web application framework"],
+    ["Angular", "component", "a JavaScript framework used for building single-page applications"],
+    ["Xamarin", "component", "a cross-platform mobile app development framework"],
+    ["JSON/HTTPS API", "component", "an interface used by the single-page application and mobile app to communicate with the server-side API application"],
+    ["Java/ Spring MVC API Application", "system", "a Java-based web application that provides a JSON/HTTPS API"],
+    ["Relational-Database Schema", "component", "a database schema used to store user information"],
+    ["Mainframe Banking System", "system", "an existing system used by the bank for transactions and account management"],
+    ["Existing E-mail System", "system", "an existing system used by the bank for sending emails to customers"]
+  ],
+  "relationships": [
+    ["Java/ Spring MVC API Application", "contains", "JSON/HTTPS API", "provides a JSON/HTTPS API interface"],
+    ["Angular", "part-of", "Single-Page Application", "builds a single-page application that runs in the customer's web browser"],
+    ["Xamarin", "part-of", "Mobile App", "builds a mobile app that provides a subset of Internet banking features"],
+    ["Java/ Spring MVC API Application", "calls", "Relational-Database Schema", "gets user information from the database schema"],
+    ["Java/ Spring MVC API Application", "calls", "Mainframe Banking System", "communicates with the mainframe banking system using a proprietary XML/HTTPS interface to get information about bank accounts or make transactions"],
+    ["Java/ Spring MVC API Application", "calls", "Existing E-mail System", "uses the existing e- mail system to send emails to customers"]
+  ]
+}

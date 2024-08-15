@@ -1,0 +1,50 @@
+This architecture shows a secure research environment intended to allow researchers to access sensitive data under a higher level of control and data protection. This article is applicable for organizations that are bound by regulatory compliance or other strict security requirements.
+
+Dataflow
+
+    Data owners upload datasets into a public blob storage account. The data is encrypted by using Microsoft-managed keys.
+
+    Azure Data Factory uses a trigger that starts copying of the uploaded dataset to a specific location (import path) on another storage account with security controls. The storage account can only be reached through a private endpoint. Also, it's accessed by a service principal with limited permissions. Data Factory deletes the original copy making the dataset immutable.
+
+    Researchers access the secure environment through a streaming application using Azure Virtual Desktop as a privileged jump box.
+
+    The dataset in the secure storage account is presented to the data science VMs provisioned in a secure network environment for research work. Much of the data preparation is done on those VMs.
+
+    The secure environment has Azure Machine Learning compute that can access the dataset through a private endpoint for users for Azure Machine Learning capabilities, such as to train, deploy, automate, and manage machine learning models. At this point, models are created that meet regulatory guidelines. All model data is de-identified by removing personal information.
+
+    Models or de-identified data is saved to a separate location on the secure storage (export path). When new data is added to the export path, a logic app is triggered. In this architecture, the logic app is outside the secure environment because no data is sent to the logic app. Its only function is to send notification and start the manual approval process.
+
+    The app starts an approval process requesting a review of data that is queued to be exported. The manual reviewers ensure that sensitive data isn't exported. After the review process, the data is either approved or denied.
+
+    Note
+
+    If an approval step is not required on exfiltration, the logic app step could be omitted.
+
+    If the de-identified data is approved, it's sent to the Data Factory instance.
+
+    Data Factory moves the data to the public storage account in a separate container to allow external researchers to have access to their exported data and models. Alternately, you can provision another storage account in a lower security environment.
+
+Components
+
+This architecture consists of several Azure services that scale resources according to need. The services and their roles are described below. For links to product documentation to get started with these services, see Next steps.
+Core workload components
+
+Here are the core components that move and process research data.
+
+    Azure Data Science Virtual Machine (DSVM): VMs that are configured with tools used for data analytics and machine learning.
+
+    Azure Machine Learning: Used to train, deploy, automate, and manage machine learning models and to manage the allocation and use of machine learning compute resources.
+
+    Azure Machine Learning Compute: A cluster of nodes that are used to train and test machine learning and AI models. The compute is allocated on demand based on an automatic scaling option.
+
+    Azure Blob storage: There are two instances. The public instance is used to temporarily store the data uploaded by data owners. Also, it stores deidentified data after modeling in a separate container. The second instance is private. It receives the training and test data sets from Machine Learning that are used by the training scripts. Storage is mounted as a virtual drive onto each node of a Machine Learning Compute cluster.
+
+    Azure Data Factory: Automatically moves data between storage accounts of differing security levels to ensure separation of duties.
+
+    Azure Virtual Desktop is used as a jump box to gain access to the resources in the secure environment with streaming applications and a full desktop, as needed. Alternately, you can use Azure Bastion. But, have a clear understanding of the security control differences between the two options. Virtual Desktop has some advantages:
+        Ability to stream an app like Microsoft Visual Studio Code to run notebooks against the machine learning compute resources.
+        Ability to limit copy, paste, and screen captures.
+        Support for Microsoft Entra authentication to DSVM.
+
+    Azure Logic Apps provides automated low-code workflow to develop both the trigger and release portions of the manual approval process.
+

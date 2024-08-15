@@ -1,0 +1,21 @@
+Step 1
+A developer initiates an activity in an AWS CI/CD pipeline, such as pushing a code change to AWS CodeCommit or deploying an application using AWS CodeDeploy. These activities create events. If a multi-account multi-region feature is activated, the events can be  generated from multiple AWS accounts and multiple AWS Regions. For development using GitHub repository, git push events are generated.
+
+Step 2
+An Amazon EventBridge events rule detects the events based on predefined event patterns and then sends the event data to an Amazon Kinesis Data Firehose delivery stream. One event rule is created per event source.
+
+For activities in AWS CodeBuild, an Amazon CloudWatch metric stream is set up to capture CloudWatch metrics and deliver them to a Kinesis Data Firehose delivery stream. For GitHub push events, an Amazon API Gateway endpoint is created to post these events and deliver them to a Kinesis Data Firehose delivery stream.
+
+Step 3
+An EventBridge events rule is also created to capture events from a CloudWatch alarm that monitors the status of CloudWatch synthetics canary or Amazon CodePipeline, if you have set up the alarm for the canary or pipeline respectively in your account. This alarm is needed to gather data for calculating Mean Time to Recovery (MTTR) metrics.
+
+Step 4
+Kinesis Data Firehose uses an AWS Lambda function for data transformation. The Lambda function extracts relevant data to each metric and sends it to an Amazon Simple Storage Service (Amazon S3) bucket in the monitoring account for downstream processing.
+
+Step 5
+The data in Amazon Simple Storage Service (Amazon S3) is linked to an Amazon Athena database, which runs queries against this data and returns query results to Amazon QuickSight.
+
+Step 6
+QuickSight obtains the query results and builds dashboard visualizations for your management team.
+
+

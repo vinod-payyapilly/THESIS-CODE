@@ -1,0 +1,27 @@
+{
+  "entities": [
+    ["web app", "system", "The user provides a document file that the web app uploads"],
+    ["Azure Blob Storage", "system", "The document file is stored in Azure Blob Storage"],
+    ["storage queue", "system", "the web app adds a command message to a storage queue to initiate pipeline processing"],
+    ["Durable Functions orchestration", "system", "Durable Functions orchestration is triggered by the command message."],
+    ["Scan activity function", "component", "The Scan activity function calls the Computer Vision Read API."],
+    ["Computer Vision Read API", "component", "The Scan activity function calls the Computer Vision Read API."],
+    ["Classify activity function", "component", "The Classify activity function calls the document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster"],
+    ["document classifier service", "component", "The Classify activity function calls the document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster"],
+    ["Azure Kubernetes Service (AKS) cluster", "system", "The Classify activity function calls the document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster"],
+    ["User", "person", "provides a document file that the web app uploads"]
+  ],
+  "relationships": [
+    ["User", "calls", "web app", "The user provides a document file that the web app uploads"],
+    ["web app", "calls", "Azure Blob Storage", "The user provides a document file that the web app uploads.The document file is stored in Azure Blob Storage"],
+    ["web app", "calls", "storage queue", "the web app adds a command message to a storage queue to initiate pipeline processing"],
+    ["storage queue", "calls", "Durable Functions orchestration", "Durable Functions orchestration is triggered by the command message."],
+    ["Durable Functions orchestration", "calls", "Azure Blob Storage", "Each Durable Functions instance processes only one document file"],
+
+    ["Scan activity function", "calls", "Computer Vision Read API", "the Scan activity function calls the Computer Vision Read API"],
+    
+    ["document classifier service", "part-of", "Azure Kubernetes Service (AKS) cluster", "document classifier service that's hosted in an Azure Kubernetes Service (AKS) cluster"],
+    ["Classify activity function", "calls", "Scan activity function", "The Classify activity function calls the document classifier service"],
+    ["Classify activity function", "calls", "Durable Functions orchestration", "The types and page ranges of the documents are calculated and returned to the orchestration"]
+  ]
+}

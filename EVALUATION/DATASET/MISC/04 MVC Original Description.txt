@@ -1,0 +1,11 @@
+MVC Architecture
+
+The Model-View-Controller (MVC) architectural pattern separates an application into three components: Models, Views, and Controllers. This pattern helps to achieve separation of concerns. In this pattern, user requests are routed to a Controller. A Controller invokes the Model to perform user actions or retrieve data. The controller then passes this Model to a View and it is returned to the user.
+
+mvc architecture - ASP.Net Core MVC
+
+The Model in an MVC application represents the state of the application and any business logic or operations that should be performed by it. A model can also contain the logic for persisting the state of the application.
+
+Views are responsible for presenting content through the user interface. A view should ideally contain minimal logic and it should only be related to presenting the content.
+
+Controllers are the components that handle user interaction, work with the model, and ultimately select a view to render. In the MVC pattern, the controller is the initial entry point and is responsible for selecting which model types to work with and which view to render. In other words, the controller controls how the app responds to a given request.

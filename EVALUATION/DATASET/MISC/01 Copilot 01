@@ -1,0 +1,27 @@
+
+
+    Components at the Top:
+        kubectl CLI: This is the command-line interface for interacting with the Kubernetes cluster.
+        UI: Represents the user interface for managing the cluster.
+        Both of these components connect to the internet via the cloud.
+
+    Control Plane (Middle Section):
+        Kubernetes API: The entry point for commands from kubectl CLI and the UI.
+        etcd: A distributed key-value store used by Kubernetes to store cluster data.
+        Controllers: Processes that monitor different parts of the cluster.
+        Scheduler: Determines which node runs an unassigned pod based on resource availability.
+        Cloud Controller: Connects with provider-specific APIs (e.g., in a cloud environment).
+
+    Worker Nodes (Bottom Section):
+        Each worker node contains:
+            kubelet: An agent ensuring containers run in pods.
+            kube-proxy: Manages network rules on nodes.
+            Container Runtime: Software for running containers.
+            Pods: The smallest deployable units in Kubernetes, containing one or more containers.
+
+    Connections:
+        Bidirectional arrows connect components within the Control Plane (API, etcd, Controllers, Scheduler).
+        Unidirectional arrows point from internal components of worker nodes (kubelet, kube-proxy, Container Runtime) to their respective pods.
+        Bidirectional arrows link worker nodes to Controllers and Scheduler.
+        An arrow from Cloud Controller points to external “Provider APIs.”
+

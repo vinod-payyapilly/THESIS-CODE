@@ -1,0 +1,42 @@
+Dataflow
+
+Azure Data Factory (ADF) orchestrates and Azure Data Lake Storage (ADLS) Gen2 stores the data:
+
+    The Contoso city parking web service API is available to transfer data from the parking spots.
+
+    There's an ADF copy job that transfers the data into the Landing schema.
+
+    Next, Azure Databricks cleanses and standardizes the data. It takes the raw data and conditions it so data scientists can use it.
+
+    If validation reveals any bad data, it gets dumped into the Malformed schema.
+
+    Important
+
+    People have asked why the data isn't validated before it's stored in ADLS. The reason is that the validation might introduce a bug that could corrupt the dataset. If you introduce a bug at this step, you can fix the bug and replay your pipeline. If you dumped the bad data before you added it to ADLS, then the corrupted data is useless because you can't replay your pipeline.
+
+    There's a second Azure Databricks transform step that converts the data into a format that you can store in the data warehouse.
+
+    Finally, the pipeline serves the data in two different ways:
+
+        Databricks makes the data available to the data scientist so they can train models.
+
+        Polybase moves the data from the data lake to Azure Synapse Analytics and Power BI accesses the data and presents it to the business user.
+
+Components
+
+The solution uses these components:
+
+    Azure Data Factory (ADF)
+
+    Azure Databricks
+
+    Azure Data Lake Storage (ADLS) Gen2
+
+    Azure Synapse Analytics
+
+    Azure Key Vault
+
+    Azure DevOps
+
+    Power BI
+

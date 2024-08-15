@@ -1,0 +1,37 @@
+{
+  "entities": [
+    ["GitHub repository", "system", ""],
+    ["Developers", "person", ""],
+    ["External users", "person", ""],
+    ["CI/CD pipeline agent", "system", ""],
+    ["Azure VM", "system", ""],
+    ["ILB ASE", "system", ""],
+    ["API application", "component", ""],
+    ["Azure API Management", "system", "consumes the preceding APIs via HOST headers"],
+    ["App Service Environment", "component", ""],
+    ["Application Gateway", "component", "exposes API Management's developer and API portal"],
+    ["Developer portal", "component", "API Management's developer and API portal"],
+    ["API portal", "component", "API Management's developer and API portal"],
+    ["Application Gateway", "component", "exposes API Management's developer and API portal"],
+    ["Azure Private DNS", "component", "used to route the traffic internally between ASE, API Management, and Application Gateway"]
+  ],
+  "relationships": [
+    ["Azure VM", "contains", "CI/CD pipeline agent", "installed on an Azure VM"],
+
+    ["API application", "part-of", "ILB ASE", "API application that's hosted on ILB ASE"],
+    ["GitHub repository", "calls", "CI/CD pipeline agent", "GitHub repository that's connected to a CI/CD pipeline agent"],
+    ["CI/CD pipeline agent", "calls", "API application", "agent pushes the build to the API application"],
+    ["Azure API Management", "calls", "App Service Environment","uses the App Service Environment's DNS name for all the APIs"],
+    ["External users", "calls", "Application Gateway",""],
+    ["Application Gateway", "calls", "API application","to consume the APIs via Application Gateway's public IP"],
+    
+    ["Azure API Management", "contains", "Developer portal", "API Management's developer and API portal"],
+    ["Azure API Management", "contains", "API portal", "API Management's developer and API portal"],
+
+    ["Application Gateway", "calls", "API portal","exposes API Management's developer and API portal."],
+    ["Application Gateway", "calls", "Developer portal","exposes API Management's developer and API portal."],
+
+    ["Azure Private DNS", "calls", "Azure API Management","route the traffic internally between ASE, API Management, and Application Gateway"],
+    ["Azure Private DNS", "calls", "Application Gateway","route the traffic internally between ASE, API Management, and Application Gateway"]
+  ]
+}

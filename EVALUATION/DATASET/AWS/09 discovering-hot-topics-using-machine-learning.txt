@@ -1,0 +1,16 @@
+Step 1 - Ingestion
+AWS Lambda functions, Amazon DynamoDB, and Amazon EventBridge provide social media and RSS feed ingestion and management. For detailed reference architecture diagrams for YouTube comments, RSS news feeds, and custom ingestion using an Amazon Simple Storage Service (Amazon S3) bucket, refer to the implementation guide.
+
+Step 2 - Data stream
+The data is buffered through Amazon Kinesis Data Streams to provide resiliency and throttle incoming requests. The Kinesis Data Streams have a configured DLQ to catch any errors in processing feeds.
+
+Step 3 - Workflow
+Consumer (Lambda function) of the Kinesis Data Streams initiates an AWS Step Functions workflow that orchestrates Amazon machine learning capabilities including: Amazon Translate, Amazon Comprehend, and Amazon Rekognition.
+
+Step 4 - Integration
+The inference data integrates with the storage components through an event-driven architecture using EventBridge. EventBridge allows further customization to add additional targets by configuring rules.
+
+Step 5 - Storage and visualization
+A combination of Amazon Kinesis Data Firehose, S3 buckets, AWS Glue tables, Amazon Athena, and Amazon QuickSight provide storage and visualization.
+
+

@@ -1,0 +1,26 @@
+
+
+Step 1
+The SAP ABAP developer installs AWS Command Line Interface (AWS CLI) version 2 on either a Windows or Mac operating system. Additionally, the developer configures the AWS CLI to authenticate with the AWS IAM Identity Center using the aws configure sso command.
+
+ 
+
+Step 2
+With the AWS CLI, the developer authenticates with the IAM Identity Center by running the aws sso login --profile <profile-name> command.
+
+ 
+Step 3
+The developer downloads the provided SAP ABAP Assistant plugin, installs it, and then configures the plugin within the Eclipse integrated development environment (IDE).
+
+Step 4
+The developer must authenticate and establish connections between the Eclipse IDE and one or more SAP systems that are hosted either within an Amazon Virtual Private Cloud (VPC), on-premises, or in the SAP Business Technology Platform (BTP) ABAP environment.
+
+Within the Eclipse IDE, the developer opens an ABAP program and selects a specific block of ABAP code for which documentation needs to be generated. To initiate the code generation process, the developer writes a prompt in simple English within the ABAP program. The developer then invokes the SAP ABAP Assistant plugin using the "Ask Bedrock" menu option available in the Eclipse IDE.
+
+Step 5
+The SAP ABAP Assistant plugin sends a request with the selected prompts or ABAP code to Amazon Bedrock, a fully managed service that offers a choice of high-performing foundation models. Amazon Bedrock then uses large language models (LLMs), such as the Anthropic Claude model, to generate the corresponding ABAP code or documentation.
+
+
+Step 6
+The SAP ABAP Assistant plugin returns the generated response back to the ABAP editor in the case of code generation and displays the generated documentation within the console of the Eclipse IDE. The developer is then responsible for validating the generated code and, if necessary, modifying it to align with the specific use case requirements.
+

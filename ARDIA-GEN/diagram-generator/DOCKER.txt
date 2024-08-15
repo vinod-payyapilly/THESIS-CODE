@@ -1,0 +1,3 @@
+docker build --no-cache -t "mermaid-server" .
+
+docker run -d --name mermaid-server -p 80:80 tomwright/mermaid-server:latest

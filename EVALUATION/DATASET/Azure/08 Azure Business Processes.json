@@ -1,0 +1,37 @@
+{
+  "entities": [
+    ["airline system", "system", "communicates with a custom API hosted in Azure API Management"],
+    ["custom API", "component", "communicates with a custom API hosted in Azure API Management"],
+    ["Azure API Management", "system", "communicates with a custom API hosted in Azure API Management"],
+    ["custom API coordinator", "system", "receives notifications and handles incoming messages from the airline system"],
+    ["Power Apps", "system", "where flights are assigned to Microsoft Teams channels"],
+    ["Microsoft Teams channels", "system", "where flights are assigned to Microsoft Teams channels"],
+    ["Storage Account queue", "system", " the system queues a Graph API call in an Azure Storage Account queue for further processing."],
+    ["Graph API call", "system", " the system queues a Graph API call in an Azure Storage Account queue for further processing."],
+    ["Azure Functions", "system", "runs the Graph API calls based on the incoming messages in the storage queue"],
+    ["Azure Event Hubs", "system", "Azure Event Hubs for further analytics"],
+    ["notification system", "system", "managed by a custom bot messaging service that employs Azure Bot Service"],
+    ["custom bot messaging service", "system", "managed by a custom bot messaging service that employs Azure Bot Service"],
+    ["Azure Bot Service", "system", "managed by a custom bot messaging service that employs Azure Bot Service"],
+    ["Users", "person", "selects a flight to monitor, or when the system assigns the user to a flight"],
+    ["Azure Data Lake storage", "system", "offers long-term retention and micro-batch processing of events from Event Hubs"],
+    ["Power BI", "system", "generating insightful reports"]
+  ],
+  "relationships": [
+    ["Azure API Management", "contains", "custom API", "custom API hosted in Azure API Management"],
+    ["airline system", "calls", "custom API", "communicates with a custom API"],
+    ["custom API coordinator", "is-called-from", "airline system", "receives notifications and handles incoming messages from the airline system"],
+    ["Power Apps", "calls", "Microsoft Teams channels", "Power Apps, where flights are assigned to Microsoft Teams channels"],
+    ["airline system", "calls", "Graph API call", " the system queues a Graph API call in an Azure Storage Account queue for further processing"],
+    ["Azure Functions", "calls", "Graph API call", "runs the Graph API calls based on the incoming messages in the storage queue"],
+    ["Azure Functions", "calls", "Storage Account queue", "based on the incoming messages in the storage queue"],
+    ["Azure Functions", "calls", "Microsoft Teams channels", "sending notifications to Teams"],
+    ["Azure Functions", "calls", "Azure Event Hubs", "also streams all events to an Azure Event Hubs for further analytics"],
+    ["notification system", "is-called-from", "custom bot messaging service", "managed by a custom bot messaging service"],
+    ["custom bot messaging service", "calls", "Azure Bot Service", "custom bot messaging service that employs Azure Bot Service"],
+    ["custom bot messaging service", "calls", "Microsoft Teams channels", "Custom bots send flight updates to users in Teams."],
+    ["Microsoft Teams channels", "calls", "Users", "Custom bots send flight updates to users in Teams."],
+    ["Azure Data Lake storage", "is-called-from", "Azure Event Hubs", "Azure Data Lake storage offers long-term retention and micro-batch processing of events from Event Hubs"],
+    ["Azure Data Lake storage", "calls", "Power BI", "Azure Data Lake storage offers long-term retention and micro-batch processing of events from Event Hubs, ultimately generating insightful reports with Power BI"]
+  ]
+}

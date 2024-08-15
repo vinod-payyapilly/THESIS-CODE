@@ -1,0 +1,17 @@
+ The steps through the architecture are as follows:
+
+    Data preparation — Collect user interaction data such as item views, and item clicks. This plays a pivotal role in building a personalized recommendation. Once data is collected, upload your user interaction data into Amazon S3, then perform data cleaning using AWS Glue DataBrew to train the model in Amazon Personalize
+
+for real-time recommendations.
+
+Train the model with Amazon Personalize — The data we use for modeling on Amazon Personalize consists of three types:
+
+    The activity of your users, also known as events — Examples include items your users click on, purchasing, and watching. The events you choose to send Amazon Personalize are dependent on your business domain. This dataset has the strongest signal for personalization, and is the only one required for personalization.
+
+    Details about your items, such as price point, category information, genre, and so on. Essentially, information in your catalog. This dataset is optional, but very useful for scenarios such as recommending new items. Personalize also enables customers to unlock the information trapped in their product descriptions, reviews, item synopses, or other unstructured text using state-of-the-art natural language processing (NLP) techniques. Amazon Personalize automatically extracts key information about the items in your catalog to use when generating recommendations for your users.
+
+    Details about the users, such as their location, age, and so on.
+
+Get real time recommendations — Once you have the data, you can, in just a few clicks, get a custom, private, personalization model trained and hosted for you. You can then vend recommendations for your users through an API exposed through Amazon API Gateway
+. 
+

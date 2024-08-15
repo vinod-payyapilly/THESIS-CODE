@@ -1,0 +1,11 @@
+{
+  "entities": [
+    ["name 1", "component", "Description"],
+    ["name 2", "system", "Description"],
+    ["name 3", "person", "Description"]
+  ],
+  "relationships": [
+    ["name 1", "contains", "name 2", "Reason"],
+    ["name 2", "calls", "name 3", "Reason"]
+  ]
+}

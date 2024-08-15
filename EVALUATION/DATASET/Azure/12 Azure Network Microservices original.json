@@ -1,0 +1,27 @@
+{
+  "entities": [
+    ["Outside services", "system", "Outside services and clients make a POST request to APIM"],
+    ["clients", "system", "Outside services and clients make a POST request to APIM"],
+    ["APIM", "system", "Outside services and clients make a POST request to APIM"],
+    ["Patient API", "system", " The CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app"],
+    ["CreatePatient function", "component", " The CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app"],
+    ["Audit API function app", "system", "The CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app"],
+    ["CreateAuditRecord function", "component", "CreatePatient function in Patient API calls the CreateAuditRecord function"],
+    ["Azure Cosmos DB", "system", "The Audit API CreateAuditRecord function creates the audit record in Azure Cosmos DB, and returns a success response to the Patient API CreatePatient function"]
+  ],
+  "relationships": [
+    ["CreatePatient function", "part-of", "Patient API", "Reason"],
+    ["Outside services", "calls", "APIM", "utside services and clients make a POST request to APIM"],
+    ["clients", "calls", "APIM", "outside services and clients make a POST request to APIM"],
+    ["APIM", "calls", "CreatePatient function", "APIM calls the CreatePatient function in the Patient API"],
+
+    ["CreateAuditRecord function", "part-of", "Audit API function app", "Reason"],
+    ["CreatePatient function", "calls", "CreateAuditRecord function", "CreatePatient function in Patient API calls the CreateAuditRecord function in the Audit API function app"],
+    ["CreateAuditRecord function", "calls", "Azure Cosmos DB", "Audit API CreateAuditRecord function creates the audit record in Azure Cosmos DB"],
+    ["CreateAuditRecord function", "calls", "CreatePatient function", "returns a success response to the Patient API CreatePatient function."],
+    ["CreatePatient function", "calls", "Azure Cosmos DB", "The CreatePatient function creates the patient document in Azure Cosmos DB"],
+
+    ["CreatePatient function", "is-called-from", "APIM", "The CreatePatient function returns a success response to APIM"]
+    
+]
+}

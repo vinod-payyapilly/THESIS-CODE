@@ -1,0 +1,38 @@
+Step 1
+The user requests the browser to navigate to an Amazon CloudFront URL.
+
+Step 2
+The user interface (UI) prompts the user for authentication, which the AWS Solution validates using Amazon Cognito.
+
+Step 3
+The UI interacts with the REST endpoint deployed on Amazon API Gateway.
+
+Step 4
+The user creates a case that the AWS Solution stores in the Case management store Amazon DynamoDB table.
+
+Step 5
+The user requests a signed Amazon Simple Storage Service (Amazon S3) URL to upload documents to an S3 bucket.
+
+Step 6
+Amazon S3 generates an s3:PutObject event on the default Amazon EventBridge event bus.
+
+Step 7
+The s3:PutObject event invokes the workflow orchestrator AWS Lambda function. This function uses the configuration stored in the Configuration for orchestrating workflows DynamoDB table to determine the workflows to be called.
+
+Step 8
+The workflow orchestrator Lambda function creates an event and sends it to the custom event bus.
+
+Step 9
+The custom event bus invokes one of the three AWS Step Functions state machine workflows based on the event definition.
+
+Step 10
+The workflow completes and publishes an event to the custom EventBridge event bus.
+
+Step 11
+The custom EventBridge event bus invokes the workflow orchestrator Lambda function. This function uses the configuration stored in the Configuration for orchestrating workflows DynamoDB table to determine whether the sequence is complete or if the sequence requires another workflow.
+
+Step 12 (Optional)
+The workflow orchestrator Lambda function writes metadata from the processed information to an Amazon Kendra index. This index provides the ability to perform ML-powered search.
+
+
+

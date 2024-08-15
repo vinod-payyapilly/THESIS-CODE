@@ -1,0 +1,17 @@
+{
+  "entities": [
+    ["API Management", "system", "accepts API calls in the form of HTTP requests"],
+    ["Logic Apps", "system", "uses secured template parameters to retrieve database credentials from Azure Key Vault"],
+    ["on-premises data gateway", "system", ""],
+    ["SQL Server", "system", "stores the data and makes it available to apps that users access"],
+    ["Azure Monitor", "system", "collects information on Logic Apps events and performance"],
+    ["Azure Key Vault", "system", "database credentials"]
+  ],
+  "relationships": [
+    ["API Management", "calls", "Logic Apps", "routes the HTTP requests to Logic Apps"],
+    ["Logic Apps", "calls", "Azure Key Vault", "Logic Apps uses secured template parameters to retrieve database credentials from Azure Key Vault"],
+    ["Logic Apps", "calls", "on-premises data gateway", "send the database credentials and a database statement to the on-premises data gateway"],
+    ["on-premises data gateway", "calls", "SQL Server", "connects to a SQL Server database"],
+    ["Azure Monitor", "calls", "Logic Apps", "collects information on Logic Apps events and performance"]
+  ]
+}

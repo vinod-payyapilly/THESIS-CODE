@@ -1,0 +1,29 @@
+{
+  "entities": [
+    ["Supplier data", "component", "Supplier data stored in CDS"],
+    ["CDS", "system", " Supplier data stored in CDS"],
+    ["Azure SQL database", "system", "moved to SQL via Data Factory"],
+    ["Data Factory", "system", "moved to SQL via Data Factory"],
+    ["Purchase order (PO)", "system", "moved to SQL via Data Factory"],
+    ["ERP system", "system", "Purchase order (PO) data stored in ERP system"],
+    ["Azure Functions", "system", "uses API to surface PO data monthly and creates a task for users to review"],
+    ["Power Apps", "system", "retrieves data from Azure SQL Database through API"],
+    ["CSV export", "system", "ends this data to suppliers through CSV export"],
+    
+    ["User", "person", " reviews and updates POs in Power Apps"],
+    ["suppliers", "person", " reviews and updates POs in Power Apps"]
+  ],
+  "relationships": [
+    ["Supplier data", "part-of", "CDS", "Supplier data stored in CDS"],
+    ["Supplier data", "is-called-from", "Data Factory", "moved to SQL via Data Factory"],
+    ["Data Factory", "calls", "Azure SQL database", "moved to SQL via Data Factory"],
+    ["Purchase order (PO)", "part-of", "ERP system", "Purchase order (PO) data stored in ERP system"],
+    ["Purchase order (PO)", "calls", "Azure SQL database", "Purchase order (PO) data stored in ERP system is sent to Azure SQL database"],
+    ["Azure Functions", "calls", "Purchase order (PO)", "uses API to surface PO data monthly"],
+    ["Azure Functions", "calls", "User", "creates a task for users to review"],
+    ["Power Apps", "calls", "Azure SQL database", "retrieves data from Azure SQL Database through API"],
+    ["User", "calls", "Power Apps", "Reviews and updates POs in Power Apps"],
+    ["User", "calls", "CSV export", "sends this data to suppliers through CSV export"],
+    ["CSV export", "calls", "suppliers", "sends this data to suppliers through CSV export"]
+  ]
+}

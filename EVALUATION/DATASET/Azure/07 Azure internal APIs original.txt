@@ -1,0 +1,25 @@
+In this scenario, an organization consolidates multiple APIs internally using Azure API Management deployed inside a Virtual Network.
+
+Dataflow
+
+The data flows as follows:
+
+    Developers check in code to a GitHub repository that's connected to a CI/CD pipeline agent that's installed on an Azure VM.
+    The agent pushes the build to the API application that's hosted on ILB ASE.
+    Azure API Management consumes the preceding APIs via HOST headers that are specified in API Management policy.
+    API Management uses the App Service Environment's DNS name for all the APIs.
+    Application Gateway exposes API Management's developer and API portal.
+    Azure Private DNS is used to route the traffic internally between ASE, API Management, and Application Gateway.
+    External users utilize the exposed developer portal to consume the APIs via Application Gateway's public IP.
+
+Components
+
+    Azure Virtual Network enables Azure resources to securely communicate with each other, the internet, and on-premises networks.
+    Azure Private DNS allows domain names to be resolved in a virtual network without needing to add a custom DNS solution.
+    Azure API Management helps organizations publish APIs to external, partner, and internal developers to use their data and services.
+    Application Gateway is a web traffic load balancer that helps you to manage traffic to your web applications.
+    Internal Load Balancer App Service Environment is an Azure App Service feature that provides a fully isolated and dedicated environment for securely running App Service apps at high scale.
+    Azure DevOps is a service for managing your development lifecycle and includes features for planning and project management, code management, build, and release.
+    Application Insights is an extensible Application Performance Management (APM) service for web developers on multiple platforms.
+    Azure Cosmos DB is Microsoft's globally distributed, multi-model database service.
+

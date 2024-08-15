@@ -1,0 +1,38 @@
+This solution uses Azure Logic Apps to integrate cloud data into on-premises data storage.
+
+The architecture illustrates the use of Azure API Management, the storage of secrets and API keys in Azure Key Vault, a connection to SQL Server through an on-premises data gateway, and performance monitoring with Azure Monitor. All of these components are integrated via Azure Logic Apps orchestration.
+
+Workflow
+
+    API Management accepts API calls in the form of HTTP requests.
+
+    API Management securely routes the HTTP requests to Logic Apps.
+
+    Each HTTP request triggers a run in Logic Apps:
+        Logic Apps uses secured template parameters to retrieve database credentials from Azure Key Vault.
+        Logic Apps uses Transport Layer Security (TLS) to send the database credentials and a database statement to the on-premises data gateway.
+
+    The on-premises data gateway connects to a SQL Server database to run the statement.
+
+    SQL Server stores the data and makes it available to apps that users access.
+
+    Azure Monitor collects information on Logic Apps events and performance.
+
+Components
+
+This architecture uses the following components:
+
+    Azure API Management creates consistent, modern API gateways for back-end services. Besides accepting API calls and routing them to back ends, this platform also verifies keys, tokens, certificates, and other credentials. API Management also enforces usage quotas and rate limits and logs call metadata.
+
+    Azure Logic Apps automates workflows by connecting apps and data across clouds. This service provides a way to securely access and process data in real time. Its serverless solutions take care of building, hosting, scaling, managing, maintaining, and monitoring apps.
+
+    An on-premises data gateway acts as a bridge that connects on-premises data with cloud services like Logic Apps. Typically, you install the gateway on a dedicated on-premises virtual machine. The cloud services can then securely use on-premises data.
+
+    Azure Key Vault stores and controls access to secrets such as tokens, passwords, and API keys. Key Vault also creates and controls encryption keys and manages security certificates.
+
+    SQL Server provides a solution for storing and querying structured and unstructured data. This database engine features industry-leading performance and security.
+
+    Azure Monitor collects data on environments and Azure resources. This information is helpful for maintaining availability and performance. Other Azure services, such as Azure Storage and Azure Event Hubs, can also use this diagnostics data. Two data platforms make up Monitor:
+        Azure Monitor Logs records and stores log and performance data. For Logic Apps, this data includes information on trigger events, run events, and action events.
+        Azure Monitor Metrics collects numerical values at regular intervals. For Logic Apps, this data includes the run latency, rate, and success percentage.
+

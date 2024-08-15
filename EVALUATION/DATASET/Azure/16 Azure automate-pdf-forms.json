@@ -1,0 +1,48 @@
+{
+  "entities": [
+    ["designated Outlook email account", "component", "A designated Outlook email account receives PDF files as attachments"],
+    ["logic app", "component", "The arrival of an email triggers a logic app to process the email."],
+    ["Azure Logic Apps", "system", "The logic app is built by using the capabilities of Azure Logic Apps."],
+    ["Container", "component", "The logic app uploads the PDF files to a container in Azure Data Lake Storage"],
+    ["Azure Data Lake Storage", "system", "The logic app uploads the PDF files to a container in Azure Data Lake Storage"],
+    ["logic app 2", "system", "The arrival of a PDF file in the PDF container triggers another logic app to process the PDF forms"],
+    
+    ["function app", "component", "The logic app sends the location of the PDF file to a function app for processing."],
+    ["Azure Functions", "system", "The function app is built by using the capabilities of Azure Functions"],
+
+    ["Azure REST API", "component", "It uses HTTPS POST, an Azure REST API, to send the location of the single-page PDF file"],
+    ["Container 2", "component", "Split files are saved to a second container in Data Lake Storage"],
+    ["AI Document Intelligence", "component", "It uses HTTPS POST, an Azure REST API, to send the location of the single-page PDF file to AI Document Intelligence for processing"],
+    
+    ["Container 3", "component", "JSON data file that contains the response data and stores the file to a third container in Data Lake Storage"],
+    
+    ["forms processing logic app", "component", "The forms processing logic app receives the processed response data"],
+    ["Azure Cosmos DB", "component", "The forms processing logic app sends the processed data to Azure Cosmos DB"],
+    
+    ["database", "component", "Azure Cosmos DB, which saves the data in a database"],
+
+    ["Power BI", "component", "Power BI obtains the data from Azure Cosmos DB and provides insights and dashboards"]
+
+  ],
+  "relationships": [
+      ["designated Outlook email account", "calls", "logic app", "The arrival of an email triggers a logic app to process the email."],
+      ["Azure Logic Apps", "contains", "logic app", "The logic app is built by using the capabilities of Azure Logic Apps."],
+      ["logic app", "calls", "Container", "The logic app uploads the PDF files to a container in Azure Data Lake Storage"],
+      ["Container", "part-of", "Azure Data Lake Storage", "container in Azure Data Lake Storage"],
+      ["Container", "calls", "logic app 2", "The arrival of a PDF file in the PDF container triggers another logic app"],
+      
+      ["logic app", "calls", "function app", "The logic app sends the location of the PDF file to a function app for processing."],
+      ["function app", "part-of", "Azure Functions", "container in Azure Data Lake Storage"],
+      ["function app", "calls", "Container 2", "Split files are saved to a second container in Data Lake Storage"],
+      ["Azure Data Lake Storage", "contains", "Container 2", "Split files are saved to a second container in Data Lake Storage"],
+      ["function app", "calls", "Azure REST API", "It uses HTTPS POST, an Azure REST API"],
+      ["Azure REST API", "calls", "AI Document Intelligence", "HTTPS POST, an Azure REST API, to send the location of the single-page PDF file to AI Document Intelligence"],
+      ["Azure Data Lake Storage", "contains", "Container 3", "third container in Data Lake Storage"],
+      ["function app", "calls", "Container 3", "It creates a JSON data file that contains the response data and stores the file to a third container"],
+      ["forms processing logic app", "calls", "Container 3", "The forms processing logic app receives the processed response data"],
+      ["forms processing logic app", "calls", "Azure Cosmos DB", "The forms processing logic app sends the processed data to Azure Cosmos DB"],
+      ["Azure Cosmos DB", "calls", "database", "Azure Cosmos DB, which saves the data in a database"],
+      ["Power BI", "calls", "Azure Cosmos DB", "Power BI obtains the data from Azure Cosmos DB and provides insights and dashboards"]
+
+    ]
+}

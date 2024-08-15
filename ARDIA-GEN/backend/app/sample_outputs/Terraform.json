@@ -1,0 +1,32 @@
+{
+    "entities": [
+      ["Terraform Core", "system", "The core of Terraform's architecture, also known as Terraform CLI."],
+      ["Providers", "component", "Modules that enable Terraform to communicate with a diverse range of services and resources."],
+      ["State file", "component", "A JSON file that stores information about the resources that Terraform manages."]
+    ],
+    "relationships": [
+      ["Terraform Core", "contains", "Providers", "Provides the underlying functionality for providers."],
+      ["Terraform Core", "calls", "State file", "Uses the state file to determine changes to infrastructure and ensure resource consistency."]
+    ]
+  }
+
+
+/* --------------------- */
+
+{
+    "entities": [
+      ["Terraform Core", "system", "The core of Terraform's architecture, also known as Terraform CLI."],
+      ["Providers", "component", "Modules that enable Terraform to communicate with a diverse range of services and resources."],
+      ["State file", "component", "A JSON file that stores information about the resources that Terraform manages."]
+      -- Add -for each Entity that contains something and also has a calls or called-from relationship-
+     -- ["Terraform Core System", --"system"--, --"System Boundary: The core of Terraform's architecture, also known as Terraform CLI."],
+    ],
+    "relationships": [
+      ["Terraform Core", "contains", "Providers", "Provides the underlying functionality for providers."],
+      ["Terraform Core", "calls", "State file", "Uses the state file to determine changes to infrastructure and ensure resource consistency."]
+        
+      ---Move all contains/part-of relationships to newly created entity -----
+      Add a new contains relationship between, new-ly created system entity and the original one
+
+    ]
+  }

@@ -1,0 +1,18 @@
+ The steps that data follows through the architecture are as follows:
+
+    Data originates in IOT devices such as medical devices, car sensors, industrial IOT sensors, and so on. This telemetry data is collected close to the devices using AWS IoT Greengrass, which enables cloud capabilities to local devices.
+
+    Data is then ingested into the cloud using edge-to-cloud interface services such as AWS IOT Core
+
+, which is a managed cloud platform that lets connected devices easily and securely interact with cloud applications and other devices, or AWS IOT SiteWise, which is a managed service that lets you collect, model, analyze, and visualize data from industrial equipment at scale.
+
+Stream data ingested into the cloud gets transformed in near-real time using Amazon Managed Service for Apache Flink
+
+, which offers an easy way to transform and analyze streaming data in near real-time with Apache Flink and Apache Beam frameworks. Stream data often needs to be enriched using lookup data which is hosted in a data warehouse. Amazon Redshift uses customer integration or stream aggregates (for example, one minute or five minutes) from Managed Service for Apache Flink. The Flink application gets written into Amazon Redshift for further business intelligence (BI) reporting downstream.
+
+Amazon SageMaker is a fully ML learning service. Once the ML model is trained and deployed in SageMaker, inferences are invoked in micro-batch using AWS Lambda. Inferenced data is sent to Amazon OpenSearch Service
+
+to create personalized monitoring dashboards using Amazon OpenSearch Service Dashboards.
+
+The data lake stores telemetry data for future batch analytics. The data is micro-batch streamed into the S3 data lake using Amazon Data Firehose, which is a fully managed service for delivering near real-time streaming data to destinations such as S3, Amazon Redshift, Amazon OpenSearch Service, Splunk, and any custom HTTP endpoints or owned by supported third-party service providers, including Datadog, Dynatrace, LogicMonitor, MongoDB, New Relic, and Sumo Logic.
+

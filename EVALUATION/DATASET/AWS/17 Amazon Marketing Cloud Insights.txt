@@ -1,0 +1,16 @@
+Step 1
+Data that lands in your Amazon Marketing Cloud (AMC) Amazon Simple Storage Service (Amazon S3) bucket is picked up by the data lake pipeline and moved to the pre-stage S3 bucket.
+
+Step 2
+AWS Glue applies transformation logic on the incoming data to prepare it for analysis, storing the result in the post-stage S3 bucket.
+
+Step 3
+AWS Lake Formation controls access permissions to the transformed data in the staged S3 bucket.
+
+Step 4
+You can access the transformed data using Amazon Athena to run a query analysis on the staged S3 bucket.
+
+Step 5
+You can build dashboards in Amazon QuickSight from Athena queries that run on the staged data.
+
+

@@ -1,0 +1,16 @@
+The diagram includes the following components and processes:
+
+    Amazon CloudFront provides a unique entry point to the application. The distribution has two origins: the first for static files and the second for the UI composer.
+
+    Static files are hosted in an Amazon S3 bucket. They are consumed by the browser and the UI composer for HTML templates.
+
+    The UI composer runs on a containers cluster in AWS Fargate. With a containerized solution, you can use streaming capabilities and multithreaded rendering if needed.
+
+    Parameter Store, a capability of AWS Systems Manager, is used as a basic micro-frontends discovery system. This capability provides a key-value store used by the UI composer for retrieving the micro-frontend endpoints to consume.
+
+    The notifications micro-frontend stores the optimized JavaScript bundle in the S3 bucket. This renders on the client because it must react to user interactions.
+
+    The reviews micro-frontend is composed by a Lambda function, and the user reviews are stored in DynamoDB. The reviews micro-frontend is rendered fully on the server side, and it outputs an HTML fragment.
+
+    The product details micro-frontend is a low-code micro-frontend that uses AWS Step Functions. The Express Workflow can be invoked synchronously, and it contains the logic for rendering the HTML fragment and a caching layer.
+

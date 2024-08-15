@@ -1,0 +1,64 @@
+{
+  "entities": [
+    ["Connect agent", "component", "captures change logs"],
+    ["temporary storage", "component", "caches the logs in temporary storage"],
+    ["mainframe native utilities", "system", "captures change logs by using mainframe or midrange native utilities"],
+    ["midrange native utilities", "system", "captures change logs by using mainframe or midrange native utilities"],
+    
+    ["mainframe systems", "system", "For mainframe systems, a publisher component on the mainframe manages data migration."],
+    ["midrange systems", "system", "For midrange systems, in place of the publisher, a listener component manages data migration."],
+    
+    ["publisher", "component", "For mainframe systems, a publisher component on the mainframe manages data migration."],
+    ["listener", "component", "For midrange systems, in place of the publisher, a listener component manages data migration."],
+    
+    ["Connect Replicator Engine", "system", "captures the data from the publisher or listener and applies it to the target."],
+    ["on-premises", "system", "The publisher or listener moves the data from on-premises to Azure"],
+    ["Azure", "system", "The publisher or listener moves the data from on-premises to Azure"],
+    
+    ["Connect Replicator Engine", "system", "The Connect Replicator Engine captures the data from the publisher or listener"],
+    ["target", "system", "applies it to the target"],
+    ["database", "system", "target is a database"],
+    ["ODBC", "component", "The target is a database that receives the changes via ODBC or ingests the changes via Azure Event Hubs"],
+    ["Azure Event Hubs", "component", "The target is a database that receives the changes via ODBC or ingests the changes via Azure Event Hubs"],
+    
+    ["Azure Databricks", "component", "the changed data is consumed by Azure Databricks and applied to Azure data platform services."],
+    ["Azure data platform services", "component", "the changed data is consumed by Azure Databricks and applied to Azure data platform services."],
+    
+    ["Connect Controller Daemon", "component", "authenticates the request and establishes the socket connection between the publisher or listener and the Replicator Engine."]
+
+
+  ],
+  "relationships": [
+    ["Connect agent", "calls", "mainframe native utilities", "captures change logs by using mainframe or midrange native utilities"],
+    ["Connect agent", "calls", "midrange native utilities", "captures change logs by using mainframe or midrange native utilities"],
+    ["Connect agent", "calls", "temporary storage", "captures change logs by using mainframe or midrange native utilities"],
+    
+    ["mainframe systems", "contains", "mainframe native utilities", "F"],
+    ["midrange systems", "contains", "midrange native utilities", ""],
+    
+    ["mainframe systems", "contains", "publisher", "For mainframe systems, a publisher component on the mainframe manages data migration."],
+    ["midrange systems", "contains", "listener", "For midrange systems, in place of the publisher, a listener component manages data migration."],
+    
+    
+    ["publisher", "calls", "on-premises", "The publisher or listener moves the data from on-premises to Azure"],
+    ["publisher", "calls", "Azure", "The publisher or listener moves the data from on-premises to Azure"],
+    ["listener", "calls", "on-premises", "The publisher or listener moves the data from on-premises to Azure"],
+    ["listener", "calls", "Azure", "The publisher or listener moves the data from on-premises to Azure"],
+    
+    ["Connect Replicator Engine", "calls", "publisher", "captures the data from the publisher or listener and applies it to the target."],
+    ["Connect Replicator Engine", "calls", "listener", "captures the data from the publisher or listener and applies it to the target."],
+    
+    ["Connect Replicator Engine", "calls", "target", "captures the data from the publisher or listener and applies it to the target."],
+    
+    ["target", "contains", "database", "target is a database"],
+    ["database", "is-called-from", "ODBC", "database that receives the changes via ODBC"],
+    ["database", "is-called-from", "Azure Event Hubs", "ingests the changes via Azure Event Hubs"],
+    ["database", "is-called-from", "Azure Databricks", "the changed data is consumed by Azure Databricks"],
+    ["Azure Databricks", "calls", "Azure data platform services", "consumed by Azure Databricks and applied to Azure data platform services."],
+
+    ["Connect Controller Daemon", "is-called-from", "publisher", "establishes the socket connection between the publisher or listener and the Replicator Engine.."],
+    ["Connect Controller Daemon", "is-called-from", "listener", "establishes the socket connection between the publisher or listener and the Replicator Engine.."],
+    
+    ["Connect Controller Daemon", "calls", "Connect Replicator Engine", "establishes the socket connection between the publisher or listener and the Replicator Engine.."]
+]
+}
